@@ -36,4 +36,6 @@ object Dependencies {
         const val compiler =  "com.google.dagger:dagger-compiler:$version"
         const val processor =  "com.google.dagger:dagger-android-processor:$version"
     }
+
+    const val zxing = "com.journeyapps:zxing-android-embedded:4.0.0"
 }
