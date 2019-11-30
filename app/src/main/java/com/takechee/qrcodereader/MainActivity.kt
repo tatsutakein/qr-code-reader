@@ -10,7 +10,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        IntentIntegrator(this).initiateScan()
-//        GlobalScope.launch {  }
+        val intentIntegrator = IntentIntegrator(this).apply {
+            captureActivity = CustomCaptureActivity::class.java
+        }
+
+        intentIntegrator.initiateScan()
     }
 }
