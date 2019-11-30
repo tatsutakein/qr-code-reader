@@ -23,7 +23,8 @@ object Dependencies {
 
         object Navigation {
             private const val version = "2.1.0"
-            const val safeArgsPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$version"
+            const val safeArgsPlugin =
+                "androidx.navigation:navigation-safe-args-gradle-plugin:$version"
             const val fragment = "androidx.navigation:navigation-fragment-ktx:$version"
             const val uiKtx = "androidx.navigation:navigation-ui-ktx:$version"
         }
@@ -32,9 +33,9 @@ object Dependencies {
     object Dagger {
         private const val version = "2.24"
         const val android = "com.google.dagger:dagger-android:$version"
-        const val androidSupport =  "com.google.dagger:dagger-android-support:$version"
-        const val compiler =  "com.google.dagger:dagger-compiler:$version"
-        const val processor =  "com.google.dagger:dagger-android-processor:$version"
+        const val androidSupport = "com.google.dagger:dagger-android-support:$version"
+        const val compiler = "com.google.dagger:dagger-compiler:$version"
+        const val processor = "com.google.dagger:dagger-android-processor:$version"
     }
 
     object ZXing {
