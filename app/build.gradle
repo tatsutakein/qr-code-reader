@@ -1,0 +1,59 @@
+import versions.Versions
+import dependencies.Dependencies
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+android {
+    compileSdkVersion Versions.compileSdkVersion
+    defaultConfig {
+        applicationId "com.takechee.qrcodereader"
+        minSdkVersion Versions.minSdkVersion
+        targetSdkVersion Versions.targetSdkVersion
+        versionCode Versions.versionCode
+        versionName Versions.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            debuggable true
+//            applicationIdSuffix ".debug"
+        }
+        staging {
+            debuggable true
+//            applicationIdSuffix ".staging"
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation Dependencies.Kotlin.stdlib
+    implementation Dependencies.AndroidX.appcompat
+    implementation Dependencies.AndroidX.coreKtx
+    implementation Dependencies.AndroidX.constraintLayout
+    implementation Dependencies.AndroidX.material
+
+    implementation Dependencies.AndroidX.Navigation.fragment
+    implementation Dependencies.AndroidX.Navigation.uiKtx
+
+    implementation Dependencies.Dagger.android
+    implementation Dependencies.Dagger.androidSupport
+    kapt Dependencies.Dagger.compiler
+    kapt Dependencies.Dagger.processor
+
+    implementation 'com.google.firebase:firebase-analytics:17.2.1'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+}
+
+apply plugin: 'com.google.gms.google-services'
