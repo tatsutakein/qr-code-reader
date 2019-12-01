@@ -1,4 +1,4 @@
-package com.takechee.qrcodereader.ui.home
+package com.takechee.qrcodereader.ui.feature.home
 
 import android.content.Intent
 import android.os.Bundle
