@@ -11,8 +11,12 @@ import androidx.fragment.app.Fragment
 import com.google.zxing.integration.android.IntentIntegrator
 import com.takechee.qrcodereader.ui.CustomCaptureActivity
 import com.takechee.qrcodereader.databinding.FragmentHomeBinding
+import com.takechee.qrcodereader.ui.common.BaseFragment
+import dagger.Module
+import dagger.android.AndroidInjector
+import dagger.android.ContributesAndroidInjector
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
@@ -59,4 +63,15 @@ class HomeFragment : Fragment() {
             }
         }
     }
+}
+
+
+@Module
+@Suppress("UNUSED")
+abstract class HomeModule {
+
+//    @FragmentScoped
+    @ContributesAndroidInjector
+    internal abstract fun contributeHomeFragment(): HomeFragment
+
 }

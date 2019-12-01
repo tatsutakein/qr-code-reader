@@ -1,6 +1,13 @@
 package com.takechee.qrcodereader
 
-import android.app.Application
+import com.takechee.qrcodereader.di.DaggerAppComponent
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
-class MainApp : Application() {
+class MainApp : DaggerApplication() {
+
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerAppComponent.factory().create(this)
+    }
+
 }
