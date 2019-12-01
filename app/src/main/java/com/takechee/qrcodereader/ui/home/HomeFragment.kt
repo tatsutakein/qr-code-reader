@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.google.zxing.integration.android.IntentIntegrator
-import com.takechee.qrcodereader.CustomCaptureActivity
+import com.takechee.qrcodereader.ui.CustomCaptureActivity
 import com.takechee.qrcodereader.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
