@@ -51,6 +51,8 @@ dependencies {
     implementation Dependencies.Dagger.androidSupport
     kapt Dependencies.Dagger.compiler
     kapt Dependencies.Dagger.processor
+    compileOnly Dependencies.Dagger.assistedAnnotations
+    annotationProcessor Dependencies.Dagger.assistedProcessor
 
     implementation 'com.google.firebase:firebase-analytics:17.2.1'
 

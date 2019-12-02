@@ -36,6 +36,12 @@ object Dependencies {
         const val androidSupport = "com.google.dagger:dagger-android-support:$version"
         const val compiler = "com.google.dagger:dagger-compiler:$version"
         const val processor = "com.google.dagger:dagger-android-processor:$version"
+
+        private const val assistedVersion = "0.5.2"
+        const val assistedAnnotations =
+            "com.squareup.inject:assisted-inject-annotations-dagger2:$assistedVersion"
+        const val assistedProcessor =
+            "com.squareup.inject:assisted-inject-processor-dagger2:$assistedVersion"
     }
 
     object ZXing {
