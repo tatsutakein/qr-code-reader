@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="resultUrl"
-            type="String" />
+            name="viewModel"
+            type="com.takechee.qrcodereader.ui.feature.result.ResultViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,7 @@
             android:id="@+id/result_url_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{resultUrl}"
+            android:text="@{viewModel.url}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -27,6 +27,7 @@
             android:id="@+id/open_url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onOpenUrlClick()}"
             android:text="読み取ったURLを開く"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
