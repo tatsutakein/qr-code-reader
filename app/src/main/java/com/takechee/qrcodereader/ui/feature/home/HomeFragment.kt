@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.zxing.integration.android.IntentIntegrator
 import com.takechee.qrcodereader.ui.CustomCaptureActivity
 import com.takechee.qrcodereader.databinding.FragmentHomeBinding
@@ -57,8 +58,7 @@ class HomeFragment : BaseFragment() {
             else -> when (val contents = result.contents) {
                 null -> Toast.makeText(context, "canceled", Toast.LENGTH_SHORT).show()
                 else -> {
-                    val intent = Intent(Intent.ACTION_VIEW, contents.toUri())
-                    startActivity(intent)
+                    findNavController().navigate(HomeFragmentDirections.toResult(contents))
                 }
             }
         }
