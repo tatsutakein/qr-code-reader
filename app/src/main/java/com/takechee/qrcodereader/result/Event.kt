@@ -46,3 +46,7 @@ inline fun <T> MutableLiveData<Event<T>>.fireEvent(
 ) {
     value = Event(provider.invoke())
 }
+
+fun MutableLiveData<Event<Unit>>.fireEvent() {
+    value = Event(Unit)
+}
