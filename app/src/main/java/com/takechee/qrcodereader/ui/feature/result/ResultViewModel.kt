@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.distinctUntilChanged
 import com.takechee.qrcodereader.result.Event
 import com.takechee.qrcodereader.result.fireEvent
-import com.takechee.qrcodereader.ui.common.BaseViewModel
+import com.takechee.qrcodereader.ui.common.base.BaseViewModel
 import javax.inject.Inject
 
 class ResultViewModel @Inject constructor(

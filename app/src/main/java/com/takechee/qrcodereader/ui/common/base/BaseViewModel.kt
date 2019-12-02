@@ -1,4 +1,4 @@
-package com.takechee.qrcodereader.ui.common
+package com.takechee.qrcodereader.ui.common.base
 
 import androidx.lifecycle.ViewModel
 

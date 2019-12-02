@@ -1,14 +1,9 @@
 package com.takechee.qrcodereader.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import com.takechee.qrcodereader.R
-import com.takechee.qrcodereader.ui.common.BaseActivity
-import dagger.Binds
+import com.takechee.qrcodereader.ui.common.base.BaseActivity
 import dagger.Module
-import dagger.android.support.DaggerAppCompatActivity
-import dagger.multibindings.IntoMap
 
 class MainActivity : BaseActivity() {
 

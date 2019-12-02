@@ -1,4 +1,4 @@
-package com.takechee.qrcodereader.ui.common
+package com.takechee.qrcodereader.ui.common.dagger
 
 import android.content.Context
 import androidx.fragment.app.Fragment

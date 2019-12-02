@@ -5,18 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.takechee.qrcodereader.databinding.FragmentResultBinding
-import com.takechee.qrcodereader.di.ViewModelKey
 import com.takechee.qrcodereader.result.receiveEvent
-import com.takechee.qrcodereader.ui.common.BaseFragment
-import dagger.Binds
+import com.takechee.qrcodereader.ui.common.base.BaseFragment
 import dagger.Module
-import dagger.Provides
 import dagger.android.ContributesAndroidInjector
-import dagger.multibindings.IntoMap
 import javax.inject.Inject
 
 class ResultFragment : BaseFragment() {

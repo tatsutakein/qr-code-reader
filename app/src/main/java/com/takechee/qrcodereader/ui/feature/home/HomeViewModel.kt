@@ -3,7 +3,7 @@ package com.takechee.qrcodereader.ui.feature.home
 import androidx.lifecycle.*
 import com.takechee.qrcodereader.result.Event
 import com.takechee.qrcodereader.result.fireEvent
-import com.takechee.qrcodereader.ui.common.BaseViewModel
+import com.takechee.qrcodereader.ui.common.base.BaseViewModel
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
