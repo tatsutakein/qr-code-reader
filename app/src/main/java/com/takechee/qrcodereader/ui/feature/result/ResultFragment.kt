@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
 import com.takechee.qrcodereader.databinding.FragmentResultBinding
 import com.takechee.qrcodereader.result.receiveEvent
@@ -13,6 +15,8 @@ import com.takechee.qrcodereader.ui.common.base.BaseFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import javax.inject.Inject
+import kotlin.math.min
+import kotlin.math.roundToInt
 
 class ResultFragment : BaseFragment() {
 
@@ -37,11 +41,26 @@ class ResultFragment : BaseFragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.qrCodeImageView.doOnLayout {
+            val requestSize = min(it.width, it.height)
+            resultViewModel.onQRImageViewLayout(requestSize)
+        }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         resultViewModel.showIntent.receiveEvent(viewLifecycleOwner) { intent ->
             startActivity(intent)
+        }
+
+        resultViewModel.qrImage.observe(viewLifecycleOwner) { bitmap ->
+            bitmap?.let {
+                binding.qrCodeImageView.setImageBitmap(it)
+            }
         }
     }
 }

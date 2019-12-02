@@ -1,6 +1,7 @@
 package com.takechee.qrcodereader.ui.feature.result
 
 import androidx.lifecycle.ViewModel
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.takechee.qrcodereader.di.ViewModelKey
 import dagger.Binds
 import dagger.Module
@@ -23,5 +24,10 @@ abstract class ResultFragmentModule {
         fun provideResultFragmentArguments(fragment: ResultFragment): ResultFragmentArguments {
             return ResultFragmentArguments.of(fragment.args)
         }
+
+        @ResultFragmentScoped
+        @JvmStatic
+        @Provides
+        fun provideBarcodeEncoder(): BarcodeEncoder = BarcodeEncoder()
     }
 }
