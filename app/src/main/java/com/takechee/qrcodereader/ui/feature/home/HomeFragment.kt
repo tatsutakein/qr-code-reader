@@ -8,14 +8,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.zxing.integration.android.IntentIntegrator
 import com.takechee.qrcodereader.ui.CustomCaptureActivity
 import com.takechee.qrcodereader.databinding.FragmentHomeBinding
 import com.takechee.qrcodereader.di.ViewModelKey
+import com.takechee.qrcodereader.result.receiveEvent
 import com.takechee.qrcodereader.ui.common.BaseFragment
 import dagger.Binds
 import dagger.Module
@@ -23,37 +26,38 @@ import dagger.Provides
 import dagger.android.AndroidInjector
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
+import javax.inject.Inject
 
 class HomeFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentHomeBinding
+    @Inject
+    lateinit var intentIntegrator: IntentIntegrator
 
-    private val intentIntegrator: IntentIntegrator by lazy {
-        IntentIntegrator.forSupportFragment(this).apply {
-            captureActivity = CustomCaptureActivity::class.java
-        }
-    }
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val homeViewModel: HomeViewModel by viewModels { viewModelFactory }
+
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false).apply {
+            viewModel = homeViewModel
+            lifecycleOwner = viewLifecycleOwner
+        }
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        intentIntegrator.initiateScan()
+        viewLifecycleOwner.lifecycle.addObserver(homeViewModel)
 
-        binding.openReaderButton.setOnClickListener {
+        homeViewModel.openReader.receiveEvent(viewLifecycleOwner) {
             intentIntegrator.initiateScan()
         }
     }
@@ -81,13 +85,7 @@ class HomeFragment : BaseFragment() {
 @Module
 @Suppress("UNUSED")
 abstract class HomeModule {
-
     @HomePageScoped
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [HomeFragmentModule::class])
     internal abstract fun contributeHomeFragment(): HomeFragment
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(HomeViewModel::class)
-    abstract fun bindMainViewModel(viewModel: HomeViewModel): ViewModel
 }
