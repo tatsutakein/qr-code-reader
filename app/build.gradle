@@ -31,8 +31,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     dataBinding {
         enabled = true
+    }
+
+    testBuildType "staging"
+
+    // Required for AR because it includes a library built with Java 8
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
     }
 }
 
@@ -43,6 +56,12 @@ dependencies {
     implementation Dependencies.AndroidX.coreKtx
     implementation Dependencies.AndroidX.constraintLayout
     implementation Dependencies.AndroidX.material
+
+    implementation Dependencies.AndroidX.Lifecycle.extensions
+    kapt Dependencies.AndroidX.Lifecycle.compiler
+    implementation Dependencies.AndroidX.Lifecycle.liveDataKtx
+    implementation Dependencies.AndroidX.Lifecycle.viewModelKtx
+    implementation Dependencies.AndroidX.Lifecycle.savedState
 
     implementation Dependencies.AndroidX.Navigation.fragment
     implementation Dependencies.AndroidX.Navigation.uiKtx

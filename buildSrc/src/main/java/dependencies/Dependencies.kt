@@ -17,8 +17,10 @@ object Dependencies {
         object Lifecycle {
             private const val version = "2.1.0"
             const val extensions = "androidx.lifecycle:lifecycle-extensions:$version"
+            const val compiler = "androidx.lifecycle:lifecycle-compiler:$version"
             const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
             const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
+            const val savedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:1.0.0-rc02"
         }
 
         object Navigation {
