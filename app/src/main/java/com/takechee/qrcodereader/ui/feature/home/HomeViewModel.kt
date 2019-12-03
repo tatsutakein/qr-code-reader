@@ -13,6 +13,14 @@ class HomeViewModel @Inject constructor(
     private val _openReader = MutableLiveData<Event<Unit>>()
     val openReader: LiveData<Event<Unit>> = _openReader.distinctUntilChanged()
 
+    val urls: LiveData<List<String>> = MutableLiveData(
+        listOf(
+            "https://takechee.com/takeblo/",
+            "https://siropaca.net/whitenote/",
+            "https://github.com/lisawray/groupie"
+        )
+    )
+
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
         fireOpenReaderEvent(ifNeeded = true)

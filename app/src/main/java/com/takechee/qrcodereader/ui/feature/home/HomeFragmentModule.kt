@@ -18,6 +18,7 @@ abstract class HomeFragmentModule {
     @ViewModelKey(HomeViewModel::class)
     abstract fun bindMainViewModel(viewModel: HomeViewModel): ViewModel
 
+
     @Module
     companion object {
         @JvmStatic
@@ -26,6 +27,12 @@ abstract class HomeFragmentModule {
             return IntentIntegrator.forSupportFragment(fragment).apply {
                 captureActivity = CustomCaptureActivity::class.java
             }
+        }
+
+        @HomePageScoped
+        @Provides
+        internal fun provideHomeHistorySection(): HomeHistorySection {
+            return HomeHistorySection()
         }
     }
 }
