@@ -50,4 +50,10 @@ object Dependencies {
         const val core = "com.google.zxing:core:3.4.0"
         const val embedded = "com.journeyapps:zxing-android-embedded:4.0.0"
     }
+
+    object Groupie {
+        private const val version = "2.7.2"
+        const val core = "com.xwray:groupie:$version"
+        const val dataBinding = "com.xwray:groupie-databinding:$version"
+    }
 }
