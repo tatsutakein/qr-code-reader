@@ -28,11 +28,5 @@ abstract class HomeFragmentModule {
                 captureActivity = CustomCaptureActivity::class.java
             }
         }
-
-        @HomePageScoped
-        @Provides
-        internal fun provideHomeHistorySection(): HomeHistorySection {
-            return HomeHistorySection()
-        }
     }
 }

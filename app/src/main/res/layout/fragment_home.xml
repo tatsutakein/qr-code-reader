@@ -33,6 +33,7 @@
             android:layout_margin="16dp"
             android:onClick="@{() -> viewModel.onOpenReaderClick()}"
             android:text="カメラを起動"
+            app:icon="@drawable/ic_photo_camera_black_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />

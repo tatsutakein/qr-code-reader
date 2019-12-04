@@ -24,10 +24,6 @@ import javax.inject.Inject
 class HomeFragment : BaseFragment() {
 
     @Inject
-    @HomePageScoped
-    lateinit var historySection: HomeHistorySection
-
-    @Inject
     lateinit var intentIntegrator: IntentIntegrator
 
     @Inject
@@ -54,6 +50,8 @@ class HomeFragment : BaseFragment() {
 
         viewLifecycleOwner.lifecycle.addObserver(homeViewModel)
 
+        val historySection = HomeHistorySection(homeViewModel)
+
         val adapter = GroupAdapter<GroupieViewHolder>()
         binding.contentsView.adapter = adapter
         val list = mutableListOf<Item<*>>()
@@ -63,6 +61,10 @@ class HomeFragment : BaseFragment() {
 
         homeViewModel.openReader.receiveEvent(viewLifecycleOwner) {
             intentIntegrator.initiateScan()
+        }
+
+        homeViewModel.openURL.receiveEvent(viewLifecycleOwner) { url ->
+            findNavController().navigate(HomeFragmentDirections.toResult(url))
         }
     }
 

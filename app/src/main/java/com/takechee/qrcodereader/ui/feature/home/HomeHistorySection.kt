@@ -4,10 +4,12 @@ import com.xwray.groupie.Item
 import com.xwray.groupie.Section
 import javax.inject.Inject
 
-class HomeHistorySection @Inject constructor() : Section() {
+class HomeHistorySection @Inject constructor(
+    private val eventListener: HomeEventListener
+) : Section() {
     fun update(urls: List<String>) {
         val list = mutableListOf<Item<*>>()
-        urls.mapTo(list) { url -> HomeHistoryItem(url) }
+        urls.mapTo(list) { url -> HomeHistoryItem(url, eventListener) }
         update(list)
     }
 

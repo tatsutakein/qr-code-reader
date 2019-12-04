@@ -8,12 +8,17 @@
         <variable
             name="url"
             type="String" />
+
+        <variable
+            name="eventListener"
+            type="com.takechee.qrcodereader.ui.feature.home.HomeEventListener" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:foreground="?selectableItemBackground"
+        android:onClick="@{() -> eventListener.onHistoryItemClick(url)}"
         android:paddingHorizontal="16dp">
 
         <TextView
