@@ -16,8 +16,8 @@ class HomeViewModel @Inject constructor(
     val urls: LiveData<List<String>> = MutableLiveData(
         listOf(
             "https://takechee.com/takeblo/",
-            "https://siropaca.net/whitenote/",
-            "https://github.com/lisawray/groupie"
+            "https://s10i.me/whitenote/",
+            "https://qiita.com/ru_ri21/items/2fdcef6f522f61f1545e"
         )
     )
 
