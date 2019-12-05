@@ -55,7 +55,7 @@ class HomeFragment : BaseFragment() {
         val adapter = GroupAdapter<GroupieViewHolder>()
         binding.contentsView.adapter = adapter
         val list = mutableListOf<Item<*>>()
-        list.add(HomeHistoriesItem(historySection))
+        list.add(HomeHistoriesItem(historySection, homeViewModel))
         adapter.update(list)
         homeViewModel.urls.observe(viewLifecycleOwner) { historySection.update(it) }
 
@@ -63,8 +63,8 @@ class HomeFragment : BaseFragment() {
             intentIntegrator.initiateScan()
         }
 
-        homeViewModel.openURL.receiveEvent(viewLifecycleOwner) { url ->
-            findNavController().navigate(HomeFragmentDirections.toResult(url))
+        homeViewModel.navigateTo.receiveEvent(viewLifecycleOwner) { directions ->
+            findNavController().navigate(directions)
         }
     }
 

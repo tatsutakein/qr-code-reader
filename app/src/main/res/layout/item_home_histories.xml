@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="url"
-            type="String" />
+            name="eventListener"
+            type="com.takechee.qrcodereader.ui.feature.home.HomeEventListener" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -65,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
+                android:onClick="@{() -> eventListener.onHistoryMoreClick()}"
                 android:text="もっと見る"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"

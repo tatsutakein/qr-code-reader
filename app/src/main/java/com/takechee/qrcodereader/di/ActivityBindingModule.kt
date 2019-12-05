@@ -2,6 +2,7 @@ package com.takechee.qrcodereader.di
 
 import com.takechee.qrcodereader.ui.MainActivity
 import com.takechee.qrcodereader.ui.MainActivityModule
+import com.takechee.qrcodereader.ui.feature.history.HistoryModule
 import com.takechee.qrcodereader.ui.feature.home.HomeModule
 import com.takechee.qrcodereader.ui.feature.result.ResultModule
 import dagger.Module
@@ -18,6 +19,7 @@ abstract class ActivityBindingModule {
             MainActivityModule::class,
             // fragments
             HomeModule::class,
+            HistoryModule::class,
             ResultModule::class
         ]
     )

@@ -3,26 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/home">
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/home"
         android:name="com.takechee.qrcodereader.ui.feature.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/to_result"
-            app:destination="@id/resultFragment" />
+            app:destination="@id/result" />
+        <action
+            android:id="@+id/to_history"
+            app:destination="@id/history" />
     </fragment>
 
     <fragment
-        android:id="@+id/resultFragment"
+        android:id="@+id/result"
         android:name="com.takechee.qrcodereader.ui.feature.result.ResultFragment"
         android:label="ResultFragment"
-        tools:layout="@layout/fragment_result" >
+        tools:layout="@layout/fragment_result">
         <argument
             android:name="url"
             app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/history"
+        android:name="com.takechee.qrcodereader.ui.feature.history.HistoryFragment"
+        android:label="HistoryFragment"
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/to_result"
+            app:destination="@id/result" />
     </fragment>
 
 </navigation>

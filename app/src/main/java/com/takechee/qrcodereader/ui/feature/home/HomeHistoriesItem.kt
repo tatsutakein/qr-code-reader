@@ -11,12 +11,14 @@ import com.xwray.groupie.Item
 import com.xwray.groupie.databinding.BindableItem
 
 data class HomeHistoriesItem(
-    val historySection: HomeHistorySection
+    val historySection: HomeHistorySection,
+    private val eventListener: HomeEventListener
 ) : BindableItem<ItemHomeHistoriesBinding>() {
 
     override fun getLayout(): Int = R.layout.item_home_histories
 
     override fun bind(viewBinding: ItemHomeHistoriesBinding, position: Int) {
+        viewBinding.eventListener = eventListener
         viewBinding.historyListView.adapter = GroupAdapter<GroupieViewHolder>().apply {
             add(historySection)
             setOnItemClickListener { item, view ->

@@ -1,4 +1,4 @@
-package com.takechee.qrcodereader.ui.feature.home
+package com.takechee.qrcodereader.ui.feature.history
 
 import androidx.lifecycle.*
 import androidx.navigation.NavDirections
@@ -7,12 +7,9 @@ import com.takechee.qrcodereader.result.fireEvent
 import com.takechee.qrcodereader.ui.common.base.BaseViewModel
 import javax.inject.Inject
 
-class HomeViewModel @Inject constructor(
+class HistoryViewModel @Inject constructor(
 
-) : BaseViewModel(), LifecycleObserver, HomeEventListener {
-
-    private val _openReader = MutableLiveData<Event<Unit>>()
-    val openReader: LiveData<Event<Unit>> = _openReader.distinctUntilChanged()
+) : BaseViewModel(), LifecycleObserver, HistoryEventListener {
 
     private val _navigateTo = MutableLiveData<Event<NavDirections>>()
     val navigateTo: LiveData<Event<NavDirections>> = _navigateTo.distinctUntilChanged()
@@ -25,28 +22,12 @@ class HomeViewModel @Inject constructor(
         )
     )
 
-
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
-        fireOpenReaderEvent(ifNeeded = true)
-    }
-
-    fun onOpenReaderClick() {
-        fireOpenReaderEvent()
-    }
-
-    private fun fireOpenReaderEvent(ifNeeded: Boolean = false) {
-        if (ifNeeded && openReader.value?.hasBeenHandled == true) return
-
-        _openReader.fireEvent()
+//        fireOpenReaderEvent(ifNeeded = true)
     }
 
     override fun onHistoryItemClick(url: String) {
-        _navigateTo.fireEvent { HomeFragmentDirections.toResult(url) }
+        _navigateTo.fireEvent { HistoryFragmentDirections.toResult(url) }
     }
-
-    override fun onHistoryMoreClick() {
-        _navigateTo.fireEvent { HomeFragmentDirections.toHistory() }
-    }
-
 }
