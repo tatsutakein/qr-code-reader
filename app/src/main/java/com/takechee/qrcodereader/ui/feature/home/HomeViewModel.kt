@@ -12,6 +12,8 @@ class HomeViewModel @Inject constructor(
     private val prefs: PreferenceStorage
 ) : BaseViewModel(), LifecycleObserver, HomeEventListener {
 
+    private var isFirstOpened = false
+
     private val _openReader = MutableLiveData<Event<Unit>>()
     val openReader: LiveData<Event<Unit>> = _openReader.distinctUntilChanged()
 
@@ -29,19 +31,20 @@ class HomeViewModel @Inject constructor(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
-        fireOpenReaderEvent(onCreate = true)
+        if (isFirstOpened) return
+        isFirstOpened = true
+
+        if (!prefs.openReaderWhenAppStarts) return
+        if (openReader.value?.hasBeenHandled == true) return
+
+        fireOpenReaderEvent()
     }
 
     fun onOpenReaderClick() {
         fireOpenReaderEvent()
     }
 
-    private fun fireOpenReaderEvent(onCreate: Boolean = false) {
-        if (onCreate) {
-            if (!prefs.openReaderWhenAppStarts) return
-            if (openReader.value?.hasBeenHandled == true) return
-        }
-
+    private fun fireOpenReaderEvent() {
         _openReader.fireEvent()
     }
 
