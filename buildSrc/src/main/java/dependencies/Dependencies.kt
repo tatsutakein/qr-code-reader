@@ -18,7 +18,7 @@ object Dependencies {
         const val material = "com.google.android.material:material:1.2.0-alpha01"
 
         object Lifecycle {
-            private const val version = "2.1.0"
+            private const val version = "2.2.0-rc02"
             const val extensions = "androidx.lifecycle:lifecycle-extensions:$version"
             const val compiler = "androidx.lifecycle:lifecycle-compiler:$version"
             const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
@@ -27,11 +27,18 @@ object Dependencies {
         }
 
         object Navigation {
-            private const val version = "2.1.0"
+            private const val version = "2.2.0-rc02"
             const val safeArgsPlugin =
                 "androidx.navigation:navigation-safe-args-gradle-plugin:$version"
             const val fragment = "androidx.navigation:navigation-fragment-ktx:$version"
             const val uiKtx = "androidx.navigation:navigation-ui-ktx:$version"
+        }
+
+        object Room {
+            private const val version = "2.2.2"
+            const val ktx = "androidx.room:room-ktx:${version}"
+            const val runtime = "androidx.room:room-runtime:${version}"
+            const val compiler = "androidx.room:room-compiler:${version}"
         }
     }
 
