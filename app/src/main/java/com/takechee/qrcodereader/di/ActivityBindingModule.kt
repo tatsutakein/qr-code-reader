@@ -5,6 +5,7 @@ import com.takechee.qrcodereader.ui.MainActivityModule
 import com.takechee.qrcodereader.ui.feature.history.HistoryModule
 import com.takechee.qrcodereader.ui.feature.home.HomeModule
 import com.takechee.qrcodereader.ui.feature.result.ResultModule
+import com.takechee.qrcodereader.ui.feature.setting.SettingsModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -20,7 +21,8 @@ abstract class ActivityBindingModule {
             // fragments
             HomeModule::class,
             HistoryModule::class,
-            ResultModule::class
+            ResultModule::class,
+            SettingsModule::class
         ]
     )
     internal abstract fun mainActivity(): MainActivity

@@ -2,6 +2,8 @@ package com.takechee.qrcodereader.ui.feature.result
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -23,11 +25,15 @@ class ResultViewModel @Inject constructor(
     private val _showIntent = MutableLiveData<Event<Intent>>()
     val showIntent: LiveData<Event<Intent>> = _showIntent.distinctUntilChanged()
 
+    private val _startUri = MutableLiveData<Event<Uri>>()
+    val startUri: LiveData<Event<Uri>> = _startUri.distinctUntilChanged()
+
     private val _qrImage = MutableLiveData<Bitmap>()
     val qrImage: LiveData<Bitmap> = _qrImage.distinctUntilChanged()
 
     fun onOpenUrlClick() {
-        _showIntent.fireEvent { Intent(Intent.ACTION_VIEW, args.url.toUri()) }
+        _startUri.fireEvent { args.url.toUri() }
+//        _showIntent.fireEvent { Intent(Intent.ACTION_VIEW, args.url.toUri()) }
     }
 
     fun onQRImageViewLayout(size: Int) {

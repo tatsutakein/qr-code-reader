@@ -2,13 +2,14 @@ package com.takechee.qrcodereader.ui.feature.home
 
 import androidx.lifecycle.*
 import androidx.navigation.NavDirections
+import com.takechee.qrcodereader.data.prefs.PreferenceStorage
 import com.takechee.qrcodereader.result.Event
 import com.takechee.qrcodereader.result.fireEvent
 import com.takechee.qrcodereader.ui.common.base.BaseViewModel
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
-
+    private val prefs: PreferenceStorage
 ) : BaseViewModel(), LifecycleObserver, HomeEventListener {
 
     private val _openReader = MutableLiveData<Event<Unit>>()
@@ -28,15 +29,18 @@ class HomeViewModel @Inject constructor(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
-        fireOpenReaderEvent(ifNeeded = true)
+        fireOpenReaderEvent(onCreate = true)
     }
 
     fun onOpenReaderClick() {
         fireOpenReaderEvent()
     }
 
-    private fun fireOpenReaderEvent(ifNeeded: Boolean = false) {
-        if (ifNeeded && openReader.value?.hasBeenHandled == true) return
+    private fun fireOpenReaderEvent(onCreate: Boolean = false) {
+        if (onCreate) {
+            if (!prefs.openReaderWhenAppStarts) return
+            if (openReader.value?.hasBeenHandled == true) return
+        }
 
         _openReader.fireEvent()
     }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.view.doOnLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -16,7 +17,6 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import javax.inject.Inject
 import kotlin.math.min
-import kotlin.math.roundToInt
 
 class ResultFragment : BaseFragment() {
 
@@ -55,6 +55,11 @@ class ResultFragment : BaseFragment() {
 
         resultViewModel.showIntent.receiveEvent(viewLifecycleOwner) { intent ->
             startActivity(intent)
+        }
+
+        val customTabsIntent = CustomTabsIntent.Builder().build()
+        resultViewModel.startUri.receiveEvent(viewLifecycleOwner) { uri ->
+            customTabsIntent.launchUrl(requireActivity(), uri)
         }
 
         resultViewModel.qrImage.observe(viewLifecycleOwner) { bitmap ->

@@ -1,4 +1,4 @@
-package com.takechee.qrcodereader.ui.feature.history
+package com.takechee.qrcodereader.ui.feature.setting
 
 import androidx.lifecycle.ViewModel
 import com.takechee.qrcodereader.di.ViewModelKey
@@ -8,12 +8,12 @@ import dagger.multibindings.IntoMap
 
 @Module
 @Suppress("UNUSED")
-abstract class HistoryFragmentModule {
+abstract class SettingsFragmentModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(HistoryViewModel::class)
-    abstract fun bindHistoryViewModel(viewModel: HistoryViewModel): ViewModel
+    @ViewModelKey(SettingsViewModel::class)
+    abstract fun bindSettingsViewModel(viewModel: SettingsViewModel): ViewModel
 
 
     @Module
