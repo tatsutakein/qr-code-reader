@@ -44,6 +44,7 @@
     <fragment
         android:id="@id/navigation_settings"
         android:name="com.takechee.qrcodereader.ui.feature.setting.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>
