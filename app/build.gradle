@@ -6,6 +6,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 
 android {
     compileSdkVersion Versions.compileSdkVersion
@@ -72,6 +73,8 @@ dependencies {
     implementation Dependencies.AndroidX.Room.ktx
     implementation Dependencies.AndroidX.Room.runtime
     kapt Dependencies.AndroidX.Room.compiler
+
+    implementation Dependencies.AndroidX.Licenses.core
 
     implementation Dependencies.Dagger.android
     implementation Dependencies.Dagger.androidSupport

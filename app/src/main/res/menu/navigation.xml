@@ -7,9 +7,16 @@
         android:checkableBehavior="single">
 
         <item
+            android:id="@id/navigation_oss_licenses"
+            android:icon="@drawable/ic_nav_info"
+            android:title="@string/info_title"
+            app:contentDescription="@string/info_title" />
+
+        <item
             android:id="@id/navigation_settings"
             android:icon="@drawable/ic_nav_settings"
             android:title="@string/settings_title"
             app:contentDescription="@string/settings_title" />
     </group>
+
 </menu>

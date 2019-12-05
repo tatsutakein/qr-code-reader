@@ -12,6 +12,7 @@ buildscript {
         // in the individual module build.gradle files
         classpath 'com.google.gms:google-services:4.3.3'
         classpath Dependencies.AndroidX.Navigation.safeArgsPlugin
+        classpath Dependencies.AndroidX.Licenses.gradlePlugin
     }
 }
 

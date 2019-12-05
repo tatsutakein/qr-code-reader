@@ -24,6 +24,9 @@ class MainActivity : BaseActivity() {
                 R.id.navigation_settings -> {
                     findNavController(R.id.nav_host_fragment).navigate(HomeFragmentDirections.toSettings())
                 }
+                R.id.navigation_oss_licenses -> {
+                    findNavController(R.id.nav_host_fragment).navigate(HomeFragmentDirections.toOssLicenses())
+                }
                 else -> return@setNavigationItemSelectedListener false
             }
             return@setNavigationItemSelectedListener true

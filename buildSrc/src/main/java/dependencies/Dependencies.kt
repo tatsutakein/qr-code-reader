@@ -40,6 +40,11 @@ object Dependencies {
             const val runtime = "androidx.room:room-runtime:${version}"
             const val compiler = "androidx.room:room-compiler:${version}"
         }
+
+        object Licenses {
+            const val gradlePlugin = "com.google.android.gms:oss-licenses-plugin:0.10.0"
+            const val core = "com.google.android.gms:play-services-oss-licenses:17.0.0"
+        }
     }
 
     object Dagger {

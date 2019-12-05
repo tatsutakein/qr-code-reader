@@ -19,6 +19,9 @@
         <action
             android:id="@+id/to_settings"
             app:destination="@id/navigation_settings" />
+        <action
+            android:id="@+id/to_oss_licenses"
+            app:destination="@id/navigation_oss_licenses" />
     </fragment>
 
     <fragment
@@ -46,5 +49,14 @@
         android:name="com.takechee.qrcodereader.ui.feature.setting.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings" />
+
+    <activity
+        android:id="@id/navigation_oss_licenses"
+        android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity">
+        <argument
+            android:name="title"
+            android:defaultValue="@string/licenses_title"
+            app:argType="string" />
+    </activity>
 
 </navigation>
