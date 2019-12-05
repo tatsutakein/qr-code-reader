@@ -53,8 +53,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Dependencies.Kotlin.stdlib
     implementation Dependencies.AndroidX.appcompat
+    implementation Dependencies.AndroidX.fragment
     implementation Dependencies.AndroidX.coreKtx
     implementation Dependencies.AndroidX.constraintLayout
+    implementation Dependencies.AndroidX.preferenceKtx
     implementation Dependencies.AndroidX.material
 
     implementation Dependencies.AndroidX.Lifecycle.extensions
