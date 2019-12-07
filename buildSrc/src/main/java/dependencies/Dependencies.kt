@@ -71,4 +71,6 @@ object Dependencies {
         const val core = "com.xwray:groupie:$version"
         const val dataBinding = "com.xwray:groupie-databinding:$version"
     }
+
+    const val threeten = "com.jakewharton.threetenabp:threetenabp:1.2.1"
 }

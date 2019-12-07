@@ -91,6 +91,8 @@ dependencies {
     implementation Dependencies.Groupie.core
     implementation Dependencies.Groupie.dataBinding
 
+    implementation Dependencies.threeten
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
