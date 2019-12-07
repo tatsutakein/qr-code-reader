@@ -17,6 +17,12 @@ android {
         versionCode Versions.versionCode
         versionName Versions.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
     buildTypes {
         debug {
@@ -38,6 +44,10 @@ android {
     }
 
     testBuildType "staging"
+
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
 
     // Required for AR because it includes a library built with Java 8
     compileOptions {
@@ -73,6 +83,7 @@ dependencies {
     implementation Dependencies.AndroidX.Room.ktx
     implementation Dependencies.AndroidX.Room.runtime
     kapt Dependencies.AndroidX.Room.compiler
+    testImplementation Dependencies.AndroidX.Room.testing
 
     implementation Dependencies.AndroidX.Licenses.core
 
