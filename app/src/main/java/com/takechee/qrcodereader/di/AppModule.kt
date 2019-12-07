@@ -4,6 +4,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import androidx.core.content.getSystemService
 import com.takechee.qrcodereader.MainApp
+import com.takechee.qrcodereader.data.db.AppDatabase
+import com.takechee.qrcodereader.data.db.ReadCodeDatabase
+import com.takechee.qrcodereader.data.db.ReadCodeRoomDatabase
 import com.takechee.qrcodereader.data.prefs.PreferenceStorage
 import com.takechee.qrcodereader.data.prefs.SharedPreferenceStorage
 import dagger.Module
@@ -27,5 +30,15 @@ class AppModule {
     @Provides
     fun providesPreferenceStorage(context: Context): PreferenceStorage {
         return SharedPreferenceStorage(context)
+    }
+
+    @Singleton
+    @Provides
+    fun providesAppDatabase(context: Context): AppDatabase = AppDatabase.buildDatabase(context)
+
+    @Singleton
+    @Provides
+    fun providesReadCodeDatabase(database: AppDatabase): ReadCodeDatabase {
+        return ReadCodeRoomDatabase(database, database.readCodeFtsDao())
     }
 }
