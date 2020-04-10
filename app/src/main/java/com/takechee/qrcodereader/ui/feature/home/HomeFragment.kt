@@ -2,15 +2,14 @@ package com.takechee.qrcodereader.ui.feature.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.zxing.integration.android.IntentIntegrator
+import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.FragmentHomeBinding
 import com.takechee.qrcodereader.result.receiveEvent
 import com.takechee.qrcodereader.ui.common.base.BaseFragment
@@ -21,7 +20,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import javax.inject.Inject
 
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     @Inject
     lateinit var intentIntegrator: IntentIntegrator
@@ -29,45 +28,40 @@ class HomeFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val homeViewModel: HomeViewModel by viewModels { viewModelFactory }
+    private val viewModel: HomeViewModel by viewModels { viewModelFactory }
 
-    private lateinit var binding: FragmentHomeBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentHomeBinding.inflate(inflater, container, false).apply {
-            viewModel = homeViewModel
-            lifecycleOwner = viewLifecycleOwner
-        }
-        return binding.root
-    }
+    // =============================================================================================
+    //
+    // Lifecycle
+    //
+    // =============================================================================================
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        val binding = FragmentHomeBinding.bind(view)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
-        viewLifecycleOwner.lifecycle.addObserver(homeViewModel)
+        viewLifecycleOwner.lifecycle.addObserver(viewModel)
 
-        val historySection = HomeHistorySection(homeViewModel)
+        val historySection = HomeHistorySection(viewModel)
 
         val adapter = GroupAdapter<GroupieViewHolder>()
         binding.contentsView.adapter = adapter
         val list = mutableListOf<Item<*>>()
-        list.add(HomeHistoriesItem(historySection, homeViewModel))
+        list.add(HomeHistoriesItem(historySection, viewModel))
         adapter.update(list)
-        homeViewModel.urls.observe(viewLifecycleOwner) { historySection.update(it) }
+        viewModel.urls.observe(viewLifecycleOwner) { historySection.update(it) }
 
-        homeViewModel.openReader.receiveEvent(viewLifecycleOwner) {
+        viewModel.openReader.receiveEvent(viewLifecycleOwner) {
             intentIntegrator.initiateScan()
         }
 
-        homeViewModel.navigateTo.receiveEvent(viewLifecycleOwner) { directions ->
+        viewModel.navigateTo.receiveEvent(viewLifecycleOwner) { directions ->
             findNavController().navigate(directions)
         }
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)) {
