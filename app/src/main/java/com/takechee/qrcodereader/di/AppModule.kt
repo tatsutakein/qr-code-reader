@@ -9,8 +9,8 @@ import com.takechee.qrcodereader.data.db.ReadCodeDatabase
 import com.takechee.qrcodereader.data.db.ReadCodeRoomDatabase
 import com.takechee.qrcodereader.data.prefs.PreferenceStorage
 import com.takechee.qrcodereader.data.prefs.SharedPreferenceStorage
-import com.takechee.qrcodereader.ui.common.navigation.DefaultNavigateHelper
-import com.takechee.qrcodereader.ui.common.navigation.NavigateHelper
+import com.takechee.qrcodereader.ui.DefaultNavigateHelper
+import com.takechee.qrcodereader.ui.NavigateHelper
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

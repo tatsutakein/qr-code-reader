@@ -8,7 +8,6 @@
     <fragment
         android:id="@id/navigation_home"
         android:name="com.takechee.qrcodereader.ui.feature.home.HomeFragment"
-        android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/to_result"
@@ -27,7 +26,6 @@
     <fragment
         android:id="@id/navigation_result"
         android:name="com.takechee.qrcodereader.ui.feature.result.ResultFragment"
-        android:label="ResultFragment"
         tools:layout="@layout/fragment_result">
         <argument
             android:name="url"
@@ -37,7 +35,6 @@
     <fragment
         android:id="@id/navigation_history"
         android:name="com.takechee.qrcodereader.ui.feature.history.HistoryFragment"
-        android:label="HistoryFragment"
         tools:layout="@layout/fragment_history">
         <action
             android:id="@+id/to_result"
@@ -47,7 +44,6 @@
     <fragment
         android:id="@id/navigation_settings"
         android:name="com.takechee.qrcodereader.ui.feature.setting.SettingsFragment"
-        android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings" />
 
     <activity

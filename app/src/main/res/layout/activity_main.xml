@@ -9,14 +9,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.MainActivity">
+        android:layout_height="match_parent">
 
         <androidx.drawerlayout.widget.DrawerLayout
             android:id="@+id/drawer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="com.google.samples.apps.iosched.ui.MainActivity"
             tools:openDrawer="start">
 
             <androidx.fragment.app.FragmentContainerView

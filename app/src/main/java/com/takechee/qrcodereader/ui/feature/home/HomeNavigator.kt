@@ -1,7 +1,7 @@
 package com.takechee.qrcodereader.ui.feature.home
 
-import com.takechee.qrcodereader.ui.common.navigation.NavigateHelper
-import com.takechee.qrcodereader.ui.common.navigation.Navigator
+import com.takechee.qrcodereader.ui.NavigateHelper
+import com.takechee.qrcodereader.ui.Navigator
 import javax.inject.Inject
 
 // =============================================================================================
