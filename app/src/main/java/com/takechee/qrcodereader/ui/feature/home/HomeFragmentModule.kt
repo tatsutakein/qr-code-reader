@@ -18,6 +18,8 @@ abstract class HomeFragmentModule {
     @ViewModelKey(HomeViewModel::class)
     abstract fun bindMainViewModel(viewModel: HomeViewModel): ViewModel
 
+    @Binds
+    abstract fun bindsHomeNavigator(helper: HomeNavigateHelper): HomeNavigator
 
     @Module
     companion object {

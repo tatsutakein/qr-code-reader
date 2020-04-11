@@ -6,19 +6,19 @@ import com.takechee.qrcodereader.data.prefs.PreferenceStorage
 import com.takechee.qrcodereader.result.Event
 import com.takechee.qrcodereader.result.fireEvent
 import com.takechee.qrcodereader.ui.common.base.BaseViewModel
+import com.takechee.qrcodereader.ui.common.navigation.Navigator
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
-    private val prefs: PreferenceStorage
-) : BaseViewModel(), LifecycleObserver, HomeEventListener {
+    private val prefs: PreferenceStorage,
+    private val navigator: HomeNavigator
+) : BaseViewModel(), LifecycleObserver, HomeEventListener, Navigator by navigator {
 
     private var isFirstOpened = false
 
     private val _openReader = MutableLiveData<Event<Unit>>()
-    val openReader: LiveData<Event<Unit>> = _openReader.distinctUntilChanged()
-
-    private val _navigateTo = MutableLiveData<Event<NavDirections>>()
-    val navigateTo: LiveData<Event<NavDirections>> = _navigateTo.distinctUntilChanged()
+    val openReader: LiveData<Event<Unit>>
+        get() = _openReader.distinctUntilChanged()
 
     val urls: LiveData<List<String>> = MutableLiveData(
         listOf(
@@ -49,11 +49,11 @@ class HomeViewModel @Inject constructor(
     }
 
     override fun onHistoryItemClick(url: String) {
-        _navigateTo.fireEvent { HomeFragmentDirections.toResult(url) }
+        navigator.navigateToResult(url)
     }
 
     override fun onHistoryMoreClick() {
-        _navigateTo.fireEvent { HomeFragmentDirections.toHistory() }
+        navigator.navigateToHistory()
     }
 
 }

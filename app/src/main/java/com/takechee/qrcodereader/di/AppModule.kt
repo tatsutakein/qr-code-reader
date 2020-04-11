@@ -9,6 +9,8 @@ import com.takechee.qrcodereader.data.db.ReadCodeDatabase
 import com.takechee.qrcodereader.data.db.ReadCodeRoomDatabase
 import com.takechee.qrcodereader.data.prefs.PreferenceStorage
 import com.takechee.qrcodereader.data.prefs.SharedPreferenceStorage
+import com.takechee.qrcodereader.ui.common.navigation.DefaultNavigateHelper
+import com.takechee.qrcodereader.ui.common.navigation.NavigateHelper
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -31,6 +33,9 @@ class AppModule {
     fun providesPreferenceStorage(context: Context): PreferenceStorage {
         return SharedPreferenceStorage(context)
     }
+
+    @Provides
+    fun providesNavigateHelper(): NavigateHelper = DefaultNavigateHelper()
 
     @Singleton
     @Provides

@@ -12,6 +12,7 @@ import com.google.zxing.integration.android.IntentIntegrator
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.FragmentHomeBinding
 import com.takechee.qrcodereader.result.receiveEvent
+import com.takechee.qrcodereader.ui.MainNavigationFragment
 import com.takechee.qrcodereader.ui.common.base.BaseFragment
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -20,7 +21,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import javax.inject.Inject
 
-class HomeFragment : BaseFragment(R.layout.fragment_home) {
+class HomeFragment : MainNavigationFragment(R.layout.fragment_home) {
 
     @Inject
     lateinit var intentIntegrator: IntentIntegrator
@@ -45,12 +46,14 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
         viewLifecycleOwner.lifecycle.addObserver(viewModel)
 
+        setupNavigation(viewModel)
+        
         val historySection = HomeHistorySection(viewModel)
 
         val adapter = GroupAdapter<GroupieViewHolder>()
         binding.contentsView.adapter = adapter
         val list = mutableListOf<Item<*>>()
-        list.add(HomeHistoriesItem(historySection, viewModel))
+        list.add(HomeHistoryContainerItem(historySection, viewModel))
         adapter.update(list)
         viewModel.urls.observe(viewLifecycleOwner) { historySection.update(it) }
 
@@ -58,9 +61,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             intentIntegrator.initiateScan()
         }
 
-        viewModel.navigateTo.receiveEvent(viewLifecycleOwner) { directions ->
-            findNavController().navigate(directions)
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
