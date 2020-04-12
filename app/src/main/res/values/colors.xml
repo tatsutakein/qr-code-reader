@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#b39ddb</color>
+
+    <color name="color_primary">@color/purple</color>
+    <color name="color_primary_dark">@color/darker_purple</color>
+    <color name="color_on_secondary">@color/black</color>
     <color name="primary_light">#e6ceff</color>
-    <color name="primary_dark">#836fa9</color>
     <color name="secondary">#f8bbd0</color>
     <color name="secondary_light">#ffeeff</color>
     <color name="secondary_dark">#c48b9f</color>
     <color name="primaryText">#000000</color>
     <color name="secondaryText">#000000</color>
+
+    <color name="color_control_light">#39000000</color> <!-- Same as textColorPrimary disabled -->
+
+    <!-- Scrim colors -->
+    <color name="system_ui_scrim_light">#B3FFFFFF</color> <!-- 70% white -->
+    <color name="system_ui_scrim_black">#40000000</color> <!-- 25% black -->
+
+    <!-- We use a dark scrim by default since light status is API 23+ -->
+    <color name="status_bar_scrim">@color/system_ui_scrim_black</color>
+    <!-- We use a dark scrim by default since light nav bar is API 27+ -->
+    <color name="nav_bar_scrim">@color/system_ui_scrim_black</color>
+
+
+    <!-- Color palettes -->
+    <color name="purple">#b39ddb</color>
+    <color name="darker_purple">#836fa9</color>
+    <color name="black">#0f0f0f</color>
+    <color name="transparent">#0fff</color>
+
 </resources>
