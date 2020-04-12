@@ -8,6 +8,7 @@
 
 
     <string name="home">ホーム</string>
+    <string name="history">履歴</string>
     <string name="open_camera">カメラを開く</string>
 
 </resources>
