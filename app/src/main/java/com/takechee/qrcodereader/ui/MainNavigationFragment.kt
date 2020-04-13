@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.ContentView
+import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.LiveData
@@ -15,7 +16,6 @@ import com.takechee.qrcodereader.result.Event
 import com.takechee.qrcodereader.result.fireEvent
 import com.takechee.qrcodereader.result.receiveEvent
 import com.takechee.qrcodereader.ui.common.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_home.view.*
 
 abstract class MainNavigationFragment : BaseFragment {
 
@@ -86,6 +86,15 @@ abstract class MainNavigationFragment : BaseFragment {
 //
 // =============================================================================================
 interface NavigationHost {
+
+    enum class BottomNavigationMenu(@IdRes internal val resId: Int) {
+        HOME(R.id.nav_graph_home),
+        HISTORY(R.id.nav_graph_history),
+        MISC(R.id.nav_graph_misc)
+    }
+
+    fun switchingBottomNavigationMenu(bottomNavigationMenu: BottomNavigationMenu)
+
     fun registerToolbarWithNavigation(toolbar: Toolbar)
 }
 

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_history"
+    app:startDestination="@id/navigation_history">
+
+    <fragment
+        android:id="@id/navigation_history"
+        android:name="com.takechee.qrcodereader.ui.feature.history.HistoryFragment"
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/to_result"
+            app:destination="@id/navigation_result" />
+    </fragment>
+
+    <fragment
+        android:id="@id/navigation_result"
+        android:name="com.takechee.qrcodereader.ui.feature.result.ResultFragment"
+        tools:layout="@layout/fragment_result">
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
+
+</navigation>

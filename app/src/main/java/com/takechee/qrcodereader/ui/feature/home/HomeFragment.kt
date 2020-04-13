@@ -47,7 +47,7 @@ class HomeFragment : MainNavigationFragment(R.layout.fragment_home) {
         viewLifecycleOwner.lifecycle.addObserver(viewModel)
 
         setupNavigation(viewModel)
-        
+
         val historySection = HomeHistorySection(viewModel)
 
         val adapter = GroupAdapter<GroupieViewHolder>()
@@ -61,6 +61,13 @@ class HomeFragment : MainNavigationFragment(R.layout.fragment_home) {
             intentIntegrator.initiateScan()
         }
 
+        viewModel.event.receiveEvent(viewLifecycleOwner) { event ->
+            when (event) {
+                is HomeEvent.SwitchingHistory -> {
+                    navigationHost?.switchingBottomNavigationMenu(event.value)
+                }
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -19,6 +19,10 @@ class HomeViewModel @Inject constructor(
     val openReader: LiveData<Event<Unit>>
         get() = _openReader.distinctUntilChanged()
 
+    private val _event = MutableLiveData<Event<HomeEvent>>()
+    val event: LiveData<Event<HomeEvent>>
+        get() = _event.distinctUntilChanged()
+
     val urls: LiveData<List<String>> = MutableLiveData(
         listOf(
             "https://takechee.com/takeblo/",
@@ -28,6 +32,11 @@ class HomeViewModel @Inject constructor(
     )
 
 
+    // =============================================================================================
+    //
+    // Lifecycle
+    //
+    // =============================================================================================
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
         if (isFirstOpened) return
@@ -39,6 +48,12 @@ class HomeViewModel @Inject constructor(
         fireOpenReaderEvent()
     }
 
+
+    // =============================================================================================
+    //
+    // Event
+    //
+    // =============================================================================================
     fun onOpenReaderClick() {
         fireOpenReaderEvent()
     }
@@ -52,7 +67,7 @@ class HomeViewModel @Inject constructor(
     }
 
     override fun onHistoryMoreClick() {
-        navigator.navigateToHistory()
+        _event.fireEvent { HomeEvent.SwitchingHistory }
     }
 
 }
