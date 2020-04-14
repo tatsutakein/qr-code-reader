@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 private const val INTENT_PARAM_URL = "URL"
 
-class DetailActivity : BaseActivity() {
+class DetailActivity : BaseActivity(R.layout.activity_detail) {
 
     // =============================================================================================
     //
@@ -22,13 +22,9 @@ class DetailActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_detail)
-
-        val navHostFragment = findNavHostFragment()
-
         if (savedInstanceState == null) {
             val url = intent.getStringExtra(INTENT_PARAM_URL) ?: return
-            navHostFragment.navController.setGraph(
+            findNavHostFragment().navController.setGraph(
                 R.navigation.nav_graph_detail,
                 DetailFragmentArgs(url).toBundle()
             )

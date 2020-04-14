@@ -1,6 +1,8 @@
 package com.takechee.qrcodereader.ui.common.dagger
 
 import android.os.Bundle
+import androidx.annotation.ContentView
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -8,8 +10,24 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-abstract class DaggerActivity : AppCompatActivity(), HasAndroidInjector {
+abstract class DaggerActivity : AppCompatActivity, HasAndroidInjector {
 
+    // =============================================================================================
+    //
+    // Constructor
+    //
+    // =============================================================================================
+    constructor() : super()
+
+    @ContentView
+    constructor(@LayoutRes contentLayoutId: Int) : super(contentLayoutId)
+
+
+    // =============================================================================================
+    //
+    // Dagger
+    //
+    // =============================================================================================
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
