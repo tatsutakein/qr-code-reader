@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/to_result"
-            app:destination="@id/navigation_result" />
+            app:destination="@id/navigation_detail" />
         <action
             android:id="@+id/to_history"
             app:destination="@id/navigation_history" />
@@ -31,13 +31,13 @@
         tools:layout="@layout/fragment_history">
         <action
             android:id="@+id/to_result"
-            app:destination="@id/navigation_result" />
+            app:destination="@id/navigation_detail" />
     </fragment>
 
     <fragment
-        android:id="@id/navigation_result"
-        android:name="com.takechee.qrcodereader.ui.feature.result.ResultFragment"
-        tools:layout="@layout/fragment_result">
+        android:id="@id/navigation_detail"
+        android:name="com.takechee.qrcodereader.ui.feature.detail.DetailFragment"
+        tools:layout="@layout/fragment_detail">
         <argument
             android:name="url"
             app:argType="string" />

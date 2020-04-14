@@ -2,7 +2,7 @@
 <resources>
     <item name="navigation_home" type="id" />
     <item name="navigation_capture" type="id" />
-    <item name="navigation_result" type="id" />
+    <item name="navigation_detail" type="id" />
     <item name="navigation_history" type="id" />
     <item name="navigation_settings" type="id" />
     <item name="navigation_oss_licenses" type="id" />

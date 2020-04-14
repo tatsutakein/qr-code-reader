@@ -1,4 +1,4 @@
-package com.takechee.qrcodereader.ui.feature.result
+package com.takechee.qrcodereader.ui.feature.detail
 
 import androidx.lifecycle.ViewModel
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -10,22 +10,22 @@ import dagger.multibindings.IntoMap
 
 @Module
 @Suppress("UNUSED")
-abstract class ResultFragmentModule {
+abstract class DetailFragmentModule {
     @Binds
     @IntoMap
-    @ViewModelKey(ResultViewModel::class)
-    abstract fun bindResultViewModel(viewModel: ResultViewModel): ViewModel
+    @ViewModelKey(DetailViewModel::class)
+    abstract fun bindDetailViewModel(viewModel: DetailViewModel): ViewModel
 
     @Module
     companion object {
-        @ResultFragmentScoped
+        @DetailFragmentScoped
         @JvmStatic
         @Provides
-        fun provideResultFragmentArguments(fragment: ResultFragment): ResultFragmentArguments {
-            return ResultFragmentArguments.of(fragment.args)
+        fun provideDetailFragmentArguments(fragment: DetailFragment): DetailFragmentArguments {
+            return DetailFragmentArguments.of(fragment.args)
         }
 
-        @ResultFragmentScoped
+        @DetailFragmentScoped
         @JvmStatic
         @Provides
         fun provideBarcodeEncoder(): BarcodeEncoder = BarcodeEncoder()

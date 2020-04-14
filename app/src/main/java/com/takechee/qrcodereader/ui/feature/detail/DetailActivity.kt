@@ -3,25 +3,9 @@ package com.takechee.qrcodereader.ui.feature.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
-import android.view.animation.AccelerateDecelerateInterpolator
-import androidx.appcompat.widget.Toolbar
-import androidx.core.view.isVisible
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.observe
-import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
-import androidx.transition.Slide
-import androidx.transition.TransitionManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.takechee.qrcodereader.R
-import com.takechee.qrcodereader.databinding.ActivityMainBinding
 import com.takechee.qrcodereader.ui.common.base.BaseActivity
-import com.takechee.qrcodereader.ui.feature.result.ResultFragmentArgs
-import com.takechee.qrcodereader.util.extension.setupWithNavController
 import dagger.Binds
 import dagger.Module
 import javax.inject.Inject
@@ -46,7 +30,7 @@ class DetailActivity : BaseActivity() {
             val url = intent.getStringExtra(INTENT_PARAM_URL) ?: return
             navHostFragment.navController.setGraph(
                 R.navigation.nav_graph_detail,
-                ResultFragmentArgs(url).toBundle()
+                DetailFragmentArgs(url).toBundle()
             )
         }
     }

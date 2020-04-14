@@ -1,9 +1,8 @@
-package com.takechee.qrcodereader.ui.feature.result
+package com.takechee.qrcodereader.ui.feature.detail
 
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
-import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,9 +14,9 @@ import com.takechee.qrcodereader.result.fireEvent
 import com.takechee.qrcodereader.ui.common.base.BaseViewModel
 import javax.inject.Inject
 
-class ResultViewModel @Inject constructor(
-    @ResultFragmentScoped private val args: ResultFragmentArguments,
-    @ResultFragmentScoped private val encoder: BarcodeEncoder
+class DetailViewModel @Inject constructor(
+    @DetailFragmentScoped private val args: DetailFragmentArguments,
+    @DetailFragmentScoped private val encoder: BarcodeEncoder
 ) : BaseViewModel() {
 
     val url: LiveData<String> = MutableLiveData(args.url)

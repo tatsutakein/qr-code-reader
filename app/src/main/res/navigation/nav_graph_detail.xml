@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_detail"
-    app:startDestination="@id/navigation_result">
+    app:startDestination="@id/navigation_detail">
 
     <fragment
-        android:id="@id/navigation_result"
-        android:name="com.takechee.qrcodereader.ui.feature.result.ResultFragment"
-        tools:layout="@layout/fragment_result">
+        android:id="@id/navigation_detail"
+        android:name="com.takechee.qrcodereader.ui.feature.detail.DetailFragment"
+        tools:layout="@layout/fragment_detail">
         <argument
             android:name="url"
             app:argType="string" />

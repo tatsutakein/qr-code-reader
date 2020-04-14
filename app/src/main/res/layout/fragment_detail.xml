@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.takechee.qrcodereader.ui.feature.result.ResultViewModel" />
+            type="com.takechee.qrcodereader.ui.feature.detail.DetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
