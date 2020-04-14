@@ -15,12 +15,6 @@ class HomeViewModel @Inject constructor(
     private val detailActivityIntentFactory: DetailActivityIntentFactory
 ) : BaseViewModel(), LifecycleObserver, HomeEventListener, Navigator by navigator {
 
-    private var isFirstOpened = false
-
-    private val _openReader = MutableLiveData<Event<Unit>>()
-    val openReader: LiveData<Event<Unit>>
-        get() = _openReader.distinctUntilChanged()
-
     private val _event = MutableLiveData<Event<HomeEvent>>()
     val event: LiveData<Event<HomeEvent>>
         get() = _event.distinctUntilChanged()
@@ -41,13 +35,6 @@ class HomeViewModel @Inject constructor(
     // =============================================================================================
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
-        if (isFirstOpened) return
-        isFirstOpened = true
-
-        if (!prefs.openReaderWhenAppStarts) return
-        if (openReader.value?.hasBeenHandled == true) return
-
-        fireOpenReaderEvent()
     }
 
 
@@ -61,12 +48,10 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun fireOpenReaderEvent() {
-//        _openReader.fireEvent()
         navigator.navigateToCapture()
     }
 
     override fun onHistoryItemClick(url: String) {
-//        navigator.navigateToResult(url)
         fireEvent {
             val intent = detailActivityIntentFactory.create(url)
             HomeEvent.OpenDetail(intent)

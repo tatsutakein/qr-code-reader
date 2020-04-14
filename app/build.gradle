@@ -77,7 +77,7 @@ dependencies {
     implementation Dependencies.AndroidX.Lifecycle.viewModelKtx
     implementation Dependencies.AndroidX.Lifecycle.savedState
 
-    implementation Dependencies.AndroidX.Navigation.fragment
+    implementation Dependencies.AndroidX.Navigation.fragmentKtx
     implementation Dependencies.AndroidX.Navigation.uiKtx
 
     implementation Dependencies.AndroidX.Room.ktx
@@ -92,7 +92,7 @@ dependencies {
     kapt Dependencies.Dagger.compiler
     kapt Dependencies.Dagger.processor
     compileOnly Dependencies.Dagger.assistedAnnotations
-    annotationProcessor Dependencies.Dagger.assistedProcessor
+    kapt Dependencies.Dagger.assistedProcessor
 
     implementation 'com.google.firebase:firebase-analytics:17.2.1'
 
@@ -102,6 +102,7 @@ dependencies {
     implementation Dependencies.Groupie.core
     implementation Dependencies.Groupie.dataBinding
 
+    implementation Dependencies.permissionsdispatcher
     implementation Dependencies.threeten
 
     testImplementation 'junit:junit:4.12'

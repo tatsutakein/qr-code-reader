@@ -2,6 +2,8 @@ package com.takechee.qrcodereader.di
 
 import com.takechee.qrcodereader.ui.MainActivity
 import com.takechee.qrcodereader.ui.MainActivityModule
+import com.takechee.qrcodereader.ui.feature.capture.CaptureActivity
+import com.takechee.qrcodereader.ui.feature.capture.CaptureActivityModule
 import com.takechee.qrcodereader.ui.feature.capture.CaptureModule
 import com.takechee.qrcodereader.ui.feature.detail.DetailActivity
 import com.takechee.qrcodereader.ui.feature.detail.DetailActivityIntentFactoryModule
@@ -32,6 +34,18 @@ abstract class ActivityBindingModule {
         ]
     )
     internal abstract fun mainActivity(): MainActivity
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+        modules = [
+            // activity
+            CaptureActivityModule::class,
+            DetailActivityIntentFactoryModule::class,
+            // fragments
+            CaptureModule::class
+        ]
+    )
+    internal abstract fun captureActivity(): CaptureActivity
 
     @ActivityScoped
     @ContributesAndroidInjector(

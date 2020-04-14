@@ -13,7 +13,6 @@ import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.FragmentHomeBinding
 import com.takechee.qrcodereader.result.receiveEvent
 import com.takechee.qrcodereader.ui.MainNavigationFragment
-import com.takechee.qrcodereader.ui.common.base.BaseFragment
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -22,9 +21,6 @@ import dagger.android.ContributesAndroidInjector
 import javax.inject.Inject
 
 class HomeFragment : MainNavigationFragment(R.layout.fragment_home) {
-
-    @Inject
-    lateinit var intentIntegrator: IntentIntegrator
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -56,10 +52,6 @@ class HomeFragment : MainNavigationFragment(R.layout.fragment_home) {
         list.add(HomeHistoryContainerItem(historySection, viewModel))
         adapter.update(list)
         viewModel.urls.observe(viewLifecycleOwner) { historySection.update(it) }
-
-        viewModel.openReader.receiveEvent(viewLifecycleOwner) {
-            intentIntegrator.initiateScan()
-        }
 
         viewModel.event.receiveEvent(viewLifecycleOwner) { event ->
             when (event) {

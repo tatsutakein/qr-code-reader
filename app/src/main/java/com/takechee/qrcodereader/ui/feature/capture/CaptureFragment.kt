@@ -1,5 +1,6 @@
 package com.takechee.qrcodereader.ui.feature.capture
 
+import android.Manifest
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -11,6 +12,7 @@ import com.takechee.qrcodereader.result.receiveEvent
 import com.takechee.qrcodereader.ui.MainNavigationFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import permissions.dispatcher.ktx.withPermissionsCheck
 import javax.inject.Inject
 
 class CaptureFragment : MainNavigationFragment(R.layout.fragment_capture) {
@@ -38,10 +40,22 @@ class CaptureFragment : MainNavigationFragment(R.layout.fragment_capture) {
 
         setupNavigation(viewModel)
 
-        binding.zxingBarcodeScanner.also {
-            barcodeView = it
-            it.decodeContinuous(viewModel)
-        }
+        barcodeView = binding.zxingBarcodeScanner
+
+        withPermissionsCheck(Manifest.permission.CAMERA,
+            onShowRationale = { request ->
+                request.proceed()
+            },
+            onPermissionDenied = {
+
+            },
+            onNeverAskAgain = {
+
+            },
+            requiresPermission = {
+                binding.zxingBarcodeScanner.decodeContinuous(viewModel)
+            }
+        )
 
         viewModel.event.receiveEvent(viewLifecycleOwner) { event ->
             when (event) {

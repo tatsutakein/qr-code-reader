@@ -30,7 +30,7 @@ object Dependencies {
             private const val version = "2.2.1"
             const val safeArgsPlugin =
                 "androidx.navigation:navigation-safe-args-gradle-plugin:$version"
-            const val fragment = "androidx.navigation:navigation-fragment-ktx:$version"
+            const val fragmentKtx = "androidx.navigation:navigation-fragment-ktx:$version"
             const val uiKtx = "androidx.navigation:navigation-ui-ktx:$version"
         }
 
@@ -73,5 +73,6 @@ object Dependencies {
         const val dataBinding = "com.xwray:groupie-databinding:$version"
     }
 
+    const val permissionsdispatcher = "org.permissionsdispatcher:permissionsdispatcher-ktx:1.0.0-alpha2"
     const val threeten = "com.jakewharton.threetenabp:threetenabp:1.2.3"
 }
