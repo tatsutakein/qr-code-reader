@@ -1,7 +1,10 @@
 package com.takechee.qrcodereader.ui
 
 import android.os.Bundle
+import android.view.Gravity
+import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.observe
@@ -9,6 +12,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.transition.Slide
+import androidx.transition.TransitionManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.ActivityMainBinding
@@ -26,24 +31,18 @@ class MainActivity : BaseActivity(), NavigationHost {
         )
     }
 
-    private var _navHost: NavHostFragment? = null
-    private val navHost: NavHostFragment
-        get() = _navHost ?: findNavHostFragment().also {
-            _navHost = it
-        }
-
-    private var _navController: NavController? = null
-    private val navController: NavController
-        get() = _navController ?: navHost.navController.also {
-            _navController = it
-        }
-
     private var currentNavController: LiveData<NavController>? = null
 
     private val binding: ActivityMainBinding by lazy {
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
     }
 
+
+    // =============================================================================================
+    //
+    // Lifecycle
+    //
+    // =============================================================================================
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -62,17 +61,29 @@ class MainActivity : BaseActivity(), NavigationHost {
         setupBottomNavigationBar()
     }
 
-    override fun switchingBottomNavigationMenu(bottomNavigationMenu: NavigationHost.BottomNavigationMenu) {
-        binding.bottomNavigation.selectedItemId = bottomNavigationMenu.resId
+
+    // =============================================================================================
+    //
+    // NavigationHost
+    //
+    // =============================================================================================
+    override fun switchingBottomNavigationMenu(menu: NavigationHost.BottomNavigationMenu) {
+        binding.bottomNavigation.selectedItemId = menu.resId
     }
 
     override fun registerToolbarWithNavigation(toolbar: Toolbar) {
-//        val appBarConfiguration = AppBarConfiguration(TOP_LEVEL_DESTINATIONS)
-//        currentNavController?.value?.let { navController ->
-//            toolbar.setupWithNavController(navController, appBarConfiguration)
-//        }
+        val appBarConfiguration = AppBarConfiguration(TOP_LEVEL_DESTINATIONS)
+        currentNavController?.value?.let { navController ->
+            toolbar.setupWithNavController(navController, appBarConfiguration)
+        }
     }
 
+
+    // =============================================================================================
+    //
+    // Utility
+    //
+    // =============================================================================================
     /**
      * Called on first creation and when restoring state.
      */
@@ -93,11 +104,31 @@ class MainActivity : BaseActivity(), NavigationHost {
             intent = intent
         )
 
+        // Whenever the selected controller changes, setup the destination changed listener.
+        controller.observe(this) { navController ->
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                TransitionManager.beginDelayedTransition(
+                    binding.container,
+                    BottomNavigationViewTransition
+                )
+                val isTopDestination = TOP_LEVEL_DESTINATIONS.contains(destination.id)
+                bottomNavigationView.isVisible = isTopDestination
+            }
+        }
         currentNavController = controller
     }
 
-    private fun findNavHostFragment(): NavHostFragment {
-        return supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+
+    // =============================================================================================
+    //
+    // Class
+    //
+    // =============================================================================================
+    private object BottomNavigationViewTransition : Slide(Gravity.BOTTOM) {
+        init {
+            excludeTarget(R.id.nav_host_fragment, true)
+            interpolator = AccelerateDecelerateInterpolator()
+        }
     }
 }
 

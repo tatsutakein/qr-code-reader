@@ -43,7 +43,7 @@
             android:layout_margin="@dimen/margin_normal"
             android:onClick="@{() -> viewModel.onOpenReaderClick()}"
             android:text="@string/open_camera"
-            app:icon="@drawable/ic_photo_camera_black_24dp"
+            app:icon="@drawable/ic_photo_camera"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />

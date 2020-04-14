@@ -93,7 +93,7 @@ interface NavigationHost {
         MISC(R.id.nav_graph_misc)
     }
 
-    fun switchingBottomNavigationMenu(bottomNavigationMenu: BottomNavigationMenu)
+    fun switchingBottomNavigationMenu(menu: BottomNavigationMenu)
 
     fun registerToolbarWithNavigation(toolbar: Toolbar)
 }
