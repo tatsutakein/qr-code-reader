@@ -1,15 +1,13 @@
 package com.takechee.qrcodereader.ui.feature.history
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.FragmentHistoryBinding
-import com.takechee.qrcodereader.databinding.FragmentHomeBinding
 import com.takechee.qrcodereader.result.receiveEvent
 import com.takechee.qrcodereader.ui.common.base.BaseFragment
 import com.xwray.groupie.GroupAdapter
@@ -19,42 +17,39 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import javax.inject.Inject
 
-class HistoryFragment : BaseFragment() {
+class HistoryFragment : BaseFragment(R.layout.fragment_history) {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val historyViewModel: HistoryViewModel by viewModels { viewModelFactory }
+    private val viewModel: HistoryViewModel by viewModels { viewModelFactory }
 
-    private lateinit var binding: FragmentHistoryBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentHistoryBinding.inflate(inflater, container, false).apply {
-            viewModel = historyViewModel
-            lifecycleOwner = viewLifecycleOwner
+    // =============================================================================================
+    //
+    // Lifecycle
+    //
+    // =============================================================================================
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val binding = FragmentHistoryBinding.bind(view).also {
+            it.viewModel = viewModel
+            it.lifecycleOwner = viewLifecycleOwner
         }
-        return binding.root
-    }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        viewLifecycleOwner.lifecycle.addObserver(historyViewModel)
+        viewLifecycleOwner.lifecycle.addObserver(viewModel)
 
         val adapter = GroupAdapter<GroupieViewHolder>()
         binding.historyListView.adapter = adapter
 
-        historyViewModel.urls.observe(viewLifecycleOwner) { urls ->
+        viewModel.urls.observe(viewLifecycleOwner) { urls ->
             val list = mutableListOf<Item<*>>()
-            urls.mapTo(list) { url -> HistoryItem(url, historyViewModel) }
+            urls.mapTo(list) { url -> HistoryItem(url, viewModel) }
             adapter.update(list)
         }
 
-        historyViewModel.navigateTo.receiveEvent(viewLifecycleOwner) { directions ->
+        viewModel.navigateTo.receiveEvent(viewLifecycleOwner) { directions ->
             findNavController().navigate(directions)
         }
     }

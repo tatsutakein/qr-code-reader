@@ -12,7 +12,8 @@ class HistoryViewModel @Inject constructor(
 ) : BaseViewModel(), LifecycleObserver, HistoryEventListener {
 
     private val _navigateTo = MutableLiveData<Event<NavDirections>>()
-    val navigateTo: LiveData<Event<NavDirections>> = _navigateTo.distinctUntilChanged()
+    val navigateTo: LiveData<Event<NavDirections>>
+        get() = _navigateTo.distinctUntilChanged()
 
     val urls: LiveData<List<String>> = MutableLiveData(
         listOf(

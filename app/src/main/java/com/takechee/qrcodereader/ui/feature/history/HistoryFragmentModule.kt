@@ -14,8 +14,7 @@ abstract class HistoryFragmentModule {
     @IntoMap
     @ViewModelKey(HistoryViewModel::class)
     abstract fun bindHistoryViewModel(viewModel: HistoryViewModel): ViewModel
-
-
+    
     @Module
     companion object {
     }
