@@ -66,6 +66,9 @@ class HomeFragment : MainNavigationFragment(R.layout.fragment_home) {
                 is HomeEvent.SwitchingHistory -> {
                     navigationHost?.switchingBottomNavigationMenu(event.value)
                 }
+                is HomeEvent.OpenDetail -> {
+                    startActivity(event.intent)
+                }
             }
         }
     }

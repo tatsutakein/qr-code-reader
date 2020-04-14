@@ -1,4 +1,4 @@
-package com.takechee.qrcodereader.ui.feature.home
+package com.takechee.qrcodereader.ui.feature.capture
 
 import com.takechee.qrcodereader.ui.NavigateHelper
 import com.takechee.qrcodereader.ui.Navigator
@@ -9,10 +9,9 @@ import javax.inject.Inject
 // Navigator
 //
 // =============================================================================================
-interface HomeNavigator : Navigator {
+interface CaptureNavigator : Navigator {
     fun navigateToResult(url: String)
     fun navigateToHistory()
-    fun navigateToCapture()
 }
 
 
@@ -21,25 +20,19 @@ interface HomeNavigator : Navigator {
 // NavigateHelper
 //
 // =============================================================================================
-class HomeNavigateHelper @Inject constructor(
+class CaptureNavigateHelper @Inject constructor(
     navigateHelper: NavigateHelper
-) : HomeNavigator, NavigateHelper by navigateHelper {
+) : CaptureNavigator, NavigateHelper by navigateHelper {
 
     override fun navigateToResult(url: String) {
-        navigateTo {
-            HomeFragmentDirections.toResult(url)
-        }
+//        navigateTo {
+//            HomeFragmentDirections.toResult(url)
+//        }
     }
 
     override fun navigateToHistory() {
-        navigateTo {
-            HomeFragmentDirections.toHistory()
-        }
-    }
-
-    override fun navigateToCapture() {
-        navigateTo {
-            HomeFragmentDirections.toCapture()
-        }
+//        navigateTo {
+//            HomeFragmentDirections.toHistory()
+//        }
     }
 }

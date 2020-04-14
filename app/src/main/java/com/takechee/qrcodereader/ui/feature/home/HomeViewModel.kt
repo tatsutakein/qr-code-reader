@@ -6,11 +6,13 @@ import com.takechee.qrcodereader.result.Event
 import com.takechee.qrcodereader.result.fireEvent
 import com.takechee.qrcodereader.ui.common.base.BaseViewModel
 import com.takechee.qrcodereader.ui.Navigator
+import com.takechee.qrcodereader.ui.feature.detail.DetailActivityIntentFactory
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
     private val prefs: PreferenceStorage,
-    private val navigator: HomeNavigator
+    private val navigator: HomeNavigator,
+    private val detailActivityIntentFactory: DetailActivityIntentFactory
 ) : BaseViewModel(), LifecycleObserver, HomeEventListener, Navigator by navigator {
 
     private var isFirstOpened = false
@@ -59,15 +61,30 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun fireOpenReaderEvent() {
-        _openReader.fireEvent()
+//        _openReader.fireEvent()
+        navigator.navigateToCapture()
     }
 
     override fun onHistoryItemClick(url: String) {
-        navigator.navigateToResult(url)
+//        navigator.navigateToResult(url)
+        fireEvent {
+            val intent = detailActivityIntentFactory.create(url)
+            HomeEvent.OpenDetail(intent)
+        }
     }
 
     override fun onHistoryMoreClick() {
-        _event.fireEvent { HomeEvent.SwitchingHistory }
+        fireEvent { HomeEvent.SwitchingHistory }
+    }
+
+
+    // =============================================================================================
+    //
+    // Utility
+    //
+    // =============================================================================================
+    private fun fireEvent(action: () -> HomeEvent) {
+        _event.fireEvent(action)
     }
 
 }

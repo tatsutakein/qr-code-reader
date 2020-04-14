@@ -2,6 +2,10 @@ package com.takechee.qrcodereader.di
 
 import com.takechee.qrcodereader.ui.MainActivity
 import com.takechee.qrcodereader.ui.MainActivityModule
+import com.takechee.qrcodereader.ui.feature.capture.CaptureModule
+import com.takechee.qrcodereader.ui.feature.detail.DetailActivity
+import com.takechee.qrcodereader.ui.feature.detail.DetailActivityIntentFactoryModule
+import com.takechee.qrcodereader.ui.feature.detail.DetailActivityModule
 import com.takechee.qrcodereader.ui.feature.history.HistoryModule
 import com.takechee.qrcodereader.ui.feature.home.HomeModule
 import com.takechee.qrcodereader.ui.feature.result.ResultModule
@@ -18,12 +22,25 @@ abstract class ActivityBindingModule {
         modules = [
             // activity
             MainActivityModule::class,
+            DetailActivityIntentFactoryModule::class,
             // fragments
             HomeModule::class,
+            CaptureModule::class,
             HistoryModule::class,
             ResultModule::class,
             SettingsModule::class
         ]
     )
     internal abstract fun mainActivity(): MainActivity
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+        modules = [
+            // activity
+            DetailActivityModule::class,
+            // fragments
+            ResultModule::class
+        ]
+    )
+    internal abstract fun detailActivity(): DetailActivity
 }

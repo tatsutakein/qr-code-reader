@@ -40,6 +40,8 @@
             android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
             android:theme="@style/Theme.MaterialComponents.Light" />
 
+        <activity android:name=".ui.feature.detail.DetailActivity" />
+
     </application>
 
 </manifest>
