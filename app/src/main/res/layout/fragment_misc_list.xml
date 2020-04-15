@@ -63,11 +63,22 @@
                     android:id="@+id/version_build_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:gravity="center_horizontal|bottom"
                     android:minHeight="48dp"
-                    android:padding="@dimen/margin_normal"
                     app:misc_gitCommitHash="@{BuildConfig.GIT_COMMIT_HASH}"
-                    app:misc_versionName="@{BuildConfig.VERSION_NAME}" />
+                    app:misc_versionName="@{BuildConfig.VERSION_NAME}"
+                    tools:text="App Version 1.0.0 (XXXXXXX)" />
+
+                <TextView
+                    android:id="@+id/build_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_small"
+                    android:visibility="@{BuildConfig.DEBUG}"
+                    app:misc_buildType="@{BuildConfig.BUILD_TYPE}"
+                    tools:text="-- DEBUG VERSION --" />
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
