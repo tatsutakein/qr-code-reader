@@ -38,8 +38,6 @@ class HistoryFragment : BaseFragment(R.layout.fragment_history) {
             it.lifecycleOwner = viewLifecycleOwner
         }
 
-        viewLifecycleOwner.lifecycle.addObserver(viewModel)
-
         val adapter = GroupAdapter<GroupieViewHolder>()
         binding.historyListView.adapter = adapter
 

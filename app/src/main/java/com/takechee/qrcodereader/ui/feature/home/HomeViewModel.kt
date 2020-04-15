@@ -21,9 +21,9 @@ class HomeViewModel @Inject constructor(
 
     val urls: LiveData<List<String>> = MutableLiveData(
         listOf(
-            "https://takechee.com/takeblo/",
-            "https://s10i.me/whitenote/",
-            "https://qiita.com/ru_ri21/items/2fdcef6f522f61f1545e"
+            "http://www.iroduku.jp/",
+            "https://www.aimer-web.jp/",
+            "https://higedan.com/"
         )
     )
 
@@ -52,10 +52,7 @@ class HomeViewModel @Inject constructor(
     }
 
     override fun onHistoryItemClick(url: String) {
-        fireEvent {
-            val intent = detailActivityIntentFactory.create(url)
-            HomeEvent.OpenDetail(intent)
-        }
+        navigator.navigateToResult(url)
     }
 
     override fun onHistoryMoreClick() {

@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class HistoryViewModel @Inject constructor(
 
-) : BaseViewModel(), LifecycleObserver, HistoryEventListener {
+) : BaseViewModel(), HistoryEventListener {
 
     private val _navigateTo = MutableLiveData<Event<NavDirections>>()
     val navigateTo: LiveData<Event<NavDirections>>
@@ -17,17 +17,21 @@ class HistoryViewModel @Inject constructor(
 
     val urls: LiveData<List<String>> = MutableLiveData(
         listOf(
+            "http://www.iroduku.jp/",
+            "https://www.aimer-web.jp/",
+            "https://higedan.com/",
             "https://takechee.com/takeblo/",
             "https://s10i.me/whitenote/",
             "https://qiita.com/ru_ri21/items/2fdcef6f522f61f1545e"
         )
     )
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun onCreate() {
-//        fireOpenReaderEvent(ifNeeded = true)
-    }
 
+    // =============================================================================================
+    //
+    // Event
+    //
+    // =============================================================================================
     override fun onHistoryItemClick(url: String) {
         _navigateTo.fireEvent { HistoryFragmentDirections.toResult(url) }
     }

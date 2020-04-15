@@ -3,6 +3,7 @@ package com.takechee.qrcodereader.ui.feature.capture
 import android.Manifest
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
@@ -66,12 +67,43 @@ class CaptureFragment : MainNavigationFragment(R.layout.fragment_capture) {
 
     override fun onResume() {
         super.onResume()
+        updateScreen(ScreenType.FULLSCREEN)
         barcodeView?.resume()
     }
 
     override fun onPause() {
         barcodeView?.pause()
+        updateScreen(ScreenType.NORMAL)
         super.onPause()
+    }
+
+
+    // =============================================================================================
+    //
+    // Utility
+    //
+    // =============================================================================================
+    private fun updateScreen(type: ScreenType) {
+        val window = activity?.window ?: return
+
+        when (type) {
+            ScreenType.FULLSCREEN -> {
+                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+                window.setFlags(
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN
+                )
+            }
+            ScreenType.NORMAL -> {
+                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+                window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+            }
+        }
+    }
+
+    private enum class ScreenType {
+        FULLSCREEN,
+        NORMAL
     }
 }
 
