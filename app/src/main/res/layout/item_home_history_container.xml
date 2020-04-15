@@ -52,7 +52,7 @@
                 android:id="@+id/separator"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:background="@color/color_control_light"
+                android:background="?android:dividerHorizontal"
                 app:layout_constraintBottom_toTopOf="@id/view_more_button"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
