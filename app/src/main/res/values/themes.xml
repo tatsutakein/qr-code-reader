@@ -18,6 +18,8 @@
         </item>
         <item name="android:navigationBarColor">@color/nav_bar_scrim</item>
 
+        <!-- Widget styles -->
+        <item name="toolbarStyle">@style/Widget.QRCodeReader.Toolbar</item>
     </style>
 
     <style name="ThemeOverlay.QRReader.Light" parent="ThemeOverlay.MaterialComponents.Light">

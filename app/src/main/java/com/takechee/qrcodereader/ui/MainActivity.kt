@@ -2,26 +2,27 @@ package com.takechee.qrcodereader.ui
 
 import android.os.Bundle
 import android.view.Gravity
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.observe
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.takechee.qrcodereader.R
-import com.takechee.qrcodereader.databinding.ActivityMainBinding
 import com.takechee.qrcodereader.ui.common.base.BaseActivity
+import com.takechee.qrcodereader.util.HeightTopWindowInsetsListener
+import com.takechee.qrcodereader.util.NoopWindowInsetsListener
 import com.takechee.qrcodereader.util.extension.setupWithNavController
 import dagger.Module
 
-class MainActivity : BaseActivity(), NavigationHost {
+class MainActivity : BaseActivity(R.layout.activity_main), NavigationHost {
 
     companion object {
         private val TOP_LEVEL_DESTINATIONS = setOf(
@@ -34,9 +35,8 @@ class MainActivity : BaseActivity(), NavigationHost {
 
     private var currentNavController: LiveData<NavController>? = null
 
-    private val binding: ActivityMainBinding by lazy {
-        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-    }
+    private lateinit var contentContainer: ViewGroup
+    private lateinit var bottomNavigationView: BottomNavigationView
 
 
     // =============================================================================================
@@ -47,7 +47,16 @@ class MainActivity : BaseActivity(), NavigationHost {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.lifecycleOwner = this
+        contentContainer = findViewById<ViewGroup>(R.id.container).also { container ->
+            container.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            // Make the content ViewGroup ignore insets so that it does not use the default padding
+            container.setOnApplyWindowInsetsListener(NoopWindowInsetsListener)
+        }
+        bottomNavigationView = findViewById(R.id.bottom_navigation)
+
+        findViewById<View>(R.id.status_bar_scrim)
+            .setOnApplyWindowInsetsListener(HeightTopWindowInsetsListener)
 
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
@@ -69,7 +78,7 @@ class MainActivity : BaseActivity(), NavigationHost {
     //
     // =============================================================================================
     override fun switchingBottomNavigationMenu(menu: NavigationHost.BottomNavigationMenu) {
-        binding.bottomNavigation.selectedItemId = menu.resId
+        bottomNavigationView.selectedItemId = menu.resId
     }
 
     override fun registerToolbarWithNavigation(toolbar: Toolbar) {
@@ -109,11 +118,11 @@ class MainActivity : BaseActivity(), NavigationHost {
         controller.observe(this) { navController ->
             navController.addOnDestinationChangedListener { _, destination, _ ->
                 TransitionManager.beginDelayedTransition(
-                    binding.container,
+                    contentContainer,
                     BottomNavigationViewTransition
                 )
-                val isTopDestination = TOP_LEVEL_DESTINATIONS.contains(destination.id)
-                bottomNavigationView.isVisible = isTopDestination
+                val isTopLevelDestination = TOP_LEVEL_DESTINATIONS.contains(destination.id)
+                bottomNavigationView.isVisible = isTopLevelDestination
             }
         }
         currentNavController = controller

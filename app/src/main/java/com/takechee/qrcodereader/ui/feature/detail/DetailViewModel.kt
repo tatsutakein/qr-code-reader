@@ -22,17 +22,19 @@ class DetailViewModel @Inject constructor(
     val url: LiveData<String> = MutableLiveData(args.url)
 
     private val _showIntent = MutableLiveData<Event<Intent>>()
-    val showIntent: LiveData<Event<Intent>> = _showIntent.distinctUntilChanged()
+    val showIntent: LiveData<Event<Intent>>
+        get() = _showIntent.distinctUntilChanged()
 
     private val _startUri = MutableLiveData<Event<Uri>>()
-    val startUri: LiveData<Event<Uri>> = _startUri.distinctUntilChanged()
+    val startUri: LiveData<Event<Uri>>
+        get() = _startUri.distinctUntilChanged()
 
     private val _qrImage = MutableLiveData<Bitmap>()
-    val qrImage: LiveData<Bitmap> = _qrImage.distinctUntilChanged()
+    val qrImage: LiveData<Bitmap>
+        get() = _qrImage.distinctUntilChanged()
 
     fun onOpenUrlClick() {
         _startUri.fireEvent { args.url.toUri() }
-//        _showIntent.fireEvent { Intent(Intent.ACTION_VIEW, args.url.toUri()) }
     }
 
     fun onQRImageViewLayout(size: Int) {
