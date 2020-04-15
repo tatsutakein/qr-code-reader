@@ -3,7 +3,7 @@ package dependencies
 @Suppress("unused")
 object Dependencies {
     object Kotlin {
-        private const val version = "1.3.71"
+        private const val version = "1.3.72"
         const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
     }
