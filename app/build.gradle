@@ -30,11 +30,11 @@ android {
     buildTypes {
         debug {
             debuggable true
-//            applicationIdSuffix ".debug"
+            applicationIdSuffix ".debug"
         }
         staging {
-            debuggable true
-//            applicationIdSuffix ".staging"
+            initWith(debug)
+            applicationIdSuffix ".staging"
         }
         release {
             minifyEnabled false
