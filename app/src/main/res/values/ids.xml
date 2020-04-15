@@ -5,5 +5,6 @@
     <item name="navigation_detail" type="id" />
     <item name="navigation_history" type="id" />
     <item name="navigation_settings" type="id" />
+    <item name="navigation_misc" type="id" />
     <item name="navigation_oss_licenses" type="id" />
 </resources>

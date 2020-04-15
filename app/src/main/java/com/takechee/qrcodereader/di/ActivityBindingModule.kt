@@ -11,6 +11,7 @@ import com.takechee.qrcodereader.ui.feature.detail.DetailActivityModule
 import com.takechee.qrcodereader.ui.feature.history.HistoryModule
 import com.takechee.qrcodereader.ui.feature.home.HomeModule
 import com.takechee.qrcodereader.ui.feature.detail.DetailModule
+import com.takechee.qrcodereader.ui.feature.misc.MiscModule
 import com.takechee.qrcodereader.ui.feature.setting.SettingsModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -30,7 +31,8 @@ abstract class ActivityBindingModule {
             CaptureModule::class,
             HistoryModule::class,
             DetailModule::class,
-            SettingsModule::class
+            SettingsModule::class,
+            MiscModule::class
         ]
     )
     internal abstract fun mainActivity(): MainActivity

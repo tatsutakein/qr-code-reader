@@ -31,6 +31,12 @@ class DetailActivity : BaseActivity(R.layout.activity_detail) {
         }
     }
 
+
+    // =============================================================================================
+    //
+    // Utility
+    //
+    // =============================================================================================
     private fun findNavHostFragment(): NavHostFragment {
         return supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
     }

@@ -27,6 +27,7 @@ class MainActivity : BaseActivity(), NavigationHost {
         private val TOP_LEVEL_DESTINATIONS = setOf(
             R.id.navigation_home,
             R.id.navigation_history,
+            R.id.navigation_misc,
             R.id.navigation_settings
         )
     }

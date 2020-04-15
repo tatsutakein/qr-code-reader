@@ -13,7 +13,9 @@
         <!-- Window decor -->
         <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/use_light_status</item>
         <item name="android:statusBarColor">@color/transparent</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">@bool/use_light_navigation</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">
+            @bool/use_light_navigation
+        </item>
         <item name="android:navigationBarColor">@color/nav_bar_scrim</item>
 
     </style>
@@ -29,5 +31,22 @@
     </style>
 
     <style name="AppTheme" parent="Base.AppTheme" />
+
+    <style name="AppTheme.OssLicenses" parent="Theme.MaterialComponents.DayNight">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+
+        <!-- Window decor -->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/use_light_status</item>
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">
+            @bool/use_light_navigation
+        </item>
+        <item name="android:navigationBarColor">@color/nav_bar_scrim</item>
+
+        <!-- Widget styles -->
+        <item name="actionBarStyle">@style/Widget.QRCodeReader.OssLicenses.ActionBar</item>
+    </style>
 
 </resources>
