@@ -7,9 +7,10 @@ import java.util.*
 
 @BindingAdapter("misc_versionName", "misc_gitCommitHash")
 fun setVersionName(view: TextView, versionName: String, gitCommitHash: String) {
+    val formattedVersionName = versionName.replace("(?<=[0-9])-.*$".toRegex(), "")
     view.text = view.resources.getString(
         R.string.version_name,
-        versionName,
+        formattedVersionName,
         gitCommitHash
     )
 }

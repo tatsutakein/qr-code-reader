@@ -31,10 +31,12 @@ android {
         debug {
             debuggable true
             applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
         }
         staging {
             initWith(debug)
             applicationIdSuffix ".staging"
+            versionNameSuffix "-staging"
         }
         release {
             minifyEnabled false
