@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
+import androidx.core.view.updatePadding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.observe
 import androidx.navigation.NavController
@@ -21,6 +22,7 @@ import com.takechee.qrcodereader.util.HeightTopWindowInsetsListener
 import com.takechee.qrcodereader.util.NoopWindowInsetsListener
 import com.takechee.qrcodereader.util.extension.setupWithNavController
 import dagger.Module
+import dev.chrisbanes.insetter.doOnApplyWindowInsets
 
 class MainActivity : BaseActivity(R.layout.activity_main), NavigationHost {
 
@@ -49,11 +51,21 @@ class MainActivity : BaseActivity(R.layout.activity_main), NavigationHost {
 
         contentContainer = findViewById<ViewGroup>(R.id.container).also { container ->
             container.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    // ** レイアウトの領域をStatusBarとNavigationBarの領域も含むようにする **
+                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+
             // Make the content ViewGroup ignore insets so that it does not use the default padding
             container.setOnApplyWindowInsetsListener(NoopWindowInsetsListener)
         }
-        bottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation).also {
+            it.doOnApplyWindowInsets { view, insets, initialState ->
+                view.updatePadding(
+                    left = initialState.paddings.left + insets.systemWindowInsetLeft,
+                    right = initialState.paddings.right + insets.systemWindowInsetRight,
+                    bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                )
+            }
+        }
 
         findViewById<View>(R.id.status_bar_scrim)
             .setOnApplyWindowInsetsListener(HeightTopWindowInsetsListener)

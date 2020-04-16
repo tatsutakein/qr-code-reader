@@ -1,9 +1,14 @@
 package com.takechee.qrcodereader.ui.feature.capture
 
 import android.Manifest
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.core.view.ViewCompat
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
@@ -13,6 +18,7 @@ import com.takechee.qrcodereader.result.receiveEvent
 import com.takechee.qrcodereader.ui.MainNavigationFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import permissions.dispatcher.ktx.withPermissionsCheck
 import javax.inject.Inject
 
@@ -58,6 +64,21 @@ class CaptureFragment : MainNavigationFragment(R.layout.fragment_capture) {
             }
         )
 
+        binding.zxingBarcodeScanner.doOnApplyWindowInsets { scanner, insets, initialState ->
+            scanner.updatePadding(
+                left = initialState.paddings.left + insets.systemWindowInsetLeft,
+//                top = initialState.paddings.top + insets.systemWindowInsetTop,
+                right = initialState.paddings.right + insets.systemWindowInsetRight,
+                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+            )
+        }
+
+        binding.toolbar.doOnApplyWindowInsets { toolbar, insets, initialState ->
+            toolbar.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                topMargin = initialState.margins.top + insets.systemWindowInsetTop
+            }
+        }
+
         viewModel.event.receiveEvent(viewLifecycleOwner) { event ->
             when (event) {
                 is CaptureEvent.OpenDetail -> startActivity(event.intent)
@@ -67,43 +88,12 @@ class CaptureFragment : MainNavigationFragment(R.layout.fragment_capture) {
 
     override fun onResume() {
         super.onResume()
-        updateScreen(ScreenType.FULLSCREEN)
         barcodeView?.resume()
     }
 
     override fun onPause() {
         barcodeView?.pause()
-        updateScreen(ScreenType.NORMAL)
         super.onPause()
-    }
-
-
-    // =============================================================================================
-    //
-    // Utility
-    //
-    // =============================================================================================
-    private fun updateScreen(type: ScreenType) {
-        val window = activity?.window ?: return
-
-        when (type) {
-            ScreenType.FULLSCREEN -> {
-                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-                window.setFlags(
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN
-                )
-            }
-            ScreenType.NORMAL -> {
-                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
-                window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
-            }
-        }
-    }
-
-    private enum class ScreenType {
-        FULLSCREEN,
-        NORMAL
     }
 }
 

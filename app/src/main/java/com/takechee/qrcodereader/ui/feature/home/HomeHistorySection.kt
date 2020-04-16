@@ -1,5 +1,6 @@
 package com.takechee.qrcodereader.ui.feature.home
 
+import com.takechee.qrcodereader.model.CapturedCode
 import com.xwray.groupie.Item
 import com.xwray.groupie.Section
 import javax.inject.Inject
@@ -7,9 +8,9 @@ import javax.inject.Inject
 class HomeHistorySection @Inject constructor(
     private val eventListener: HomeEventListener
 ) : Section() {
-    fun update(urls: List<String>) {
+    fun update(captures: List<CapturedCode>) {
         val list = mutableListOf<Item<*>>()
-        urls.mapTo(list) { url -> HomeHistoryItem(url, eventListener) }
+        captures.mapTo(list) { captured -> HomeHistoryItem(captured, eventListener) }
         update(list)
     }
 

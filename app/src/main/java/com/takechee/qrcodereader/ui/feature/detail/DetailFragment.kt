@@ -11,20 +11,19 @@ import androidx.navigation.fragment.navArgs
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.FragmentDetailBinding
 import com.takechee.qrcodereader.result.receiveEvent
+import com.takechee.qrcodereader.ui.MainNavigationFragment
 import com.takechee.qrcodereader.ui.common.base.BaseFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import javax.inject.Inject
 import kotlin.math.min
 
-class DetailFragment : BaseFragment(R.layout.fragment_detail) {
+class DetailFragment : MainNavigationFragment(R.layout.fragment_detail) {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val viewModel: DetailViewModel by viewModels { viewModelFactory }
-
-    private lateinit var binding: FragmentDetailBinding
 
     internal val args: DetailFragmentArgs by navArgs()
 

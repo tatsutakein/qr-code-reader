@@ -9,21 +9,35 @@
             type="com.takechee.qrcodereader.ui.feature.capture.CaptureViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent">
 
         <!--
         This Activity is typically full-screen. Therefore we can safely use centerCrop scaling with
         a SurfaceView, without fear of weird artifacts. -->
         <com.journeyapps.barcodescanner.CompoundBarcodeView
             android:id="@+id/zxing_barcode_scanner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:zxing_preview_scaling_strategy="centerCrop"
             app:zxing_use_texture_view="false" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Widget.QRCodeReader.Toolbar"
+            android:layout_width="0dp"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/capture_menu"
+            app:title="@string/capture" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

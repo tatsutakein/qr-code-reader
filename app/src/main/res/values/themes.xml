@@ -34,7 +34,7 @@
 
     <style name="AppTheme" parent="Base.AppTheme" />
 
-    <style name="AppTheme.OssLicenses" parent="Theme.MaterialComponents.DayNight">
+    <style name="Base.AppTheme.OssLicenses" parent="Theme.MaterialComponents.DayNight">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
@@ -50,5 +50,7 @@
         <!-- Widget styles -->
         <item name="actionBarStyle">@style/Widget.QRCodeReader.OssLicenses.ActionBar</item>
     </style>
+
+    <style name="AppTheme.OssLicenses" parent="Base.AppTheme.OssLicenses" />
 
 </resources>

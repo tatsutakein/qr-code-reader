@@ -51,7 +51,7 @@ class HomeFragment : MainNavigationFragment(R.layout.fragment_home) {
         val list = mutableListOf<Item<*>>()
         list.add(HomeHistoryContainerItem(historySection, viewModel))
         adapter.update(list)
-        viewModel.urls.observe(viewLifecycleOwner) { historySection.update(it) }
+        viewModel.captures.observe(viewLifecycleOwner) { historySection.update(it) }
 
         viewModel.event.receiveEvent(viewLifecycleOwner) { event ->
             when (event) {

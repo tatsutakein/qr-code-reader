@@ -25,7 +25,7 @@ data class HomeHistoryContainerItem(
                 when (item) {
                     is HomeHistoryItem -> Toast.makeText(
                         view.context,
-                        item.url,
+                        item.captured.text,
                         Toast.LENGTH_SHORT
                     ).show()
                 }

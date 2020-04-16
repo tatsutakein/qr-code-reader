@@ -2,6 +2,7 @@ package com.takechee.qrcodereader.ui.feature.home
 
 import androidx.lifecycle.*
 import com.takechee.qrcodereader.data.prefs.PreferenceStorage
+import com.takechee.qrcodereader.model.CapturedCode
 import com.takechee.qrcodereader.result.Event
 import com.takechee.qrcodereader.result.fireEvent
 import com.takechee.qrcodereader.ui.common.base.BaseViewModel
@@ -19,13 +20,9 @@ class HomeViewModel @Inject constructor(
     val event: LiveData<Event<HomeEvent>>
         get() = _event.distinctUntilChanged()
 
-    val urls: LiveData<List<String>> = MutableLiveData(
-        listOf(
-            "http://www.iroduku.jp/",
-            "https://www.aimer-web.jp/",
-            "https://higedan.com/"
-        )
-    )
+    val captures: LiveData<List<CapturedCode>> = liveData(viewModelScope.coroutineContext) {
+        emit(CapturedCode.homeSamples())
+    }
 
 
     // =============================================================================================
@@ -51,8 +48,8 @@ class HomeViewModel @Inject constructor(
         navigator.navigateToCapture()
     }
 
-    override fun onHistoryItemClick(url: String) {
-        navigator.navigateToResult(url)
+    override fun onHistoryItemClick(capturedCode: CapturedCode) {
+        navigator.navigateToResult(capturedCode.text)
     }
 
     override fun onHistoryMoreClick() {

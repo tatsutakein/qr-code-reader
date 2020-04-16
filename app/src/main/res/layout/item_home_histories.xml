@@ -26,7 +26,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 android:singleLine="true"
-                android:text="最近読み取ったURL"
+                android:text="@string/recently_captured_content"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@id/history_list_view"
                 app:layout_constraintLeft_toLeftOf="parent"

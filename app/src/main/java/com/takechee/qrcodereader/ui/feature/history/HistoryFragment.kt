@@ -41,9 +41,9 @@ class HistoryFragment : BaseFragment(R.layout.fragment_history) {
         val adapter = GroupAdapter<GroupieViewHolder>()
         binding.historyListView.adapter = adapter
 
-        viewModel.urls.observe(viewLifecycleOwner) { urls ->
+        viewModel.captures.observe(viewLifecycleOwner) { captures ->
             val list = mutableListOf<Item<*>>()
-            urls.mapTo(list) { url -> HistoryItem(url, viewModel) }
+            captures.mapTo(list) { captured -> HistoryItem(captured, viewModel) }
             adapter.update(list)
         }
 
