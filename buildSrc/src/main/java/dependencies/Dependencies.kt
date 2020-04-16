@@ -68,11 +68,13 @@ object Dependencies {
     }
 
     object Groupie {
-        private const val version = "2.7.2"
+        private const val version = "2.8.0"
         const val core = "com.xwray:groupie:$version"
         const val dataBinding = "com.xwray:groupie-databinding:$version"
     }
 
     const val permissionsdispatcher = "org.permissionsdispatcher:permissionsdispatcher-ktx:1.0.0-alpha2"
     const val threeten = "com.jakewharton.threetenabp:threetenabp:1.2.3"
+    const val insetterDbx = "dev.chrisbanes:insetter-dbx:0.2.1"
+    const val insetterKtx = "dev.chrisbanes:insetter-ktx:0.2.1"
 }
