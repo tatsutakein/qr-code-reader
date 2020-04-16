@@ -63,6 +63,20 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
     }
+
+    // More than one file was found with OS independent path 'META-INF/LICENSE'
+    // https://stackoverflow.com/a/47509465
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude("META-INF/*.kotlin_module")
+    }
 }
 
 dependencies {
@@ -109,6 +123,9 @@ dependencies {
 
     implementation Dependencies.permissionsdispatcher
     implementation Dependencies.threeten
+
+    implementation Dependencies.insetterDbx
+    implementation Dependencies.insetterKtx
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
