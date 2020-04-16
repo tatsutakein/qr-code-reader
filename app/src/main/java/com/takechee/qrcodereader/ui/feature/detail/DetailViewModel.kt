@@ -15,7 +15,7 @@ import com.takechee.qrcodereader.ui.common.base.BaseViewModel
 import javax.inject.Inject
 
 class DetailViewModel @Inject constructor(
-    @DetailFragmentScoped private val args: DetailFragmentArguments,
+    @DetailFragmentScoped private val args: DetailArgs,
     @DetailFragmentScoped private val encoder: BarcodeEncoder
 ) : BaseViewModel() {
 

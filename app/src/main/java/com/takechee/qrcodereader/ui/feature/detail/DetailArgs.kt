@@ -1,11 +1,11 @@
 package com.takechee.qrcodereader.ui.feature.detail
 
-data class DetailFragmentArguments(
+data class DetailArgs(
     val url: String
 ) {
     companion object {
-        fun of(args: DetailFragmentArgs): DetailFragmentArguments {
-            return DetailFragmentArguments(
+        fun of(args: DetailFragmentArgs): DetailArgs {
+            return DetailArgs(
                 url = args.url
             )
         }
