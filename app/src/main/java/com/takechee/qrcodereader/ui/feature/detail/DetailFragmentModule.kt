@@ -21,8 +21,8 @@ abstract class DetailFragmentModule {
         @DetailFragmentScoped
         @JvmStatic
         @Provides
-        fun provideDetailFragmentArguments(fragment: DetailFragment): DetailFragmentArguments {
-            return DetailFragmentArguments.of(fragment.args)
+        fun provideDetailFragmentArguments(fragment: DetailFragment): DetailArgs {
+            return DetailArgs.of(fragment.args)
         }
 
         @DetailFragmentScoped

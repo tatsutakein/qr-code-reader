@@ -3,20 +3,21 @@ package com.takechee.qrcodereader.ui.feature.detail
 import android.os.Bundle
 import android.view.View
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.core.view.doOnLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.FragmentDetailBinding
 import com.takechee.qrcodereader.result.receiveEvent
 import com.takechee.qrcodereader.ui.MainNavigationFragment
-import com.takechee.qrcodereader.ui.common.base.BaseFragment
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
+import com.xwray.groupie.Item
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import javax.inject.Inject
-import kotlin.math.min
 
 class DetailFragment : MainNavigationFragment(R.layout.fragment_detail) {
 
@@ -41,11 +42,6 @@ class DetailFragment : MainNavigationFragment(R.layout.fragment_detail) {
             it.lifecycleOwner = viewLifecycleOwner
         }
 
-        binding.qrCodeImageView.doOnLayout {
-            val requestSize = min(it.width, it.height)
-            viewModel.onQRImageViewLayout(requestSize)
-        }
-
         val customTabsIntent = CustomTabsIntent.Builder().build()
         viewModel.event.receiveEvent(viewLifecycleOwner) { event ->
             when (event) {
@@ -54,10 +50,18 @@ class DetailFragment : MainNavigationFragment(R.layout.fragment_detail) {
             }
         }
 
-        viewModel.qrImage.observe(viewLifecycleOwner) { bitmap ->
-            bitmap?.let {
-                binding.qrCodeImageView.setImageBitmap(it)
-            }
+        val groupAdapter = GroupAdapter<GroupieViewHolder>()
+        binding.contentsView.apply {
+            (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
+            adapter = groupAdapter
+        }
+
+        viewModel.uiModel.observe(viewLifecycleOwner) { uiModel ->
+            val list = mutableListOf<Item<*>>()
+            uiModel.hasQRImage { bitmap -> list += DetailViewContent.QRImage(bitmap) }
+            uiModel.hasTitle { title -> list += DetailViewContent.Title(title) }
+            uiModel.hasText { text -> list += DetailViewContent.Text(text) }
+            groupAdapter.update(list)
         }
     }
 }

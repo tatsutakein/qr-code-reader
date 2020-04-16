@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -11,8 +12,7 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -30,54 +30,72 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/contents_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:fillViewport="true"
-            android:scrollbarStyle="insideOverlay"
-            android:scrollbars="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:orientation="vertical"
+            android:padding="@dimen/margin_normal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <!--        <androidx.core.widget.NestedScrollView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
 
-                <ImageView
-                    android:id="@+id/qr_code_image_view"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toTopOf="@id/result_url_text_view"
-                    app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent=".8" />
+        <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content">-->
 
-                <TextView
-                    android:id="@+id/result_url_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.url}"
-                    app:layout_constraintBottom_toTopOf="@id/open_url"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/qr_code_image_view" />
+        <!--                <ImageView-->
+        <!--                    android:id="@+id/qr_code_image_view"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="0dp"-->
+        <!--                    android:layout_margin="@dimen/margin_normal"-->
+        <!--                    android:maxWidth="200dp"-->
+        <!--                    app:layout_constraintBottom_toTopOf="@id/title_text_view"-->
+        <!--                    app:layout_constraintDimensionRatio="1:1"-->
+        <!--                    app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--                    app:layout_constraintRight_toRightOf="parent"-->
+        <!--                    app:layout_constraintTop_toTopOf="parent"-->
+        <!--                    tools:src="@tools:sample/avatars" />-->
 
-                <Button
-                    android:id="@+id/open_url"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{() -> viewModel.onOpenUrlClick()}"
-                    android:text="読み取ったURLを開く"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/result_url_text_view" />
+        <!--                <TextView-->
+        <!--                    android:id="@+id/title_text_view"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:text="@{viewModel.title}"-->
+        <!--                    app:layout_constraintBottom_toTopOf="@id/open_url"-->
+        <!--                    app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--                    app:layout_constraintRight_toRightOf="parent"-->
+        <!--                    app:layout_constraintTop_toBottomOf="@id/qr_code_image_view" />-->
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--                <TextView-->
+        <!--                    android:id="@+id/result_url_text_view"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:text="@{viewModel.url}"-->
+        <!--                    app:layout_constraintBottom_toTopOf="@id/open_url"-->
+        <!--                    app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--                    app:layout_constraintRight_toRightOf="parent"-->
+        <!--                    app:layout_constraintTop_toBottomOf="@id/title_text_view" />-->
 
-        </androidx.core.widget.NestedScrollView>
+        <!--                <Button-->
+        <!--                    android:id="@+id/open_url"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:onClick="@{() -> viewModel.onOpenUrlClick()}"-->
+        <!--                    android:text="読み取ったURLを開く"-->
+        <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--                    app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--                    app:layout_constraintRight_toRightOf="parent"-->
+        <!--                    app:layout_constraintTop_toBottomOf="@id/result_url_text_view" />-->
+
+        <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+        <!--        </androidx.core.widget.NestedScrollView>-->
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
