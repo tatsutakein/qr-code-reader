@@ -21,12 +21,12 @@
 
         <ImageView
             android:id="@+id/action_image_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginHorizontal="@dimen/margin_normal"
             android:background="@drawable/detail_action_image_area"
             android:contentDescription="@{text}"
-            android:padding="@dimen/margin_normal"
+            android:padding="12dp"
             android:src="@{src}"
             android:tint="?colorPrimary"
             app:layout_constraintBottom_toTopOf="@id/action_text_view"
