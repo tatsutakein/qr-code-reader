@@ -1,5 +1,6 @@
 package com.takechee.qrcodereader.di
 
+import android.content.ClipboardManager
 import android.content.Context
 import android.net.ConnectivityManager
 import androidx.core.content.getSystemService
@@ -25,6 +26,11 @@ class AppModule {
 
     @Provides
     fun providesConnectivityManager(context: Context): ConnectivityManager = requireNotNull(
+        context.applicationContext.getSystemService()
+    )
+
+    @Provides
+    fun providesClipboardManager(context: Context): ClipboardManager = requireNotNull(
         context.applicationContext.getSystemService()
     )
 

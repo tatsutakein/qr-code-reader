@@ -12,7 +12,7 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -39,63 +39,6 @@
             android:padding="@dimen/margin_normal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-        <!--        <androidx.core.widget.NestedScrollView-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
-
-        <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content">-->
-
-        <!--                <ImageView-->
-        <!--                    android:id="@+id/qr_code_image_view"-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="0dp"-->
-        <!--                    android:layout_margin="@dimen/margin_normal"-->
-        <!--                    android:maxWidth="200dp"-->
-        <!--                    app:layout_constraintBottom_toTopOf="@id/title_text_view"-->
-        <!--                    app:layout_constraintDimensionRatio="1:1"-->
-        <!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--                    app:layout_constraintRight_toRightOf="parent"-->
-        <!--                    app:layout_constraintTop_toTopOf="parent"-->
-        <!--                    tools:src="@tools:sample/avatars" />-->
-
-        <!--                <TextView-->
-        <!--                    android:id="@+id/title_text_view"-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:text="@{viewModel.title}"-->
-        <!--                    app:layout_constraintBottom_toTopOf="@id/open_url"-->
-        <!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--                    app:layout_constraintRight_toRightOf="parent"-->
-        <!--                    app:layout_constraintTop_toBottomOf="@id/qr_code_image_view" />-->
-
-        <!--                <TextView-->
-        <!--                    android:id="@+id/result_url_text_view"-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:text="@{viewModel.url}"-->
-        <!--                    app:layout_constraintBottom_toTopOf="@id/open_url"-->
-        <!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--                    app:layout_constraintRight_toRightOf="parent"-->
-        <!--                    app:layout_constraintTop_toBottomOf="@id/title_text_view" />-->
-
-        <!--                <Button-->
-        <!--                    android:id="@+id/open_url"-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:onClick="@{() -> viewModel.onOpenUrlClick()}"-->
-        <!--                    android:text="読み取ったURLを開く"-->
-        <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--                    app:layout_constraintRight_toRightOf="parent"-->
-        <!--                    app:layout_constraintTop_toBottomOf="@id/result_url_text_view" />-->
-
-        <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-        <!--        </androidx.core.widget.NestedScrollView>-->
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -9,6 +9,7 @@
         <item name="colorSecondary">?attr/colorPrimary</item>
         <item name="colorOnSecondary">@color/color_on_secondary</item>
         <item name="colorControlLight">@color/color_control_light</item>
+        <item name="colorControlHighlight">@color/color_control_high_light</item>
 
         <!-- Window decor -->
         <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/use_light_status</item>

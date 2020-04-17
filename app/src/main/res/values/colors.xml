@@ -12,6 +12,7 @@
     <color name="secondaryText">#000000</color>
 
     <color name="color_control_light">#39000000</color> <!-- Same as textColorPrimary disabled -->
+    <color name="color_control_high_light">#39b39ddb</color>
 
     <!-- Scrim colors -->
     <color name="system_ui_scrim_light">#B3FFFFFF</color> <!-- 70% white -->

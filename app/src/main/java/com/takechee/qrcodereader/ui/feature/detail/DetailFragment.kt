@@ -61,6 +61,11 @@ class DetailFragment : MainNavigationFragment(R.layout.fragment_detail) {
             uiModel.hasQRImage { bitmap -> list += DetailViewContent.QRImage(bitmap) }
             uiModel.hasTitle { title -> list += DetailViewContent.Title(title) }
             uiModel.hasText { text -> list += DetailViewContent.Text(text) }
+            uiModel.whenText(
+                textAction = { list += DetailViewContent.ActionArea.TextAction(viewModel) },
+                urlAction = { list += DetailViewContent.ActionArea.UrlAction(viewModel) },
+                specifiedAction = { list += DetailViewContent.ActionArea.SpecifiedAction(viewModel) }
+            )
             groupAdapter.update(list)
         }
     }

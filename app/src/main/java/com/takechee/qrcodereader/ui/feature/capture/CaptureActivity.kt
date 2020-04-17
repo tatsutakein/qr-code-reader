@@ -10,10 +10,11 @@ class CaptureActivity : BaseActivity(R.layout.activity_capture) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val container = findViewById<View>(R.id.capture_fragment_container)
-        container.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                // **レイアウトの領域をStatusBarとNavigationBarの領域も含むようにする**
-                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        findViewById<View>(R.id.capture_fragment_container).apply {
+            systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                    // **レイアウトの領域をStatusBarとNavigationBarの領域も含むようにする**
+                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        }
     }
 }
 

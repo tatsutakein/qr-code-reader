@@ -15,6 +15,11 @@
     <string name="detail">読み取り詳細</string>
     <string name="history">履歴</string>
     <string name="misc">その他</string>
+    <string name="copy_to_clipboard">クリップボードにコピー</string>
+    <string name="copied">コピーしました</string>
+    <string name="share">シェア</string>
+    <string name="open_intent">オープン</string>
     <string name="open_camera">カメラを開く</string>
+    <string name="access_url">アクセスする</string>
     <string name="recently_captured_content">最近読み取ったコンテンツ</string>
 </resources>
