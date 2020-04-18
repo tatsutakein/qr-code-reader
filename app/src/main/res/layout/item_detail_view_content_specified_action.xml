@@ -7,7 +7,7 @@
 
         <variable
             name="clickListener"
-            type="com.takechee.qrcodereader.ui.feature.detail.DetailViewContent.ActionArea.OnActionClickListener" />
+            type="com.takechee.qrcodereader.ui.feature.detail.DetailViewContentActionArea.OnActionClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

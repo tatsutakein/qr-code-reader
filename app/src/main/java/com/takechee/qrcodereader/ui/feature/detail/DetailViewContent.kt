@@ -5,97 +5,78 @@ import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.*
 import com.xwray.groupie.databinding.BindableItem
 
-sealed class DetailViewContent {
-    data class QRImage(
-        val bitmap: Bitmap
-    ) : BindableItem<ItemDetailViewContentQrimageBinding>(1) {
-        override fun getLayout(): Int = R.layout.item_detail_view_content_qrimage
-        override fun bind(viewBinding: ItemDetailViewContentQrimageBinding, position: Int) {
-            viewBinding.qrCodeImageView.setImageBitmap(bitmap)
-        }
+private enum class DetailViewContent {
+    QR_IMAGE,
+    TITLE,
+    TEXT,
+    ACTION_AREA;
+
+    val id: Long = (ordinal + 1).toLong()
+}
+
+data class DetailViewContentQRImage(
+    val bitmap: Bitmap
+) : BindableItem<ItemDetailViewContentQrimageBinding>(DetailViewContent.QR_IMAGE.id) {
+    override fun getLayout(): Int = R.layout.item_detail_view_content_qrimage
+    override fun bind(viewBinding: ItemDetailViewContentQrimageBinding, position: Int) {
+        viewBinding.qrCodeImageView.setImageBitmap(bitmap)
+    }
+}
+
+data class DetailViewContentTitle(
+    val text: String
+) : BindableItem<ItemDetailViewContentTextBinding>(DetailViewContent.TITLE.id) {
+    override fun getLayout(): Int = R.layout.item_detail_view_content_text
+    override fun bind(viewBinding: ItemDetailViewContentTextBinding, position: Int) {
+        viewBinding.text = text
+    }
+}
+
+data class DetailViewContentText(
+    val text: String
+) : BindableItem<ItemDetailViewContentTextBinding>(DetailViewContent.TEXT.id) {
+    override fun getLayout(): Int = R.layout.item_detail_view_content_text
+    override fun bind(viewBinding: ItemDetailViewContentTextBinding, position: Int) {
+        viewBinding.text = text
+    }
+}
+
+sealed class DetailViewContentActionArea {
+
+    interface OnActionClickListener {
+        fun onShareActionClick()
+        fun onOpenIntentActionClick()
+        fun onOpenUrlActionClick()
+        fun onCopyToClipBoardActionClick()
     }
 
-    data class Title(
-        val text: String
-    ) : BindableItem<ItemDetailViewContentTextBinding>(2) {
-        override fun getLayout(): Int = R.layout.item_detail_view_content_text
-        override fun bind(viewBinding: ItemDetailViewContentTextBinding, position: Int) {
-            viewBinding.text = text
-        }
-    }
-
-    data class Text(
-        val text: String
-    ) : BindableItem<ItemDetailViewContentTextBinding>(3) {
-        override fun getLayout(): Int = R.layout.item_detail_view_content_text
-        override fun bind(viewBinding: ItemDetailViewContentTextBinding, position: Int) {
-            viewBinding.text = text
-        }
-    }
-
-    data class Button(
-        val clickListener: OnClickListener
-    ) : BindableItem<ItemDetailViewContentButtonBinding>(4) {
-        override fun getLayout(): Int = R.layout.item_detail_view_content_button
-        override fun bind(viewBinding: ItemDetailViewContentButtonBinding, position: Int) {
+    data class UrlAction(
+        val clickListener: OnActionClickListener
+    ) : BindableItem<ItemDetailViewContentUrlActionBinding>(DetailViewContent.ACTION_AREA.id) {
+        override fun getLayout(): Int = R.layout.item_detail_view_content_url_action
+        override fun bind(viewBinding: ItemDetailViewContentUrlActionBinding, position: Int) {
             viewBinding.clickListener = clickListener
         }
-
-        interface OnClickListener {
-            fun onButtonClick()
-        }
     }
 
-    data class ShareButton(
-        val clickListener: OnClickListener
-    ) : BindableItem<ItemDetailViewContentShareButtonBinding>(5) {
-        override fun getLayout(): Int = R.layout.item_detail_view_content_share_button
-        override fun bind(viewBinding: ItemDetailViewContentShareButtonBinding, position: Int) {
+    data class TextAction(
+        val clickListener: OnActionClickListener
+    ) : BindableItem<ItemDetailViewContentTextActionBinding>(DetailViewContent.ACTION_AREA.id) {
+        override fun getLayout(): Int = R.layout.item_detail_view_content_text_action
+        override fun bind(viewBinding: ItemDetailViewContentTextActionBinding, position: Int) {
             viewBinding.clickListener = clickListener
         }
-
-        interface OnClickListener {
-            fun onShareButtonClick()
-        }
     }
 
-    sealed class ActionArea {
-
-        interface OnActionClickListener {
-            fun onShareActionClick()
-            fun onOpenIntentActionClick()
-            fun onOpenUrlActionClick()
-            fun onCopyToClipBoardActionClick()
-        }
-
-        data class UrlAction(
-            val clickListener: OnActionClickListener
-        ) : BindableItem<ItemDetailViewContentUrlActionBinding>(5) {
-            override fun getLayout(): Int = R.layout.item_detail_view_content_url_action
-            override fun bind(viewBinding: ItemDetailViewContentUrlActionBinding, position: Int) {
-                viewBinding.clickListener = clickListener
-            }
-        }
-
-        data class TextAction(
-            val clickListener: OnActionClickListener
-        ) : BindableItem<ItemDetailViewContentTextActionBinding>(5) {
-            override fun getLayout(): Int = R.layout.item_detail_view_content_text_action
-            override fun bind(viewBinding: ItemDetailViewContentTextActionBinding, position: Int) {
-                viewBinding.clickListener = clickListener
-            }
-        }
-
-        data class SpecifiedAction(
-            val clickListener: OnActionClickListener
-        ) : BindableItem<ItemDetailViewContentSpecifiedActionBinding>(5) {
-            override fun getLayout(): Int = R.layout.item_detail_view_content_specified_action
-            override fun bind(
-                viewBinding: ItemDetailViewContentSpecifiedActionBinding,
-                position: Int
-            ) {
-                viewBinding.clickListener = clickListener
-            }
+    data class SpecifiedAction(
+        val clickListener: OnActionClickListener
+    ) : BindableItem<ItemDetailViewContentSpecifiedActionBinding>(DetailViewContent.ACTION_AREA.id) {
+        override fun getLayout(): Int = R.layout.item_detail_view_content_specified_action
+        override fun bind(
+            viewBinding: ItemDetailViewContentSpecifiedActionBinding,
+            position: Int
+        ) {
+            viewBinding.clickListener = clickListener
         }
     }
 }

@@ -58,13 +58,13 @@ class DetailFragment : MainNavigationFragment(R.layout.fragment_detail) {
 
         viewModel.uiModel.observe(viewLifecycleOwner) { uiModel ->
             val list = mutableListOf<Item<*>>()
-            uiModel.hasQRImage { bitmap -> list += DetailViewContent.QRImage(bitmap) }
-            uiModel.hasTitle { title -> list += DetailViewContent.Title(title) }
-            uiModel.hasText { text -> list += DetailViewContent.Text(text) }
+            uiModel.hasQRImage { bitmap -> list += DetailViewContentQRImage(bitmap) }
+            uiModel.hasTitle { title -> list += DetailViewContentTitle(title) }
+            uiModel.hasText { text -> list += DetailViewContentText(text) }
             uiModel.whenText(
-                textAction = { list += DetailViewContent.ActionArea.TextAction(viewModel) },
-                urlAction = { list += DetailViewContent.ActionArea.UrlAction(viewModel) },
-                specifiedAction = { list += DetailViewContent.ActionArea.SpecifiedAction(viewModel) }
+                textAction = { list += DetailViewContentActionArea.TextAction(viewModel) },
+                urlAction = { list += DetailViewContentActionArea.UrlAction(viewModel) },
+                specifiedAction = { list += DetailViewContentActionArea.SpecifiedAction(viewModel) }
             )
             groupAdapter.update(list)
         }
