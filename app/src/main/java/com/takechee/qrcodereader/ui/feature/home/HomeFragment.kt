@@ -1,14 +1,10 @@
 package com.takechee.qrcodereader.ui.feature.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
-import androidx.navigation.fragment.findNavController
-import com.google.zxing.integration.android.IntentIntegrator
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.FragmentHomeBinding
 import com.takechee.qrcodereader.result.receiveEvent
@@ -60,18 +56,6 @@ class HomeFragment : MainNavigationFragment(R.layout.fragment_home) {
                 }
                 is HomeEvent.OpenDetail -> {
                     startActivity(event.intent)
-                }
-            }
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)) {
-            null -> super.onActivityResult(requestCode, resultCode, data)
-            else -> when (val contents = result.contents) {
-                null -> Toast.makeText(context, "canceled", Toast.LENGTH_SHORT).show()
-                else -> {
-                    findNavController().navigate(HomeFragmentDirections.toResult(contents))
                 }
             }
         }

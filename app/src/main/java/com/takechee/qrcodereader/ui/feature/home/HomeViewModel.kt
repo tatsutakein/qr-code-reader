@@ -5,24 +5,20 @@ import com.takechee.qrcodereader.data.prefs.PreferenceStorage
 import com.takechee.qrcodereader.model.CapturedCode
 import com.takechee.qrcodereader.result.Event
 import com.takechee.qrcodereader.result.fireEvent
-import com.takechee.qrcodereader.ui.common.base.BaseViewModel
 import com.takechee.qrcodereader.ui.Navigator
-import com.takechee.qrcodereader.ui.feature.detail.DetailActivityIntentFactory
+import com.takechee.qrcodereader.ui.common.base.BaseViewModel
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
     private val prefs: PreferenceStorage,
-    private val navigator: HomeNavigator,
-    private val detailActivityIntentFactory: DetailActivityIntentFactory
+    private val navigator: HomeNavigator
 ) : BaseViewModel(), LifecycleObserver, HomeEventListener, Navigator by navigator {
 
     private val _event = MutableLiveData<Event<HomeEvent>>()
     val event: LiveData<Event<HomeEvent>>
         get() = _event.distinctUntilChanged()
 
-    val captures: LiveData<List<CapturedCode>> = liveData(viewModelScope.coroutineContext) {
-        emit(CapturedCode.homeSamples())
-    }
+    val captures: LiveData<List<CapturedCode>> = MutableLiveData(CapturedCode.homeSamples())
 
 
     // =============================================================================================
@@ -49,7 +45,7 @@ class HomeViewModel @Inject constructor(
     }
 
     override fun onHistoryItemClick(capturedCode: CapturedCode) {
-        navigator.navigateToResult(capturedCode.text)
+        navigator.navigateToDetail(capturedCode.text)
     }
 
     override fun onHistoryMoreClick() {

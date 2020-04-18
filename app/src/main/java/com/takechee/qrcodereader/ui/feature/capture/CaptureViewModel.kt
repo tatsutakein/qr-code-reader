@@ -10,12 +10,10 @@ import com.takechee.qrcodereader.result.Event
 import com.takechee.qrcodereader.result.fireEvent
 import com.takechee.qrcodereader.ui.Navigator
 import com.takechee.qrcodereader.ui.common.base.BaseViewModel
-import com.takechee.qrcodereader.ui.feature.detail.DetailActivityIntentFactory
 import javax.inject.Inject
 
 class CaptureViewModel @Inject constructor(
-    private val navigator: CaptureNavigator,
-    private val detailActivityIntentFactory: DetailActivityIntentFactory
+    private val navigator: CaptureNavigator
 ) : BaseViewModel(), BarcodeCallback, Navigator by navigator {
 
     private val _event = MutableLiveData<Event<CaptureEvent>>()
@@ -30,10 +28,7 @@ class CaptureViewModel @Inject constructor(
     // =============================================================================================
     override fun barcodeResult(result: BarcodeResult?) {
         val resultText = result?.text ?: return
-        fireEvent {
-            val url = detailActivityIntentFactory.create(resultText)
-            CaptureEvent.OpenDetail(url)
-        }
+        navigator.navigateToDetail(resultText)
     }
 
     override fun possibleResultPoints(resultPoints: MutableList<ResultPoint>?) {

@@ -30,9 +30,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.feature.capture.CaptureActivity" />
-
-        <activity android:name=".ui.feature.detail.DetailActivity" />
+        <activity android:name=".ui.feature.capture.DirectCaptureActivity" />
 
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"

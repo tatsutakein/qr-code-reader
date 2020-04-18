@@ -2,15 +2,12 @@ package com.takechee.qrcodereader.di
 
 import com.takechee.qrcodereader.ui.MainActivity
 import com.takechee.qrcodereader.ui.MainActivityModule
-import com.takechee.qrcodereader.ui.feature.capture.CaptureActivity
-import com.takechee.qrcodereader.ui.feature.capture.CaptureActivityModule
 import com.takechee.qrcodereader.ui.feature.capture.CaptureModule
-import com.takechee.qrcodereader.ui.feature.detail.DetailActivity
-import com.takechee.qrcodereader.ui.feature.detail.DetailActivityIntentFactoryModule
-import com.takechee.qrcodereader.ui.feature.detail.DetailActivityModule
+import com.takechee.qrcodereader.ui.feature.capture.DirectCaptureActivity
+import com.takechee.qrcodereader.ui.feature.capture.DirectCaptureActivityModule
+import com.takechee.qrcodereader.ui.feature.detail.DetailModule
 import com.takechee.qrcodereader.ui.feature.history.HistoryModule
 import com.takechee.qrcodereader.ui.feature.home.HomeModule
-import com.takechee.qrcodereader.ui.feature.detail.DetailModule
 import com.takechee.qrcodereader.ui.feature.misc.MiscModule
 import com.takechee.qrcodereader.ui.feature.setting.SettingsModule
 import dagger.Module
@@ -25,7 +22,6 @@ abstract class ActivityBindingModule {
         modules = [
             // activity
             MainActivityModule::class,
-            DetailActivityIntentFactoryModule::class,
             // fragments
             HomeModule::class,
             CaptureModule::class,
@@ -41,22 +37,11 @@ abstract class ActivityBindingModule {
     @ContributesAndroidInjector(
         modules = [
             // activity
-            CaptureActivityModule::class,
-            DetailActivityIntentFactoryModule::class,
+            DirectCaptureActivityModule::class,
             // fragments
-            CaptureModule::class
-        ]
-    )
-    internal abstract fun captureActivity(): CaptureActivity
-
-    @ActivityScoped
-    @ContributesAndroidInjector(
-        modules = [
-            // activity
-            DetailActivityModule::class,
-            // fragments
+            CaptureModule::class,
             DetailModule::class
         ]
     )
-    internal abstract fun detailActivity(): DetailActivity
+    internal abstract fun directCaptureActivity(): DirectCaptureActivity
 }

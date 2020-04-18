@@ -10,8 +10,7 @@ import javax.inject.Inject
 //
 // =============================================================================================
 interface CaptureNavigator : Navigator {
-    fun navigateToResult(url: String)
-    fun navigateToHistory()
+    fun navigateToDetail(text: String)
 }
 
 
@@ -24,15 +23,9 @@ class CaptureNavigateHelper @Inject constructor(
     navigateHelper: NavigateHelper
 ) : CaptureNavigator, NavigateHelper by navigateHelper {
 
-    override fun navigateToResult(url: String) {
-//        navigateTo {
-//            HomeFragmentDirections.toResult(url)
-//        }
-    }
-
-    override fun navigateToHistory() {
-//        navigateTo {
-//            HomeFragmentDirections.toHistory()
-//        }
+    override fun navigateToDetail(text: String) {
+        navigateTo {
+            CaptureFragmentDirections.toDetail(text)
+        }
     }
 }

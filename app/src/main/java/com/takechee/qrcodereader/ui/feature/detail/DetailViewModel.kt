@@ -21,7 +21,6 @@ import org.jsoup.Jsoup
 import java.io.IOException
 import javax.inject.Inject
 
-
 class DetailViewModel @Inject constructor(
     private val context: Context,
     private val clipboardManager: ClipboardManager,
@@ -49,14 +48,14 @@ class DetailViewModel @Inject constructor(
     //
     // =============================================================================================
     init {
-        val url: LiveData<String> = MutableLiveData(args.text)
+        val text: LiveData<String> = MutableLiveData(args.text)
         uiModel = MediatorLiveData<DetailUiModel>().apply {
             value = DetailUiModel.EMPTY
             fun updateValue() {
                 value = DetailUiModel(qrImage.value, title.value, args.text)
             }
             listOf(
-                url.distinctUntilChanged(),
+                text.distinctUntilChanged(),
                 title.distinctUntilChanged(),
                 qrImage.distinctUntilChanged()
             ).forEach { source ->

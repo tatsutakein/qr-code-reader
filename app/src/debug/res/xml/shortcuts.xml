@@ -11,7 +11,7 @@
         android:shortcutShortLabel="@string/open_camera">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="com.takechee.qrcodereader.ui.feature.capture.CaptureActivity"
+            android:targetClass="com.takechee.qrcodereader.ui.feature.capture.DirectCaptureActivity"
             android:targetPackage="com.takechee.qrcodereader.debug" />
         <!-- If your shortcut is associated with multiple intents, include them
              here. The last intent in the list determines what the user sees when
