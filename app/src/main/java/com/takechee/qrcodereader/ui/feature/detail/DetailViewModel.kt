@@ -36,6 +36,7 @@ class DetailViewModel @Inject constructor(
 
     private val title = MutableLiveData<String>()
     private val qrImage = MutableLiveData<Bitmap>()
+    private val nickname = MutableLiveData<String>()
 
     private val _event = MutableLiveData<Event<DetailEvent>>()
     val event: LiveData<Event<DetailEvent>>
@@ -52,12 +53,13 @@ class DetailViewModel @Inject constructor(
         uiModel = MediatorLiveData<DetailUiModel>().apply {
             value = DetailUiModel.EMPTY
             fun updateValue() {
-                value = DetailUiModel(qrImage.value, title.value, args.text)
+                value = DetailUiModel(qrImage.value, title.value, args.text, nickname.value)
             }
             listOf(
                 text.distinctUntilChanged(),
                 title.distinctUntilChanged(),
-                qrImage.distinctUntilChanged()
+                qrImage.distinctUntilChanged(),
+                nickname.distinctUntilChanged()
             ).forEach { source ->
                 addSource(source) { updateValue() }
             }
@@ -128,7 +130,40 @@ class DetailViewModel @Inject constructor(
     }
 
     override fun onEditNicknameClick() {
-        
+        val initNickname = nickname.value ?: ""
+        val isWebUrl = Patterns.WEB_URL.matcher(args.text).matches()
+        fireEvent { DetailEvent.ShowEditNicknameDialog(initNickname, isWebUrl) }
+    }
+
+    override fun onEditNicknamePositiveClick(nickname: String) {
+        this.nickname.value = nickname
+    }
+
+    override suspend fun onGetTitleByUrlClick(callback: (title: String) -> Unit) {
+        if (!Patterns.WEB_URL.matcher(args.text).matches()) return
+        val doc = withContext(Dispatchers.IO) {
+            try {
+                Jsoup.connect(args.text).get()
+            } catch (e: IOException) {
+                return@withContext null
+            }
+        } ?: return
+
+        callback.invoke(doc.title())
+    }
+
+    override fun onGetTitleByUrlClick(): LiveData<Event<String>> {
+        return liveData(viewModelScope.coroutineContext) {
+            if (!Patterns.WEB_URL.matcher(args.text).matches()) return@liveData
+            val doc = withContext(Dispatchers.IO) {
+                try {
+                    Jsoup.connect(args.text).get()
+                } catch (e: IOException) {
+                    return@withContext null
+                }
+            } ?: return@liveData
+            emit(Event<String>(doc.title()))
+        }
     }
 
 

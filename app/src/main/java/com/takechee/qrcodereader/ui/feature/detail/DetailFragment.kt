@@ -47,6 +47,7 @@ class DetailFragment : MainNavigationFragment(R.layout.fragment_detail) {
             when (event) {
                 is DetailEvent.OpenIntent -> event.action(this)
                 is DetailEvent.OpenUrl -> event.action(requireContext(), customTabsIntent)
+                is DetailEvent.ShowEditNicknameDialog -> event.action(this)
             }
         }
 
@@ -66,7 +67,7 @@ class DetailFragment : MainNavigationFragment(R.layout.fragment_detail) {
                 urlAction = { list += DetailViewContentActionArea.UrlAction(viewModel) },
                 specifiedAction = { list += DetailViewContentActionArea.SpecifiedAction(viewModel) }
             )
-            list += DetailViewContentEditNickname(viewModel)
+            uiModel.withNickname { list += DetailViewContentEditNickname(it, viewModel) }
             groupAdapter.update(list)
         }
     }

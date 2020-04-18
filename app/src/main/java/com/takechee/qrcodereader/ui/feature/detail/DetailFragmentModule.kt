@@ -6,11 +6,16 @@ import com.takechee.qrcodereader.di.ViewModelKey
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 
 @Module
 @Suppress("UNUSED")
 abstract class DetailFragmentModule {
+
+    @ContributesAndroidInjector
+    internal abstract fun contributeEditNicknameDialogFragment(): EditNicknameDialogFragment
+
     @Binds
     @IntoMap
     @ViewModelKey(DetailViewModel::class)

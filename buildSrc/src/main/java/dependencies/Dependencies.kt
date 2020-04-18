@@ -71,6 +71,7 @@ object Dependencies {
         private const val version = "2.8.0"
         const val core = "com.xwray:groupie:$version"
         const val dataBinding = "com.xwray:groupie-databinding:$version"
+        const val viewBinding = "com.xwray:groupie-viewbinding:$version"
     }
 
     const val permissionsdispatcher = "org.permissionsdispatcher:permissionsdispatcher-ktx:1.0.0-alpha2"

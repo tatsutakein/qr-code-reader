@@ -52,10 +52,12 @@ data class DetailViewContentText(
 }
 
 data class DetailViewContentEditNickname(
+    val nickname: String,
     val eventListener: DetailViewContentEventListener
 ) : BindableItem<ItemDetailViewContentEditNicknameBinding>(DetailViewContent.EDIT_NICKNAME.id) {
     override fun getLayout(): Int = R.layout.item_detail_view_content_edit_nickname
     override fun bind(viewBinding: ItemDetailViewContentEditNicknameBinding, position: Int) {
+        viewBinding.nickname = nickname
         viewBinding.eventListener = eventListener
     }
 }

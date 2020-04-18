@@ -3,6 +3,7 @@ package com.takechee.qrcodereader.di
 import android.content.ClipboardManager
 import android.content.Context
 import android.net.ConnectivityManager
+import android.view.inputmethod.InputMethodManager
 import androidx.core.content.getSystemService
 import com.takechee.qrcodereader.MainApp
 import com.takechee.qrcodereader.data.db.AppDatabase
@@ -31,6 +32,11 @@ class AppModule {
 
     @Provides
     fun providesClipboardManager(context: Context): ClipboardManager = requireNotNull(
+        context.applicationContext.getSystemService()
+    )
+
+    @Provides
+    fun provideInputMethodManager(context: Context): InputMethodManager = requireNotNull(
         context.applicationContext.getSystemService()
     )
 

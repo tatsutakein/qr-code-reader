@@ -8,13 +8,15 @@ import androidx.core.net.toUri
 data class DetailUiModel(
     val qrImage: Bitmap?,
     val title: String?,
-    val text: String?
+    val text: String?,
+    val nickname: String?
 ) {
     companion object {
         val EMPTY = DetailUiModel(
             qrImage = null,
             title = null,
-            text = null
+            text = null,
+            nickname = null
         )
     }
 
@@ -55,6 +57,11 @@ data class DetailUiModel(
         }
 
         textAction.invoke()
+    }
+
+    fun withNickname(action: (nickname: String) -> Unit) {
+        val nickname = nickname ?: ""
+        action.invoke(nickname)
     }
 
 }
