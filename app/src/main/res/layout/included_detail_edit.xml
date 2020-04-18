@@ -22,13 +22,13 @@
         android:layout_height="wrap_content"
         android:background="?selectableItemBackground"
         android:minHeight="?listPreferredItemHeight"
-        android:paddingStart="?listPreferredItemPaddingStart"
-        android:paddingEnd="?listPreferredItemPaddingEnd">
+        android:paddingHorizontal="@dimen/margin_normal">
 
         <ImageView
             android:id="@+id/icon_image_view"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_marginStart="@dimen/margin_small"
             android:src="@{icon}"
             android:tint="?colorOnSurface"
             app:layout_constraintBottom_toBottomOf="parent"
