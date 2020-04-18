@@ -21,5 +21,6 @@
     <string name="open_intent">オープン</string>
     <string name="open_camera">カメラを開く</string>
     <string name="access_url">アクセスする</string>
+    <string name="edit_nickname">ニックネームを編集</string>
     <string name="recently_captured_content">最近読み取ったコンテンツ</string>
 </resources>

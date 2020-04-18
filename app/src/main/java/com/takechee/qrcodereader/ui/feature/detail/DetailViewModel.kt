@@ -127,6 +127,10 @@ class DetailViewModel @Inject constructor(
         Toast.makeText(context, R.string.copied, Toast.LENGTH_SHORT).show()
     }
 
+    override fun onEditNicknameClick() {
+        
+    }
+
 
     // =============================================================================================
     //

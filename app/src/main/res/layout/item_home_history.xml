@@ -18,15 +18,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:foreground="?selectableItemBackground"
+        android:minHeight="?listPreferredItemHeightSmall"
         android:onClick="@{() -> eventListener.onHistoryItemClick(captured)}"
-        android:paddingHorizontal="16dp">
+        android:paddingHorizontal="@dimen/margin_normal"
+        android:paddingVertical="@dimen/margin_small">
 
         <TextView
             android:id="@+id/url_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="end"
             android:gravity="center_vertical"
-            android:lines="3"
+            android:lines="2"
             app:home_capturedCode="@{captured}" />
 
     </FrameLayout>

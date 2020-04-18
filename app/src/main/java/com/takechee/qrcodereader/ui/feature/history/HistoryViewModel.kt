@@ -16,9 +16,7 @@ class HistoryViewModel @Inject constructor(
     val navigateTo: LiveData<Event<NavDirections>>
         get() = _navigateTo.distinctUntilChanged()
 
-    val captures: LiveData<List<CapturedCode>> = liveData(viewModelScope.coroutineContext) {
-        emit(CapturedCode.historySample())
-    }
+    val captures: LiveData<List<CapturedCode>> = MutableLiveData(CapturedCode.historySample())
 
 
     // =============================================================================================
