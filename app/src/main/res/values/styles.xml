@@ -25,6 +25,10 @@
 
     <style name="Widget.QRCodeReader" parent="@android:style/Widget.Material" />
 
+    <style name="Widget.QRCodeReader.CardView" parent="CardView">
+        <item name="cardCornerRadius">@dimen/cardview_radius</item>
+    </style>
+
     <!-- Settings -->
     <style name="Widget.QRCodeReader.Misc" />
 

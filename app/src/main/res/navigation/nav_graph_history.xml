@@ -10,7 +10,7 @@
         android:name="com.takechee.qrcodereader.ui.feature.history.HistoryFragment"
         tools:layout="@layout/fragment_history">
         <action
-            android:id="@+id/to_result"
+            android:id="@+id/to_detail"
             app:destination="@id/navigation_detail" />
     </fragment>
 
@@ -19,7 +19,7 @@
         android:name="com.takechee.qrcodereader.ui.feature.detail.DetailFragment"
         tools:layout="@layout/fragment_detail">
         <argument
-            android:name="url"
+            android:name="text"
             app:argType="string" />
     </fragment>
 

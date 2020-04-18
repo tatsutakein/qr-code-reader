@@ -21,6 +21,7 @@
 
         <!-- Widget styles -->
         <item name="toolbarStyle">@style/Widget.QRCodeReader.Toolbar</item>
+        <item name="cardViewStyle">@style/Widget.QRCodeReader.CardView</item>
     </style>
 
     <style name="ThemeOverlay.QRReader.Light" parent="ThemeOverlay.MaterialComponents.Light">

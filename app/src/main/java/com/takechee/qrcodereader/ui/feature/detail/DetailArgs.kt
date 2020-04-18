@@ -6,7 +6,7 @@ data class DetailArgs(
     companion object {
         fun of(args: DetailFragmentArgs): DetailArgs {
             return DetailArgs(
-                text = args.url
+                text = args.text
             )
         }
     }

@@ -25,9 +25,9 @@ data class DetailViewContentQRImage(
 
 data class DetailViewContentTitle(
     val text: String
-) : BindableItem<ItemDetailViewContentTextBinding>(DetailViewContent.TITLE.id) {
-    override fun getLayout(): Int = R.layout.item_detail_view_content_text
-    override fun bind(viewBinding: ItemDetailViewContentTextBinding, position: Int) {
+) : BindableItem<ItemDetailViewContentTitleBinding>(DetailViewContent.TITLE.id) {
+    override fun getLayout(): Int = R.layout.item_detail_view_content_title
+    override fun bind(viewBinding: ItemDetailViewContentTitleBinding, position: Int) {
         viewBinding.text = text
     }
 }

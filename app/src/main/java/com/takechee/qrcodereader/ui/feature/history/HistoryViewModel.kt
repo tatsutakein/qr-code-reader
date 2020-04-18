@@ -27,6 +27,6 @@ class HistoryViewModel @Inject constructor(
     //
     // =============================================================================================
     override fun onHistoryItemClick(capturedCode: CapturedCode) {
-        _navigateTo.fireEvent { HistoryFragmentDirections.toResult(capturedCode.text) }
+        _navigateTo.fireEvent { HistoryFragmentDirections.toDetail(capturedCode.text) }
     }
 }
