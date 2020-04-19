@@ -2,40 +2,31 @@ package com.takechee.qrcodereader.ui.feature.detail
 
 import android.graphics.Bitmap
 import android.util.Patterns
-import android.webkit.URLUtil
 import androidx.core.net.toUri
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
 data class DetailUiModel(
     val qrImage: Bitmap?,
-    val title: String?,
     val text: String?,
-    val nickname: String?
+    val nickname: String?,
+    val isFavorite: LiveData<Boolean>
 ) {
     companion object {
         val EMPTY = DetailUiModel(
             qrImage = null,
-            title = null,
             text = null,
-            nickname = null
+            nickname = null,
+            isFavorite = MutableLiveData()
         )
     }
 
     fun hasQRImage(action: (qrImage: Bitmap) -> Unit) {
-        if (qrImage != null) {
-            action.invoke(qrImage)
-        }
-    }
-
-    fun hasTitle(action: (title: String) -> Unit) {
-        if (title != null) {
-            action.invoke(title)
-        }
+        if (qrImage != null) action.invoke(qrImage)
     }
 
     fun hasText(action: (text: String) -> Unit) {
-        if (text != null) {
-            action.invoke(text)
-        }
+        if (text != null) action.invoke(text)
     }
 
     fun whenText(
@@ -63,5 +54,4 @@ data class DetailUiModel(
         val nickname = nickname ?: ""
         action.invoke(nickname)
     }
-
 }

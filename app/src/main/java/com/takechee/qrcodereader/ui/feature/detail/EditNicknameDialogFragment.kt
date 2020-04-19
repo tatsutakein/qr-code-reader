@@ -97,7 +97,9 @@ class EditNicknameDialogFragment : BaseDialogFragment() {
         }
 
         (dialog as? AlertDialog)?.let { dialog ->
-            dialog.setView(view)
+            val verticalSpace = resources.getDimensionPixelSize(R.dimen.margin_small)
+            val horizontalSpace = resources.getDimensionPixelSize(R.dimen.margin_normal)
+            dialog.setView(view, horizontalSpace, verticalSpace, horizontalSpace, verticalSpace)
             dialog.setButton(BUTTON_POSITIVE, resources.getString(R.string.save)) { _, _ ->
                 val editValue = view.findViewById<EditText>(R.id.edit_text).text.toString()
                 if (editValue.isEmpty()) return@setButton

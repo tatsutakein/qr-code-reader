@@ -20,11 +20,13 @@
     <string name="share">シェア</string>
     <string name="save">保存</string>
     <string name="cancel">キャンセル</string>
-    <string name="get_by_url">URLから取得</string>
+    <string name="get_title_by_url">URLからタイトルを取得</string>
     <string name="open_intent">オープン</string>
     <string name="open_camera">カメラを開く</string>
     <string name="access_url">アクセスする</string>
     <string name="nickname">ニックネーム</string>
+    <string name="add_to_favorite">お気に入りに追加</string>
+    <string name="remove_to_favorite">お気に入りを解除</string>
     <string name="edit_nickname">ニックネームを編集</string>
     <string name="recently_captured_content">最近読み取ったコンテンツ</string>
 </resources>

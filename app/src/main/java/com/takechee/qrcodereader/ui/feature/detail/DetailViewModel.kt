@@ -34,9 +34,9 @@ class DetailViewModel @Inject constructor(
 
     val uiModel: LiveData<DetailUiModel>
 
-    private val title = MutableLiveData<String>()
     private val qrImage = MutableLiveData<Bitmap>()
     private val nickname = MutableLiveData<String>()
+    private val isFavorite = MutableLiveData<Boolean>()
 
     private val _event = MutableLiveData<Event<DetailEvent>>()
     val event: LiveData<Event<DetailEvent>>
@@ -53,30 +53,25 @@ class DetailViewModel @Inject constructor(
         uiModel = MediatorLiveData<DetailUiModel>().apply {
             value = DetailUiModel.EMPTY
             fun updateValue() {
-                value = DetailUiModel(qrImage.value, title.value, args.text, nickname.value)
+                value = DetailUiModel(
+                    qrImage.value,
+                    args.text,
+                    nickname.value,
+                    isFavorite
+                )
             }
             listOf(
                 text.distinctUntilChanged(),
-                title.distinctUntilChanged(),
                 qrImage.distinctUntilChanged(),
-                nickname.distinctUntilChanged()
+                nickname.distinctUntilChanged(),
+                isFavorite.distinctUntilChanged()
             ).forEach { source ->
                 addSource(source) { updateValue() }
             }
         }.distinctUntilChanged()
+    }
 
-        if (Patterns.WEB_URL.matcher(args.text).matches()) viewModelScope.launch {
-            val doc = withContext(Dispatchers.IO) {
-                try {
-                    Jsoup.connect(args.text).get()
-                } catch (e: IOException) {
-                    return@withContext null
-                }
-            } ?: return@launch
-
-            title.value = doc.title()
-        }
-
+    init {
         viewModelScope.launch {
             try {
                 val size = QR_IMAGE_SIZE.px
@@ -139,19 +134,6 @@ class DetailViewModel @Inject constructor(
         this.nickname.value = nickname
     }
 
-    override suspend fun onGetTitleByUrlClick(callback: (title: String) -> Unit) {
-        if (!Patterns.WEB_URL.matcher(args.text).matches()) return
-        val doc = withContext(Dispatchers.IO) {
-            try {
-                Jsoup.connect(args.text).get()
-            } catch (e: IOException) {
-                return@withContext null
-            }
-        } ?: return
-
-        callback.invoke(doc.title())
-    }
-
     override fun onGetTitleByUrlClick(): LiveData<Event<String>> {
         return liveData(viewModelScope.coroutineContext) {
             if (!Patterns.WEB_URL.matcher(args.text).matches()) return@liveData
@@ -164,6 +146,10 @@ class DetailViewModel @Inject constructor(
             } ?: return@liveData
             emit(Event<String>(doc.title()))
         }
+    }
+
+    override fun onFavoriteClick(isFavorite: Boolean) {
+        this.isFavorite.value = isFavorite
     }
 
 
