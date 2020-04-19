@@ -135,27 +135,17 @@ data class DetailViewContentEditNickname(
 }
 
 data class DetailViewFavorite(
-    val isFavorite: LiveData<Boolean>,
-    val lifecycleOwner: LifecycleOwner,
+    val isFavorite: Boolean,
     val eventListener: DetailViewContentEventListener
 ) : BindableItem<ItemDetailViewContentFavoriteBinding>(DetailViewContent.FAVORITE.id) {
     override fun getLayout(): Int = R.layout.item_detail_view_content_favorite
-
-    override fun createViewHolder(itemView: View): GroupieViewHolder<ItemDetailViewContentFavoriteBinding> {
-        return super.createViewHolder(itemView).apply {
-            binding.lifecycleOwner = lifecycleOwner
-        }
-    }
-
     override fun bind(viewBinding: ItemDetailViewContentFavoriteBinding, position: Int) {
-        isFavorite.observe(lifecycleOwner) { favorite ->
-            val animView = viewBinding.iconImageView
-            if (favorite) {
-                animView.playAnimation()
-            } else {
-                animView.cancelAnimation()
-                animView.progress = 0f
-            }
+        val animView = viewBinding.iconImageView
+        if (isFavorite) {
+            animView.playAnimation()
+        } else {
+            animView.cancelAnimation()
+            animView.progress = 0f
         }
         viewBinding.isFavorite = isFavorite
         viewBinding.eventListener = eventListener

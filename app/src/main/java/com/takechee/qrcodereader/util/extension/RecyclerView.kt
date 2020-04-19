@@ -10,6 +10,10 @@ fun RecyclerView.setUpGroupAdapter(
 ): GroupAdapter<GroupieViewHolder> {
     val groupAdapter = GroupAdapter<GroupieViewHolder>().apply(initialize)
     adapter = groupAdapter
-    (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
+    simpleItemAnimatorEnabled(false)
     return groupAdapter
+}
+
+fun RecyclerView.simpleItemAnimatorEnabled(enabled: Boolean) {
+    (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
 }

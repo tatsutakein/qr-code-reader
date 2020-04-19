@@ -6,11 +6,6 @@
     app:startDestination="@id/navigation_misc">
 
     <fragment
-        android:id="@id/navigation_settings"
-        android:name="com.takechee.qrcodereader.ui.feature.setting.SettingsFragment"
-        tools:layout="@layout/fragment_settings" />
-
-    <fragment
         android:id="@id/navigation_misc"
         android:name="com.takechee.qrcodereader.ui.feature.misc.MiscListFragment"
         tools:layout="@layout/fragment_misc_list" />

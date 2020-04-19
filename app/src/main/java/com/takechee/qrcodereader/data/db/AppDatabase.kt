@@ -11,14 +11,14 @@ import androidx.room.TypeConverters
  */
 @Database(
     entities = [
-        ReadCodeEntity::class
+        ContentEntity::class
     ],
     version = 1,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun readCodeFtsDao(): ReadCodeDao
+    abstract fun contentDao(): ContentDao
 
     companion object {
         private const val databaseName = "qr-code-reader-db"

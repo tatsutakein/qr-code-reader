@@ -1,8 +1,8 @@
 package com.takechee.qrcodereader.ui.feature.home
 
-import com.takechee.qrcodereader.model.CapturedCode
+import com.takechee.qrcodereader.model.Content
 
 interface HomeEventListener {
-    fun onHistoryItemClick(capturedCode: CapturedCode)
+    fun onHistoryItemClick(content: Content)
     fun onHistoryMoreClick()
 }

@@ -1,12 +1,14 @@
 package com.takechee.qrcodereader.ui.feature.detail
 
+import com.takechee.qrcodereader.model.ContentId
+
 data class DetailArgs(
-    val text: String
+    val contentId: ContentId
 ) {
     companion object {
         fun of(args: DetailFragmentArgs): DetailArgs {
             return DetailArgs(
-                text = args.text
+                contentId = args.contentId
             )
         }
     }

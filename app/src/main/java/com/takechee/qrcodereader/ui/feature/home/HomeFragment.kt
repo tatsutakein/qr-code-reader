@@ -5,10 +5,12 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.FragmentHomeBinding
 import com.takechee.qrcodereader.result.receiveEvent
 import com.takechee.qrcodereader.ui.MainNavigationFragment
+import com.takechee.qrcodereader.util.extension.simpleItemAnimatorEnabled
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -36,26 +38,22 @@ class HomeFragment : MainNavigationFragment(R.layout.fragment_home) {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewLifecycleOwner.lifecycle.addObserver(viewModel)
-
         setupNavigation(viewModel)
 
         val historySection = HomeHistorySection(viewModel)
 
+        binding.contentsView.simpleItemAnimatorEnabled(false)
         val adapter = GroupAdapter<GroupieViewHolder>()
         binding.contentsView.adapter = adapter
         val list = mutableListOf<Item<*>>()
-        list.add(HomeHistoryContainerItem(historySection, viewModel))
+        list += HomeHistoryContainerItem(historySection, viewModel)
         adapter.update(list)
-        viewModel.captures.observe(viewLifecycleOwner) { historySection.update(it) }
+        viewModel.contents.observe(viewLifecycleOwner) { historySection.update(it) }
 
         viewModel.event.receiveEvent(viewLifecycleOwner) { event ->
             when (event) {
                 is HomeEvent.SwitchingHistory -> {
                     navigationHost?.switchingBottomNavigationMenu(event.value)
-                }
-                is HomeEvent.OpenDetail -> {
-                    startActivity(event.intent)
                 }
             }
         }

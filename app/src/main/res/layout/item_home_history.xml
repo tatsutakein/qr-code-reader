@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="captured"
-            type="com.takechee.qrcodereader.model.CapturedCode" />
+            name="content"
+            type="com.takechee.qrcodereader.model.Content" />
 
         <variable
             name="eventListener"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:foreground="?selectableItemBackground"
         android:minHeight="?listPreferredItemHeightSmall"
-        android:onClick="@{() -> eventListener.onHistoryItemClick(captured)}"
+        android:onClick="@{() -> eventListener.onHistoryItemClick(content)}"
         android:paddingHorizontal="@dimen/margin_normal"
         android:paddingVertical="@dimen/margin_small">
 
@@ -31,7 +31,7 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:lines="2"
-            app:home_capturedCode="@{captured}" />
+            app:home_capturedCode="@{content}" />
 
     </FrameLayout>
 

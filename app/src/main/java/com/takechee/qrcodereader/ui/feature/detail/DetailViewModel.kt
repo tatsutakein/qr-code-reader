@@ -10,6 +10,9 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.takechee.qrcodereader.R
+import com.takechee.qrcodereader.data.repository.ContentRepository
+import com.takechee.qrcodereader.model.Content
+import com.takechee.qrcodereader.model.ContentNickname
 import com.takechee.qrcodereader.result.Event
 import com.takechee.qrcodereader.result.fireEvent
 import com.takechee.qrcodereader.ui.common.base.BaseViewModel
@@ -25,18 +28,27 @@ class DetailViewModel @Inject constructor(
     private val context: Context,
     private val clipboardManager: ClipboardManager,
     @DetailFragmentScoped private val args: DetailArgs,
-    @DetailFragmentScoped private val encoder: BarcodeEncoder
+    @DetailFragmentScoped private val encoder: BarcodeEncoder,
+    private val repository: ContentRepository
 ) : BaseViewModel(), DetailUserEventListener {
 
     companion object {
         private const val QR_IMAGE_SIZE = 200
     }
 
+    private val content: LiveData<Content> =
+        repository.getContentFlow(args.contentId).asLiveData(viewModelScope.coroutineContext)
+
     val uiModel: LiveData<DetailUiModel>
 
-    private val qrImage = MutableLiveData<Bitmap>()
-    private val nickname = MutableLiveData<String>()
-    private val isFavorite = MutableLiveData<Boolean>()
+    private val qrImage: LiveData<Bitmap?> = content.map {
+        try {
+            val size = QR_IMAGE_SIZE.px
+            encoder.encodeBitmap(it.text, BarcodeFormat.QR_CODE, size, size)
+        } catch (e: WriterException) {
+            null
+        }
+    }
 
     private val _event = MutableLiveData<Event<DetailEvent>>()
     val event: LiveData<Event<DetailEvent>>
@@ -49,36 +61,21 @@ class DetailViewModel @Inject constructor(
     //
     // =============================================================================================
     init {
-        val text: LiveData<String> = MutableLiveData(args.text)
         uiModel = MediatorLiveData<DetailUiModel>().apply {
             value = DetailUiModel.EMPTY
             fun updateValue() {
                 value = DetailUiModel(
                     qrImage.value,
-                    args.text,
-                    nickname.value,
-                    isFavorite
+                    content.value ?: Content.EMPTY
                 )
             }
             listOf(
-                text.distinctUntilChanged(),
                 qrImage.distinctUntilChanged(),
-                nickname.distinctUntilChanged(),
-                isFavorite.distinctUntilChanged()
+                content.distinctUntilChanged()
             ).forEach { source ->
                 addSource(source) { updateValue() }
             }
         }.distinctUntilChanged()
-    }
-
-    init {
-        viewModelScope.launch {
-            try {
-                val size = QR_IMAGE_SIZE.px
-                qrImage.value = encoder.encodeBitmap(args.text, BarcodeFormat.QR_CODE, size, size)
-            } catch (e: WriterException) {
-            }
-        }
     }
 
 
@@ -91,7 +88,7 @@ class DetailViewModel @Inject constructor(
         fireEvent {
             val sendIntent = Intent().apply {
                 action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, args.text)
+                putExtra(Intent.EXTRA_TEXT, args.contentId)
                 type = "text/plain"
             }
             val shareIntent = Intent.createChooser(sendIntent, null)
@@ -100,21 +97,24 @@ class DetailViewModel @Inject constructor(
     }
 
     override fun onOpenIntentActionClick() {
+        val contentText = content.value?.text ?: return
         fireEvent {
-            val viewIntent = Intent(Intent.ACTION_VIEW, args.text.toUri())
+            val viewIntent = Intent(Intent.ACTION_VIEW, contentText.toUri())
             val chooserIntent = Intent.createChooser(viewIntent, null)
             DetailEvent.OpenIntent(chooserIntent)
         }
     }
 
     override fun onOpenUrlActionClick() {
-        fireEvent { DetailEvent.OpenUrl(args.text.toUri()) }
+        val contentText = content.value?.text ?: return
+        fireEvent { DetailEvent.OpenUrl(contentText.toUri()) }
     }
 
     override fun onCopyToClipBoardActionClick() {
+        val contentText = content.value?.text ?: return
         // クリップボードに格納するItemを作成
-        val item: ClipData.Item = ClipData.Item(args.text)
-        // MIMETYPEの作成
+        val item: ClipData.Item = ClipData.Item(contentText)
+        // MimeTypeの作成
         val mimeType = arrayOfNulls<String>(1)
         mimeType[0] = ClipDescription.MIMETYPE_TEXT_URILIST
         //クリップボードに格納するClipDataオブジェクトの作成
@@ -125,21 +125,27 @@ class DetailViewModel @Inject constructor(
     }
 
     override fun onEditNicknameClick() {
-        val initNickname = nickname.value ?: ""
-        val isWebUrl = Patterns.WEB_URL.matcher(args.text).matches()
-        fireEvent { DetailEvent.ShowEditNicknameDialog(initNickname, isWebUrl) }
+        val content = content.value ?: return
+        val isWebUrl = Patterns.WEB_URL.matcher(content.text).matches()
+        fireEvent { DetailEvent.ShowEditNicknameDialog(content.nickname.value, isWebUrl) }
     }
 
     override fun onEditNicknamePositiveClick(nickname: String) {
-        this.nickname.value = nickname
+        viewModelScope.launch {
+            repository.updateContent(
+                contentId = args.contentId,
+                nickname = nickname.let(::ContentNickname)
+            )
+        }
     }
 
     override fun onGetTitleByUrlClick(): LiveData<Event<String>> {
         return liveData(viewModelScope.coroutineContext) {
-            if (!Patterns.WEB_URL.matcher(args.text).matches()) return@liveData
+            val contentText = content.value?.text ?: return@liveData
+            if (!Patterns.WEB_URL.matcher(contentText).matches()) return@liveData
             val doc = withContext(Dispatchers.IO) {
                 try {
-                    Jsoup.connect(args.text).get()
+                    Jsoup.connect(contentText).get()
                 } catch (e: IOException) {
                     return@withContext null
                 }
@@ -149,7 +155,9 @@ class DetailViewModel @Inject constructor(
     }
 
     override fun onFavoriteClick(isFavorite: Boolean) {
-        this.isFavorite.value = isFavorite
+        viewModelScope.launch {
+            repository.updateContent(contentId = args.contentId, isFavorite = isFavorite)
+        }
     }
 
 

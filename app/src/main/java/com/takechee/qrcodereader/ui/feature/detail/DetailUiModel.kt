@@ -5,19 +5,16 @@ import android.util.Patterns
 import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.takechee.qrcodereader.model.Content
 
 data class DetailUiModel(
     val qrImage: Bitmap?,
-    val text: String?,
-    val nickname: String?,
-    val isFavorite: LiveData<Boolean>
+    val content: Content
 ) {
     companion object {
         val EMPTY = DetailUiModel(
             qrImage = null,
-            text = null,
-            nickname = null,
-            isFavorite = MutableLiveData()
+            content = Content.EMPTY
         )
     }
 
@@ -25,33 +22,32 @@ data class DetailUiModel(
         if (qrImage != null) action.invoke(qrImage)
     }
 
-    fun hasText(action: (text: String) -> Unit) {
-        if (text != null) action.invoke(text)
+    fun hasContent(action: (content: Content, text: ContentText) -> Unit) {
+        if (content == Content.EMPTY) return
+        val contentText = getContentText()
+
+        action.invoke(content, contentText)
     }
 
-    fun whenText(
-        urlAction: () -> Unit,
-        textAction: () -> Unit,
-        specifiedAction: () -> Unit
-    ) {
-        val text = text ?: return
-
+    private fun getContentText(): ContentText {
+        val text = content.text
         if (Patterns.WEB_URL.matcher(text).matches()) {
-            urlAction.invoke()
-            return
+            return ContentText.Url(text)
         }
 
         val uri = text.toUri()
         if (uri.scheme != null) {
-            specifiedAction.invoke()
-            return
+            return ContentText.Specified(text)
         }
 
-        textAction.invoke()
+        return ContentText.Text(text)
     }
 
-    fun withNickname(action: (nickname: String) -> Unit) {
-        val nickname = nickname ?: ""
-        action.invoke(nickname)
+    sealed class ContentText {
+        abstract val value: String
+
+        class Url(override val value: String) : ContentText()
+        class Text(override val value: String) : ContentText()
+        class Specified(override val value: String) : ContentText()
     }
 }

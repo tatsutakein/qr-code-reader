@@ -102,7 +102,6 @@ class EditNicknameDialogFragment : BaseDialogFragment() {
             dialog.setView(view, horizontalSpace, verticalSpace, horizontalSpace, verticalSpace)
             dialog.setButton(BUTTON_POSITIVE, resources.getString(R.string.save)) { _, _ ->
                 val editValue = view.findViewById<EditText>(R.id.edit_text).text.toString()
-                if (editValue.isEmpty()) return@setButton
                 if (editValue == initNickname) return@setButton
                 viewModel.onEditNicknamePositiveClick(editValue)
             }

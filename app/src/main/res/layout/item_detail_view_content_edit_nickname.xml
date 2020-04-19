@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="com.takechee.qrcodereader.util.extension.StringKt" />
+
         <import type="com.takechee.qrcodereader.R" />
 
         <import type="com.takechee.qrcodereader.util.extension.AttrsKt" />
@@ -33,7 +35,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@{@string/edit_nickname}" />
+            app:title="@{StringKt.isNullOrEmpty(nickname) ? @string/add_nickname : @string/edit_nickname}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

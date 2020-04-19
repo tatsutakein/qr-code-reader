@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="com.takechee.qrcodereader.util.extension.StringKt" />
+
         <variable
             name="icon"
             type="android.graphics.drawable.Drawable" />
@@ -59,6 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_normal"
             android:text="@{body}"
+            android:visibility="@{!StringKt.isNullOrEmpty(body)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/icon_image_view"
             app:layout_constraintRight_toRightOf="parent"

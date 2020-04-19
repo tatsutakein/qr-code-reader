@@ -12,6 +12,7 @@ import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.FragmentDetailBinding
 import com.takechee.qrcodereader.result.receiveEvent
 import com.takechee.qrcodereader.ui.MainNavigationFragment
+import com.takechee.qrcodereader.util.extension.simpleItemAnimatorEnabled
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -53,21 +54,26 @@ class DetailFragment : MainNavigationFragment(R.layout.fragment_detail) {
 
         val groupAdapter = GroupAdapter<GroupieViewHolder>()
         binding.contentsView.apply {
-            (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
+            simpleItemAnimatorEnabled(false)
             adapter = groupAdapter
         }
 
         viewModel.uiModel.observe(viewLifecycleOwner) { uiModel ->
             val list = mutableListOf<Item<*>>()
             uiModel.hasQRImage { bitmap -> list += DetailViewContentQRImage(bitmap) }
-            uiModel.hasText { text -> list += DetailViewContentText(text) }
-            uiModel.whenText(
-                textAction = { list += DetailViewContentActionArea.TextAction(viewModel) },
-                urlAction = { list += DetailViewContentActionArea.UrlAction(viewModel) },
-                specifiedAction = { list += DetailViewContentActionArea.SpecifiedAction(viewModel) }
-            )
-            uiModel.withNickname { list += DetailViewContentEditNickname(it, viewModel) }
-            list += DetailViewFavorite(uiModel.isFavorite, viewLifecycleOwner, viewModel)
+            uiModel.hasContent { content, text ->
+                list += DetailViewContentText(text.value)
+                list += when (text) {
+                    is DetailUiModel.ContentText.Url ->
+                        DetailViewContentActionArea.UrlAction(viewModel)
+                    is DetailUiModel.ContentText.Text ->
+                        DetailViewContentActionArea.TextAction(viewModel)
+                    is DetailUiModel.ContentText.Specified ->
+                        DetailViewContentActionArea.SpecifiedAction(viewModel)
+                }
+                list += DetailViewContentEditNickname(content.nickname.value, viewModel)
+                list += DetailViewFavorite(uiModel.content.isFavorite, viewModel)
+            }
             groupAdapter.update(list)
         }
     }

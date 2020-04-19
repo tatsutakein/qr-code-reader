@@ -1,7 +1,7 @@
 package com.takechee.qrcodereader.ui.feature.history
 
-import com.takechee.qrcodereader.model.CapturedCode
+import com.takechee.qrcodereader.model.Content
 
 interface HistoryEventListener {
-    fun onHistoryItemClick(capturedCode: CapturedCode)
+    fun onHistoryItemClick(content: Content)
 }

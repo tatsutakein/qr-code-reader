@@ -6,11 +6,11 @@ import android.net.ConnectivityManager
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.getSystemService
 import com.takechee.qrcodereader.MainApp
-import com.takechee.qrcodereader.data.db.AppDatabase
-import com.takechee.qrcodereader.data.db.ReadCodeDatabase
-import com.takechee.qrcodereader.data.db.ReadCodeRoomDatabase
+import com.takechee.qrcodereader.data.db.*
 import com.takechee.qrcodereader.data.prefs.PreferenceStorage
 import com.takechee.qrcodereader.data.prefs.SharedPreferenceStorage
+import com.takechee.qrcodereader.data.repository.ContentDataRepository
+import com.takechee.qrcodereader.data.repository.ContentRepository
 import com.takechee.qrcodereader.ui.DefaultNavigateHelper
 import com.takechee.qrcodereader.ui.NavigateHelper
 import dagger.Module
@@ -26,12 +26,12 @@ class AppModule {
     }
 
     @Provides
-    fun providesConnectivityManager(context: Context): ConnectivityManager = requireNotNull(
+    fun provideConnectivityManager(context: Context): ConnectivityManager = requireNotNull(
         context.applicationContext.getSystemService()
     )
 
     @Provides
-    fun providesClipboardManager(context: Context): ClipboardManager = requireNotNull(
+    fun provideClipboardManager(context: Context): ClipboardManager = requireNotNull(
         context.applicationContext.getSystemService()
     )
 
@@ -42,20 +42,25 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun providesPreferenceStorage(context: Context): PreferenceStorage {
+    fun providePreferenceStorage(context: Context): PreferenceStorage {
         return SharedPreferenceStorage(context)
     }
 
     @Provides
-    fun providesNavigateHelper(): NavigateHelper = DefaultNavigateHelper()
+    fun provideNavigateHelper(): NavigateHelper = DefaultNavigateHelper()
 
     @Singleton
     @Provides
-    fun providesAppDatabase(context: Context): AppDatabase = AppDatabase.buildDatabase(context)
+    fun provideAppDatabase(context: Context): AppDatabase = AppDatabase.buildDatabase(context)
 
     @Singleton
     @Provides
-    fun providesReadCodeDatabase(database: AppDatabase): ReadCodeDatabase {
-        return ReadCodeRoomDatabase(database, database.readCodeFtsDao())
+    fun provideContentDatabase(database: AppDatabase): ContentDatabase {
+        return ContentRoomDatabase(database, database.contentDao())
     }
+
+    @Singleton
+    @Provides
+    fun provideContentRepository(dataSource: ContentDataRepository): ContentRepository = dataSource
+
 }

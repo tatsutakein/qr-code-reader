@@ -1,13 +1,10 @@
 package com.takechee.qrcodereader.ui.feature.home
 
 import android.widget.Toast
-import androidx.recyclerview.widget.RecyclerView
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.ItemHomeHistoriesBinding
-import com.takechee.qrcodereader.databinding.ItemHomeHistoryBinding
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import com.xwray.groupie.Item
 import com.xwray.groupie.databinding.BindableItem
 
 data class HomeHistoriesItem(
@@ -25,7 +22,7 @@ data class HomeHistoriesItem(
                 when (item) {
                     is HomeHistoryItem -> Toast.makeText(
                         view.context,
-                        item.captured.text,
+                        item.content.text,
                         Toast.LENGTH_SHORT
                     ).show()
                 }
