@@ -79,4 +79,5 @@ object Dependencies {
     const val insetterDbx = "dev.chrisbanes:insetter-dbx:0.2.1"
     const val insetterKtx = "dev.chrisbanes:insetter-ktx:0.2.1"
     const val jsourp = "org.jsoup:jsoup:1.13.1"
+    const val lottie = "com.airbnb.android:lottie:3.4.0"
 }
