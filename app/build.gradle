@@ -7,6 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'com.google.android.gms.oss-licenses-plugin'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion Versions.compileSdkVersion
@@ -32,14 +33,17 @@ android {
             debuggable true
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
+            manifestPlaceholders = [crashlyticsEnabled: false]
         }
         staging {
             initWith(debug)
             applicationIdSuffix ".staging"
             versionNameSuffix "-staging"
+            manifestPlaceholders = [crashlyticsEnabled: true]
         }
         release {
             minifyEnabled false
+            manifestPlaceholders = [crashlyticsEnabled: true]
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -113,7 +117,8 @@ dependencies {
     compileOnly Dependencies.Dagger.assistedAnnotations
     kapt Dependencies.Dagger.assistedProcessor
 
-    implementation 'com.google.firebase:firebase-analytics:17.2.1'
+    implementation 'com.google.firebase:firebase-analytics:17.3.0'
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta04'
 
     implementation Dependencies.ZXing.core
     implementation Dependencies.ZXing.embedded
