@@ -31,7 +31,7 @@ class HistorySection(private val eventListener: HistoryEventListener) : Section(
 // EmptyItem
 //
 // =============================================================================================
-private object HistoryEmptyItem : Item<GroupieViewHolder>() {
+private object HistoryEmptyItem : Item<GroupieViewHolder>(Long.MIN_VALUE) {
     override fun getLayout(): Int = R.layout.item_history_empty
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {}
 }
