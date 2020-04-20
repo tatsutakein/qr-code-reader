@@ -14,7 +14,6 @@ import com.xwray.groupie.databinding.GroupieViewHolder
 
 private enum class DetailViewContent {
     QR_IMAGE,
-    TITLE,
     TEXT,
     ACTION_AREA,
     FAVORITE,
@@ -44,21 +43,6 @@ data class DetailViewContentQRImage(
     override fun getLayout(): Int = R.layout.item_detail_view_content_qrimage
     override fun bind(viewBinding: ItemDetailViewContentQrimageBinding, position: Int) {
         viewBinding.qrCodeImageView.setImageBitmap(bitmap)
-    }
-}
-
-
-// =============================================================================================
-//
-// Title
-//
-// =============================================================================================
-data class DetailViewContentTitle(
-    val text: String
-) : BindableItem<ItemDetailViewContentTitleBinding>(DetailViewContent.TITLE.id) {
-    override fun getLayout(): Int = R.layout.item_detail_view_content_title
-    override fun bind(viewBinding: ItemDetailViewContentTitleBinding, position: Int) {
-        viewBinding.text = text
     }
 }
 
@@ -142,7 +126,7 @@ data class DetailViewFavorite(
     override fun bind(viewBinding: ItemDetailViewContentFavoriteBinding, position: Int) {
         val animView = viewBinding.iconImageView
         if (isFavorite) {
-            animView.playAnimation()
+            animView.post { animView.playAnimation() }
         } else {
             animView.cancelAnimation()
             animView.progress = 0f

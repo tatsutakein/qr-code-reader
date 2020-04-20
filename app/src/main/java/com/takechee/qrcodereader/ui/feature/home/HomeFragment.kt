@@ -1,11 +1,12 @@
 package com.takechee.qrcodereader.ui.feature.home
 
+import android.content.pm.ShortcutManager
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.map
 import androidx.lifecycle.observe
-import androidx.recyclerview.widget.SimpleItemAnimator
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.FragmentHomeBinding
 import com.takechee.qrcodereader.result.receiveEvent
@@ -19,6 +20,9 @@ import dagger.android.ContributesAndroidInjector
 import javax.inject.Inject
 
 class HomeFragment : MainNavigationFragment(R.layout.fragment_home) {
+
+    @Inject
+    lateinit var shortcutManager: ShortcutManager
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -46,9 +50,16 @@ class HomeFragment : MainNavigationFragment(R.layout.fragment_home) {
         val adapter = GroupAdapter<GroupieViewHolder>()
         binding.contentsView.adapter = adapter
         val list = mutableListOf<Item<*>>()
-        list += HomeHistoryContainerItem(historySection, viewModel)
+        list += HomeHistoryContainerItem(
+            historySection,
+            viewModel.contents.map { it.isNotEmpty() },
+            viewLifecycleOwner,
+            viewModel
+        )
         adapter.update(list)
-        viewModel.contents.observe(viewLifecycleOwner) { historySection.update(it) }
+        viewModel.contents.observe(viewLifecycleOwner) {
+            historySection.update(it)
+        }
 
         viewModel.event.receiveEvent(viewLifecycleOwner) { event ->
             when (event) {

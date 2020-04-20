@@ -10,6 +10,10 @@
     <string name="build_type">-- %1$s VERSION --</string>
 
     <string name="home">ホーム</string>
+    <string name="recent_content">最近のコンテンツ</string>
+    <string name="see_more">もっとみる</string>
+    <string name="empty_content">コンテンツはまだありません。</string>
+    <string name="empty_content_message">新しいコンテンツを作成すると、最近のコンテンツがここで確認できるようになります。</string>
     <string name="capture">キャプチャー</string>
     <string name="capture_open_gallery">ギャラリーを開く</string>
     <string name="detail">読み取り詳細</string>

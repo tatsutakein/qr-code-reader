@@ -2,6 +2,7 @@ package com.takechee.qrcodereader.di
 
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.pm.ShortcutManager
 import android.net.ConnectivityManager
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.getSystemService
@@ -13,6 +14,8 @@ import com.takechee.qrcodereader.data.repository.ContentDataRepository
 import com.takechee.qrcodereader.data.repository.ContentRepository
 import com.takechee.qrcodereader.ui.DefaultNavigateHelper
 import com.takechee.qrcodereader.ui.NavigateHelper
+import com.takechee.qrcodereader.util.shortcut.DefaultShortcutController
+import com.takechee.qrcodereader.util.shortcut.ShortcutController
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -26,19 +29,19 @@ class AppModule {
     }
 
     @Provides
-    fun provideConnectivityManager(context: Context): ConnectivityManager = requireNotNull(
-        context.applicationContext.getSystemService()
-    )
-
-    @Provides
     fun provideClipboardManager(context: Context): ClipboardManager = requireNotNull(
         context.applicationContext.getSystemService()
     )
 
     @Provides
-    fun provideInputMethodManager(context: Context): InputMethodManager = requireNotNull(
+    fun provideShortcutManager(context: Context): ShortcutManager = requireNotNull(
         context.applicationContext.getSystemService()
     )
+
+    @Provides
+    fun provideShortcutController(context: Context): ShortcutController {
+        return DefaultShortcutController(context)
+    }
 
     @Singleton
     @Provides

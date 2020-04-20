@@ -44,9 +44,6 @@ class EditNicknameDialogFragment : BaseDialogFragment() {
     }
 
     @Inject
-    lateinit var inputMethodManager: InputMethodManager
-
-    @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val viewModel: DetailViewModel by parentViewModels { viewModelFactory }
