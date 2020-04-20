@@ -6,16 +6,14 @@ import com.takechee.qrcodereader.data.repository.ContentRepository
 import com.takechee.qrcodereader.model.Content
 import com.takechee.qrcodereader.result.Event
 import com.takechee.qrcodereader.result.fireEvent
+import com.takechee.qrcodereader.ui.Navigator
 import com.takechee.qrcodereader.ui.common.base.BaseViewModel
 import javax.inject.Inject
 
 class HistoryViewModel @Inject constructor(
+    private val navigator: HistoryNavigator,
     private val repository: ContentRepository
-) : BaseViewModel(), HistoryEventListener {
-
-    private val _navigateTo = MutableLiveData<Event<NavDirections>>()
-    val navigateTo: LiveData<Event<NavDirections>>
-        get() = _navigateTo.distinctUntilChanged()
+) : BaseViewModel(), HistoryEventListener, Navigator by navigator {
 
     val contents: LiveData<List<Content>> = repository.getContentsAllFlow()
         .asLiveData(viewModelScope.coroutineContext)
@@ -27,6 +25,6 @@ class HistoryViewModel @Inject constructor(
     //
     // =============================================================================================
     override fun onHistoryItemClick(content: Content) {
-        _navigateTo.fireEvent { HistoryFragmentDirections.toDetail(content.id) }
+        navigator.navigateToDetail(content.id)
     }
 }

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.map
 import androidx.lifecycle.observe
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.FragmentHomeBinding
@@ -49,12 +48,17 @@ class HomeFragment : MainNavigationFragment(R.layout.fragment_home) {
         binding.contentsView.simpleItemAnimatorEnabled(false)
         val adapter = GroupAdapter<GroupieViewHolder>()
         binding.contentsView.adapter = adapter
-        val list = mutableListOf<Item<*>>()
-        list += historyContainer
-        list += HomeShortcutItem(viewModel)
-        adapter.update(list)
-        viewModel.contents.observe(viewLifecycleOwner) {
-            historyContainer.update(it)
+        val initList = mutableListOf<Item<*>>()
+        initList += historyContainer
+        initList += HomeShortcutItem(viewModel)
+        adapter.update(initList)
+
+        viewModel.uiModel.observe(viewLifecycleOwner) { uiModel ->
+            val list = mutableListOf<Item<*>>()
+            list += historyContainer
+            if (uiModel.shortcutGuideVisible) list += HomeShortcutItem(viewModel)
+            adapter.update(list)
+            historyContainer.update(uiModel.contents)
         }
 
         viewModel.event.receiveEvent(viewLifecycleOwner) { event ->

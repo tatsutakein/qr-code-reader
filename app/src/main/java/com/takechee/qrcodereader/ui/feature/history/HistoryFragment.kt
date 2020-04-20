@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.FragmentHistoryBinding
 import com.takechee.qrcodereader.result.receiveEvent
+import com.takechee.qrcodereader.ui.MainNavigationFragment
 import com.takechee.qrcodereader.ui.common.base.BaseFragment
 import com.takechee.qrcodereader.util.extension.simpleItemAnimatorEnabled
 import com.xwray.groupie.GroupAdapter
@@ -19,7 +20,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import javax.inject.Inject
 
-class HistoryFragment : BaseFragment(R.layout.fragment_history) {
+class HistoryFragment : MainNavigationFragment(R.layout.fragment_history) {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -40,6 +41,8 @@ class HistoryFragment : BaseFragment(R.layout.fragment_history) {
             it.lifecycleOwner = viewLifecycleOwner
         }
 
+        setupNavigation(viewModel)
+
         val section = HistorySection(viewModel)
         binding.historyListView.apply {
             adapter = GroupAdapter<GroupieViewHolder>().apply { add(section) }
@@ -47,10 +50,6 @@ class HistoryFragment : BaseFragment(R.layout.fragment_history) {
         }
 
         viewModel.contents.observe(viewLifecycleOwner) { contents -> section.update(contents) }
-
-        viewModel.navigateTo.receiveEvent(viewLifecycleOwner) { directions ->
-            findNavController().navigate(directions)
-        }
     }
 }
 

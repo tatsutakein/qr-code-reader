@@ -27,8 +27,33 @@ class HomeViewModel @Inject constructor(
     val event: LiveData<Event<HomeEvent>>
         get() = _event.distinctUntilChanged()
 
-    val contents = repository.getContentsFlow(HISTORY_START, HISTORY_LIMIT)
-        .asLiveData(viewModelScope.coroutineContext)
+    val uiModel: LiveData<HomeUiModel>
+
+
+    // =============================================================================================
+    //
+    // Initialize
+    //
+    // =============================================================================================
+    init {
+        val contentsLiveData = repository.getContentsFlow(HISTORY_START, HISTORY_LIMIT)
+            .asLiveData(viewModelScope.coroutineContext)
+
+        val shortcutGuideVisibleLiveData: LiveData<Boolean> =
+            prefs.shortcutGuideVisibleFlow.asLiveData(viewModelScope.coroutineContext)
+
+        uiModel = MediatorLiveData<HomeUiModel>().apply {
+            value = HomeUiModel.EMPTY
+            fun update() {
+                val contents = contentsLiveData.value ?: return
+                val shortcutGuideVisible = shortcutGuideVisibleLiveData.value ?: return
+                value = HomeUiModel(contents, shortcutGuideVisible)
+            }
+            listOf(contentsLiveData, shortcutGuideVisibleLiveData).forEach { source ->
+                addSource(source) { update() }
+            }
+        }.distinctUntilChanged()
+    }
 
 
     // =============================================================================================
@@ -50,5 +75,9 @@ class HomeViewModel @Inject constructor(
 
     override fun onAddShortcutClick() {
         shortcutController.requestAddDirectCaptureShortcut()
+    }
+
+    override fun onRemoveShortcutGuideClick() {
+        prefs.shortcutGuideVisible = false
     }
 }

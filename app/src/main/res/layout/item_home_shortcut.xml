@@ -17,14 +17,15 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/margin_normal">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/title_text_view"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_normal"
+                android:layout_marginTop="@dimen/margin_normal"
                 android:text="@string/add_shortcut"
                 app:layout_constraintBottom_toTopOf="@id/body_text_view"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -35,6 +36,7 @@
                 android:id="@+id/body_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_normal"
                 android:layout_marginVertical="@dimen/margin_small"
                 android:text="@string/add_shortcut_message"
                 app:layout_constraintBottom_toTopOf="@id/add_shortcut_button"
@@ -42,10 +44,22 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_text_view" />
 
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackgroundBorderless"
+                android:onClick="@{() -> eventListener.onRemoveShortcutGuideClick()}"
+                android:padding="@dimen/margin_normal"
+                android:src="@drawable/ic_close"
+                android:tint="?colorOnSurface"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <Button
                 android:id="@+id/add_shortcut_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_normal"
                 android:onClick="@{() -> eventListener.onAddShortcutClick()}"
                 android:text="@string/add"
                 app:layout_constraintBottom_toBottomOf="parent"

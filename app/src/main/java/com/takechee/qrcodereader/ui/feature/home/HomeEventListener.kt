@@ -6,4 +6,5 @@ interface HomeEventListener {
     fun onHistoryItemClick(content: Content)
     fun onHistoryMoreClick()
     fun onAddShortcutClick()
+    fun onRemoveShortcutGuideClick()
 }
