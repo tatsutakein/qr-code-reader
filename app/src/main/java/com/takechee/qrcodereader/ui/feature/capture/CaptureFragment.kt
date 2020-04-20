@@ -1,12 +1,9 @@
 package com.takechee.qrcodereader.ui.feature.capture
 
 import android.Manifest
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import androidx.core.view.ViewCompat
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
@@ -63,7 +60,6 @@ class CaptureFragment : MainNavigationFragment(R.layout.fragment_capture) {
                 binding.zxingBarcodeScanner.decodeContinuous(viewModel)
             }
         )
-
         binding.zxingBarcodeScanner.doOnApplyWindowInsets { scanner, insets, initialState ->
             scanner.updatePadding(
                 left = initialState.paddings.left + insets.systemWindowInsetLeft,

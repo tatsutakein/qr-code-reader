@@ -8,12 +8,14 @@ import com.takechee.qrcodereader.result.Event
 import com.takechee.qrcodereader.result.fireEvent
 import com.takechee.qrcodereader.ui.Navigator
 import com.takechee.qrcodereader.ui.common.base.BaseViewModel
+import com.takechee.qrcodereader.util.shortcut.ShortcutController
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
     private val prefs: PreferenceStorage,
     private val navigator: HomeNavigator,
-    private val repository: ContentRepository
+    private val repository: ContentRepository,
+    private val shortcutController: ShortcutController
 ) : BaseViewModel(), HomeEventListener, Navigator by navigator {
 
     companion object {
@@ -35,10 +37,6 @@ class HomeViewModel @Inject constructor(
     //
     // =============================================================================================
     fun onOpenReaderClick() {
-        fireOpenReaderEvent()
-    }
-
-    private fun fireOpenReaderEvent() {
         navigator.navigateToCapture()
     }
 
@@ -47,17 +45,10 @@ class HomeViewModel @Inject constructor(
     }
 
     override fun onHistoryMoreClick() {
-        fireEvent { HomeEvent.SwitchingHistory }
+        _event.fireEvent { HomeEvent.SwitchingHistory }
     }
 
-
-    // =============================================================================================
-    //
-    // Utility
-    //
-    // =============================================================================================
-    private fun fireEvent(action: () -> HomeEvent) {
-        _event.fireEvent(action)
+    override fun onAddShortcutClick() {
+        shortcutController.requestAddDirectCaptureShortcut()
     }
-
 }

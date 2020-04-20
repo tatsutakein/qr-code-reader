@@ -30,7 +30,9 @@ class DefaultShortcutController @Inject constructor(
             .setShortLabel(context.getString(R.string.open_camera))
             .setLongLabel(context.getString(R.string.open_camera))
             .setIcon(IconCompat.createWithResource(context, R.drawable.ic_photo_camera))
-            .setIntent(Intent(context, DirectCaptureActivity::class.java))
+            .setIntent(
+                Intent(context, DirectCaptureActivity::class.java).setAction(Intent.ACTION_VIEW)
+            )
             .build()
     }
 
@@ -41,6 +43,8 @@ class DefaultShortcutController @Inject constructor(
             context, /* request code */ 0,
             intent, /* flags */ 0
         )
+
+        successCallback.intentSender
         ShortcutManagerCompat.requestPinShortcut(
             context,
             shortcut,

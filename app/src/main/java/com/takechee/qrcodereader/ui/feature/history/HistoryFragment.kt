@@ -14,6 +14,7 @@ import com.takechee.qrcodereader.util.extension.simpleItemAnimatorEnabled
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
+import com.xwray.groupie.Section
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import javax.inject.Inject
@@ -39,15 +40,13 @@ class HistoryFragment : BaseFragment(R.layout.fragment_history) {
             it.lifecycleOwner = viewLifecycleOwner
         }
 
-        binding.historyListView.simpleItemAnimatorEnabled(false)
-        val adapter = GroupAdapter<GroupieViewHolder>()
-        binding.historyListView.adapter = adapter
-
-        viewModel.contents.observe(viewLifecycleOwner) { captures ->
-            val list = mutableListOf<Item<*>>()
-            captures.mapTo(list) { captured -> HistoryItem(captured, viewModel) }
-            adapter.update(list)
+        val section = HistorySection(viewModel)
+        binding.historyListView.apply {
+            adapter = GroupAdapter<GroupieViewHolder>().apply { add(section) }
+            simpleItemAnimatorEnabled(false)
         }
+
+        viewModel.contents.observe(viewLifecycleOwner) { contents -> section.update(contents) }
 
         viewModel.navigateTo.receiveEvent(viewLifecycleOwner) { directions ->
             findNavController().navigate(directions)

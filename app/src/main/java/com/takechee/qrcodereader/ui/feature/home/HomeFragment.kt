@@ -44,21 +44,17 @@ class HomeFragment : MainNavigationFragment(R.layout.fragment_home) {
 
         setupNavigation(viewModel)
 
-        val historySection = HomeHistorySection(viewModel)
+        val historyContainer = HomeHistoryContainerItem(viewModel)
 
         binding.contentsView.simpleItemAnimatorEnabled(false)
         val adapter = GroupAdapter<GroupieViewHolder>()
         binding.contentsView.adapter = adapter
         val list = mutableListOf<Item<*>>()
-        list += HomeHistoryContainerItem(
-            historySection,
-            viewModel.contents.map { it.isNotEmpty() },
-            viewLifecycleOwner,
-            viewModel
-        )
+        list += historyContainer
+        list += HomeShortcutItem(viewModel)
         adapter.update(list)
         viewModel.contents.observe(viewLifecycleOwner) {
-            historySection.update(it)
+            historyContainer.update(it)
         }
 
         viewModel.event.receiveEvent(viewLifecycleOwner) { event ->

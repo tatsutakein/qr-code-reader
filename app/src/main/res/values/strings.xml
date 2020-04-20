@@ -11,6 +11,9 @@
 
     <string name="home">ホーム</string>
     <string name="recent_content">最近のコンテンツ</string>
+    <string name="add_shortcut">ショートカットを追加する</string>
+    <string name="add_shortcut_message">ホーム画面にショートカットを追加すると素早くQRコード・バーコードを読み取ることができます。</string>
+    <string name="add">追加する</string>
     <string name="see_more">もっとみる</string>
     <string name="empty_content">コンテンツはまだありません。</string>
     <string name="empty_content_message">新しいコンテンツを作成すると、最近のコンテンツがここで確認できるようになります。</string>
@@ -18,6 +21,7 @@
     <string name="capture_open_gallery">ギャラリーを開く</string>
     <string name="detail">読み取り詳細</string>
     <string name="history">履歴</string>
+    <string name="history_empty_message">コンテンツが作成されるとここに表示されます</string>
     <string name="misc">その他</string>
     <string name="copy_to_clipboard">クリップボードにコピー</string>
     <string name="copied">クリップボードにコピーしました</string>

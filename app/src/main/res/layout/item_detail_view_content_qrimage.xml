@@ -12,6 +12,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_margin="@dimen/margin_large"
+            android:background="?dividerHorizontal"
             android:maxWidth="200dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
