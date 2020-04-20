@@ -1,6 +1,5 @@
 package com.takechee.qrcodereader.ui.feature.home
 
-import android.content.pm.ShortcutManager
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -12,6 +11,7 @@ import com.takechee.qrcodereader.databinding.FragmentHomeBinding
 import com.takechee.qrcodereader.result.receiveEvent
 import com.takechee.qrcodereader.ui.MainNavigationFragment
 import com.takechee.qrcodereader.util.extension.simpleItemAnimatorEnabled
+import com.takechee.qrcodereader.util.shortcut.ShortcutController
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -22,7 +22,7 @@ import javax.inject.Inject
 class HomeFragment : MainNavigationFragment(R.layout.fragment_home) {
 
     @Inject
-    lateinit var shortcutManager: ShortcutManager
+    lateinit var shortcutController: ShortcutController
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

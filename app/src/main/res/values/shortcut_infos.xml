@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="shortcut_direct_capture_id">direct_capture</string>
 </resources>
