@@ -2,6 +2,10 @@ package com.takechee.qrcodereader.ui.feature.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.doOnLayout
+import androidx.core.view.marginBottom
+import androidx.core.view.marginTop
+import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -40,6 +44,13 @@ class HomeFragment : MainNavigationFragment(R.layout.fragment_home) {
         val binding = FragmentHomeBinding.bind(view)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        binding.openReaderButton.doOnLayout {
+            binding.contentsView.updatePadding(
+                bottom = binding.contentsView.paddingBottom
+                        + it.marginTop + it.height + it.marginBottom
+            )
+        }
 
         setupNavigation(viewModel)
 

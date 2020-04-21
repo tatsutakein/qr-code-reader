@@ -12,7 +12,9 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:paddingLeftSystemWindowInsets="@{true}"
+        app:paddingRightSystemWindowInsets="@{true}">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -38,7 +40,8 @@
             android:orientation="vertical"
             android:paddingVertical="@dimen/margin_normal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:paddingBottomSystemWindowInsets="@{true}" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

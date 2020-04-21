@@ -6,6 +6,7 @@
         android:id="@+id/menu_item_open_gallery"
         android:icon="@drawable/ic_photo_library"
         android:title="@string/capture_open_gallery"
+        android:visible="false"
         app:contentDescription="@string/capture_open_gallery"
         app:showAsAction="always" />
 

@@ -24,12 +24,12 @@
                 style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_normal"
+                android:layout_marginStart="@dimen/margin_normal"
                 android:layout_marginTop="@dimen/margin_normal"
                 android:text="@string/add_shortcut"
                 app:layout_constraintBottom_toTopOf="@id/body_text_view"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/close_button"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -45,6 +45,7 @@
                 app:layout_constraintTop_toBottomOf="@id/title_text_view" />
 
             <ImageButton
+                android:id="@+id/close_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?selectableItemBackgroundBorderless"

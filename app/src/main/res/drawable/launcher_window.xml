@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        tools:height="800dp"
+        tools:width="480dp">
+        <color android:color="?colorSurface" />
+    </item>
+
+    <item
+        android:width="128dp"
+        android:height="128dp"
+        android:gravity="center">
+        <bitmap android:src="@drawable/ic_launcher_main" />
+    </item>
+
+    <item
+        android:width="128dp"
+        android:height="128dp"
+        android:bottom="@dimen/margin_large"
+        android:gravity="bottom|center_horizontal">
+        <bitmap
+            android:src="@drawable/ic_launcher_made_by"
+            android:tint="@color/color_control_light" />
+    </item>
+
+</layer-list>

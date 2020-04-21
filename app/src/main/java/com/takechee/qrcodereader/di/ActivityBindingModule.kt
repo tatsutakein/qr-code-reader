@@ -1,5 +1,6 @@
 package com.takechee.qrcodereader.di
 
+import com.takechee.qrcodereader.ui.launcher.LauncherActivity
 import com.takechee.qrcodereader.ui.MainActivity
 import com.takechee.qrcodereader.ui.MainActivityModule
 import com.takechee.qrcodereader.ui.feature.capture.CaptureModule
@@ -10,12 +11,22 @@ import com.takechee.qrcodereader.ui.feature.history.HistoryModule
 import com.takechee.qrcodereader.ui.feature.home.HomeModule
 import com.takechee.qrcodereader.ui.feature.misc.MiscModule
 import com.takechee.qrcodereader.ui.feature.setting.SettingsModule
+import com.takechee.qrcodereader.ui.launcher.LauncherActivityModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
 @Suppress("UNUSED")
 abstract class ActivityBindingModule {
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+        modules = [
+            // activity
+            LauncherActivityModule::class
+        ]
+    )
+    internal abstract fun launcherActivity(): LauncherActivity
 
     @ActivityScoped
     @ContributesAndroidInjector(

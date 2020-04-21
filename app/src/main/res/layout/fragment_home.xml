@@ -11,7 +11,9 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:paddingLeftSystemWindowInsets="@{true}"
+        app:paddingRightSystemWindowInsets="@{true}">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -35,7 +37,7 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:orientation="vertical"
-            android:padding="16dp"
+            android:padding="@dimen/margin_normal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
@@ -47,7 +49,9 @@
             android:layout_margin="@dimen/margin_normal"
             android:onClick="@{() -> viewModel.onOpenReaderClick()}"
             android:text="@string/open_camera"
+            android:textColor="?colorOnPrimary"
             app:icon="@drawable/ic_photo_camera"
+            app:iconTint="?colorOnPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
