@@ -1,7 +1,11 @@
 package com.takechee.qrcodereader.ui.feature.onboading
 
 import android.os.Bundle
+import android.view.ViewGroup
 import androidx.activity.viewModels
+import androidx.core.view.doOnLayout
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -43,7 +47,21 @@ class OnboadingActivity : BaseActivity() {
             update(OnboadingPage.items())
         }
 
+        binding.actionArea.doOnLayout {
+            binding.pager.setPageTransformer { page, _ ->
+                page.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    bottomMargin = it.height
+                }
+            }
+        }
+
         viewModel.event.receiveEvent(this) { event ->
+            when (event) {
+                is OnboadingEvent.Destination -> {
+                    startActivity(event.intent)
+                    finish()
+                }
+            }
         }
     }
 }

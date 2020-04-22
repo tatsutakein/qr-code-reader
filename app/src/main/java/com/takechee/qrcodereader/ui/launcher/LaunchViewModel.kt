@@ -17,6 +17,7 @@ import com.takechee.qrcodereader.ui.MainActivity
 import com.takechee.qrcodereader.ui.Navigator
 import com.takechee.qrcodereader.ui.common.base.BaseViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -41,8 +42,14 @@ class LaunchViewModel @Inject constructor(
     //
     // =============================================================================================
     init {
-        _event.fireEvent {
+        viewModelScope.launch {
+            val waitTime = async { delay(DELAY_MS) }
+
+            waitTime.await()
+            _event.fireEvent {
+//                LauncherEvent.Destination.OnBoarding(context)
             LauncherEvent.Destination.Main(context)
+            }
         }
     }
 }

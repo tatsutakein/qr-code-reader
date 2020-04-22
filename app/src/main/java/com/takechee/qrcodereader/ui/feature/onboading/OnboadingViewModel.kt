@@ -24,7 +24,7 @@ import javax.inject.Inject
 class OnboadingViewModel @Inject constructor(
     private val context: Context,
     private val prefs: PreferenceStorage
-) : BaseViewModel() {
+) : BaseViewModel(), OnboadingUserEvent {
 
     companion object {
         private const val DELAY_MS: Long = 500
@@ -42,5 +42,16 @@ class OnboadingViewModel @Inject constructor(
     // =============================================================================================
     init {
 
+    }
+
+    // =============================================================================================
+    //
+    // Event
+    //
+    // =============================================================================================
+    override fun onStartUseClick() {
+        _event.fireEvent {
+            OnboadingEvent.Destination.DirectCapture(context)
+        }
     }
 }

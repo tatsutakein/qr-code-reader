@@ -10,10 +10,11 @@
     <string name="build_type">-- %1$s VERSION --</string>
 
     <string name="start_use">使ってみる</string>
+    <string name="use_case_capture">QRコードの読み取りができます</string>
     <string name="home">ホーム</string>
     <string name="recent_content">最近のコンテンツ</string>
     <string name="add_shortcut">ショートカットを追加する</string>
-    <string name="add_shortcut_message">ホーム画面にショートカットを追加すると素早くQRコード・バーコードを読み取ることができます。</string>
+    <string name="add_shortcut_message">ホーム画面にショートカットを追加すると素早くQRコードを読み取ることができます。</string>
     <string name="add">追加する</string>
     <string name="see_more">もっとみる</string>
     <string name="empty_content">コンテンツはまだありません。</string>

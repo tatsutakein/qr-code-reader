@@ -8,14 +8,16 @@
         android:id="@+id/capture_image_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/ic_photo_camera"
+        android:layout_marginVertical="@dimen/margin_large"
+        android:src="@drawable/ic_qr_code_scan"
+        android:tint="?colorOnSurface"
         app:layout_constraintBottom_toTopOf="@id/use_case_text_view"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintWidth_percent=".5" />
+        app:layout_constraintWidth_percent=".4" />
 
     <TextView
         android:id="@+id/use_case_text_view"
@@ -24,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_normal"
         android:gravity="center_horizontal"
-        android:text="hogehoge"
+        android:text="@string/use_case_capture"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
