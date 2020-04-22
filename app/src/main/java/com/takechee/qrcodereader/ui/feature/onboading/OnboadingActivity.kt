@@ -58,7 +58,7 @@ class OnboadingActivity : BaseActivity() {
         viewModel.event.receiveEvent(this) { event ->
             when (event) {
                 is OnboadingEvent.Destination -> {
-                    startActivity(event.intent)
+                    event.intents.forEach { intent -> startActivity(intent) }
                     finish()
                 }
             }
