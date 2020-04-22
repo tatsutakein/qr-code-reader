@@ -14,17 +14,24 @@ import javax.inject.Inject
 interface ContentDatabase {
     fun getContentsAllFlow(): Flow<List<Content>>
     fun getContentsFlow(start: Int, limit: Int): Flow<List<Content>>
-    fun getContentFlow(contentId: ContentId): Flow<Content>
-    fun getContent(): Content
-    suspend fun insertCaptureText(text: String): ContentId
+    fun getContentFlow(contentId: ContentId): Flow<Content?>
+    suspend fun upsertCaptureText(text: String): ContentId
 
     suspend fun updateContent(
         contentId: ContentId,
         nickname: ContentNickname? = null,
         isFavorite: Boolean? = null
     )
+
+    suspend fun delete(contentId: ContentId)
 }
 
+
+// =============================================================================================
+//
+// Room
+//
+// =============================================================================================
 class ContentRoomDatabase @Inject constructor(
     private val database: RoomDatabase,
     private val contentDao: ContentDao
@@ -37,20 +44,18 @@ class ContentRoomDatabase @Inject constructor(
         return contentDao.getContentsFlow(start, limit).map { it.map(::toContent) }
     }
 
-    override fun getContentFlow(contentId: ContentId): Flow<Content> {
-        return contentDao.getContentById(contentId).map { entity -> toContent(entity) }
+    override fun getContentFlow(contentId: ContentId): Flow<Content?> {
+        return contentDao.getContentById(contentId).map { entity -> entity?.let(::toContent) }
     }
 
-    override fun getContent(): Content {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun insertCaptureText(text: String): ContentId {
+    override suspend fun upsertCaptureText(text: String): ContentId {
         return withContext(Dispatchers.IO) {
             database.withTransaction {
                 val contents = contentDao.getContentsByText(text)
                 if (contents.isNotEmpty()) {
-                    return@withTransaction contents.first().contentId
+                    val contentId = contents.first().contentId
+                    contentDao.updateCaptureCount(contentId)
+                    return@withTransaction contentId
                 }
                 contentDao.insert(ContentEntity.createInsertEntity(text))
             }
@@ -71,18 +76,21 @@ class ContentRoomDatabase @Inject constructor(
         }
     }
 
-    private suspend fun toContentSuspend(entity: ContentEntity): Content {
-        return toContent(entity)
+    override suspend fun delete(contentId: ContentId) {
+        withContext(Dispatchers.IO) {
+            database.runInTransaction { contentDao.delete(contentId) }
+        }
     }
 
     private fun toContent(entity: ContentEntity): Content {
-        return Content(
+        return Content.create(
             id = entity.contentId,
             createTime = entity.createTime,
+            updateTime = entity.updateTime,
             text = entity.text,
-            nickname = entity.nickname?.let(::ContentNickname) ?: ContentNickname.EMPTY,
+            nickname = entity.nickname,
+            captureCount = entity.captureCount,
             isFavorite = entity.isFavorite
         )
     }
-
 }

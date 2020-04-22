@@ -19,33 +19,39 @@ data class ContentNickname(val value: String) {
 data class Content internal constructor(
     val id: ContentId,
     val createTime: OffsetDateTime,
+    val updateTime: OffsetDateTime,
     val text: String,
     val nickname: ContentNickname,
+    val captureCount: Int,
     val isFavorite: Boolean
 ) {
     companion object {
         val EMPTY = Content(
             id = -1,
             createTime = OffsetDateTime.now(),
+            updateTime = OffsetDateTime.now(),
             text = "",
             nickname = ContentNickname.EMPTY,
+            captureCount = 0,
             isFavorite = false
         )
 
         fun create(
             id: Long,
             createTime: OffsetDateTime,
+            updateTime: OffsetDateTime,
             text: String,
-            title: String? = null,
+            nickname: String? = null,
+            captureCount: Int,
             isFavorite: Boolean = false
-        ): Content {
-            return Content(
-                id = id,
-                createTime = createTime,
-                text = text,
-                nickname = title?.let(::ContentNickname) ?: ContentNickname.EMPTY,
-                isFavorite = isFavorite
-            )
-        }
+        ): Content = Content(
+            id = id,
+            createTime = createTime,
+            updateTime = updateTime,
+            text = text,
+            nickname = nickname?.let(::ContentNickname) ?: ContentNickname.EMPTY,
+            captureCount = captureCount,
+            isFavorite = isFavorite
+        )
     }
 }

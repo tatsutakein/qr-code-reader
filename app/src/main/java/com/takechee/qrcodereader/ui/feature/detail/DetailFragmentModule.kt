@@ -17,6 +17,9 @@ abstract class DetailFragmentModule {
     internal abstract fun contributeEditNicknameDialogFragment(): EditNicknameDialogFragment
 
     @Binds
+    abstract fun bindNavigator(helper: DetailNavigateHelper): DetailNavigator
+
+    @Binds
     @IntoMap
     @ViewModelKey(DetailViewModel::class)
     abstract fun bindDetailViewModel(viewModel: DetailViewModel): ViewModel

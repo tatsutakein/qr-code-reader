@@ -27,6 +27,8 @@
     <string name="copied">クリップボードにコピーしました</string>
     <string name="share">シェア</string>
     <string name="save">保存</string>
+    <string name="delete">削除</string>
+    <string name="complete_delete">削除しました</string>
     <string name="cancel">キャンセル</string>
     <string name="get_title_by_url">URLからタイトルを取得</string>
     <string name="open_intent">オープン</string>

@@ -15,6 +15,7 @@ import com.takechee.qrcodereader.model.Content
 import com.takechee.qrcodereader.model.ContentNickname
 import com.takechee.qrcodereader.result.Event
 import com.takechee.qrcodereader.result.fireEvent
+import com.takechee.qrcodereader.ui.Navigator
 import com.takechee.qrcodereader.ui.common.base.BaseViewModel
 import com.takechee.qrcodereader.util.extension.px
 import kotlinx.coroutines.Dispatchers
@@ -29,14 +30,15 @@ class DetailViewModel @Inject constructor(
     private val clipboardManager: ClipboardManager,
     @DetailFragmentScoped private val args: DetailArgs,
     @DetailFragmentScoped private val encoder: BarcodeEncoder,
-    private val repository: ContentRepository
-) : BaseViewModel(), DetailUserEventListener {
+    private val repository: ContentRepository,
+    private val navigator: DetailNavigator
+) : BaseViewModel(), DetailUserEventListener, Navigator by navigator {
 
     companion object {
         private const val QR_IMAGE_SIZE = 200
     }
 
-    private val content: LiveData<Content> =
+    private val content: LiveData<Content?> =
         repository.getContentFlow(args.contentId).asLiveData(viewModelScope.coroutineContext)
 
     val uiModel: LiveData<DetailUiModel>
@@ -44,7 +46,7 @@ class DetailViewModel @Inject constructor(
     private val qrImage: LiveData<Bitmap?> = content.map {
         try {
             val size = QR_IMAGE_SIZE.px
-            encoder.encodeBitmap(it.text, BarcodeFormat.QR_CODE, size, size)
+            encoder.encodeBitmap(it?.text, BarcodeFormat.QR_CODE, size, size)
         } catch (e: WriterException) {
             null
         }
@@ -157,6 +159,15 @@ class DetailViewModel @Inject constructor(
     override fun onFavoriteClick(isFavorite: Boolean) {
         viewModelScope.launch {
             repository.updateContent(contentId = args.contentId, isFavorite = isFavorite)
+        }
+    }
+
+    override fun onDeleteClick() {
+        viewModelScope.launch {
+            repository.delete(contentId = args.contentId)
+
+            Toast.makeText(context, R.string.complete_delete, Toast.LENGTH_SHORT).show()
+            navigator.navigatePopBack()
         }
     }
 

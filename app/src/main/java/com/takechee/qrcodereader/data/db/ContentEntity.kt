@@ -14,11 +14,17 @@ data class ContentEntity(
     @ColumnInfo(name = "create_time")
     val createTime: OffsetDateTime,
 
+    @ColumnInfo(name = "update_time")
+    val updateTime: OffsetDateTime,
+
     @ColumnInfo(name = "text")
     val text: String,
 
     @ColumnInfo(name = "nickname")
     val nickname: String?,
+
+    @ColumnInfo(name = "capture_count")
+    val captureCount: Int,
 
     @ColumnInfo(name = "is_favorite")
     val isFavorite: Boolean
@@ -28,8 +34,10 @@ data class ContentEntity(
             return ContentEntity(
                 contentId = 0,
                 createTime = OffsetDateTime.now(),
+                updateTime = OffsetDateTime.now(),
                 text = text,
                 nickname = null,
+                captureCount = 1,
                 isFavorite = false
             )
         }

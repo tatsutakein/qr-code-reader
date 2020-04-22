@@ -43,7 +43,7 @@ class CaptureViewModel @Inject constructor(
 
         captureResultJob = viewModelScope.launch {
             val resultText = result?.text ?: return@launch
-            repository.insertCaptureText(resultText) { contentId ->
+            repository.upsertCaptureText(resultText) { contentId ->
                 navigator.navigateToDetail(contentId)
             }
             delay(DELAY_MS)
@@ -55,15 +55,4 @@ class CaptureViewModel @Inject constructor(
 //            Log.e("barcode", it.toString())
         }
     }
-
-
-    // =============================================================================================
-    //
-    // Utility
-    //
-    // =============================================================================================
-    private fun fireEvent(factory: () -> CaptureEvent) {
-        _event.fireEvent(factory)
-    }
-
 }

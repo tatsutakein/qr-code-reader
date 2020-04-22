@@ -10,14 +10,16 @@ import javax.inject.Inject
 interface ContentRepository {
     fun getContentsAllFlow(): Flow<List<Content>>
     fun getContentsFlow(start: Int, limit: Int): Flow<List<Content>>
-    fun getContentFlow(contentId: ContentId): Flow<Content>
-    suspend fun insertCaptureText(text: String, action: (contentId: ContentId) -> Unit)
+    fun getContentFlow(contentId: ContentId): Flow<Content?>
+    suspend fun upsertCaptureText(text: String, action: (contentId: ContentId) -> Unit)
 
     suspend fun updateContent(
         contentId: ContentId,
         nickname: ContentNickname? = null,
         isFavorite: Boolean? = null
     )
+
+    suspend fun delete(contentId: ContentId)
 }
 
 
@@ -29,6 +31,7 @@ interface ContentRepository {
 class ContentDataRepository @Inject constructor(
     private val db: ContentDatabase
 ) : ContentRepository {
+
     override fun getContentsAllFlow(): Flow<List<Content>> {
         return db.getContentsAllFlow()
     }
@@ -37,12 +40,12 @@ class ContentDataRepository @Inject constructor(
         return db.getContentsFlow(start, limit)
     }
 
-    override fun getContentFlow(contentId: ContentId): Flow<Content> {
+    override fun getContentFlow(contentId: ContentId): Flow<Content?> {
         return db.getContentFlow(contentId)
     }
 
-    override suspend fun insertCaptureText(text: String, action: (contentId: ContentId) -> Unit) {
-        db.insertCaptureText(text).let(action)
+    override suspend fun upsertCaptureText(text: String, action: (contentId: ContentId) -> Unit) {
+        db.upsertCaptureText(text).let(action)
     }
 
     override suspend fun updateContent(
@@ -51,5 +54,9 @@ class ContentDataRepository @Inject constructor(
         isFavorite: Boolean?
     ) {
         db.updateContent(contentId, nickname, isFavorite)
+    }
+
+    override suspend fun delete(contentId: ContentId) {
+        db.delete(contentId)
     }
 }

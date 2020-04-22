@@ -9,6 +9,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.distinctUntilChanged
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.takechee.qrcodereader.R
@@ -16,6 +17,7 @@ import com.takechee.qrcodereader.result.Event
 import com.takechee.qrcodereader.result.fireEvent
 import com.takechee.qrcodereader.result.receiveEvent
 import com.takechee.qrcodereader.ui.common.base.BaseFragment
+import javax.inject.Inject
 
 abstract class MainNavigationFragment : BaseFragment {
 
@@ -76,6 +78,13 @@ abstract class MainNavigationFragment : BaseFragment {
                 // unknown to this NavController
             }
         }
+        navigator.navPopBack.receiveEvent(viewLifecycleOwner) {
+            try {
+                findNavController().popBackStack()
+            } catch (ignore: IllegalArgumentException) {
+                // unknown to this NavController
+            }
+        }
     }
 }
 
@@ -106,18 +115,28 @@ interface NavigationHost {
 // =============================================================================================
 interface Navigator {
     val navDirections: LiveData<Event<NavDirections>>
+    val navPopBack: LiveData<Event<Unit>>
 }
 
 interface NavigateHelper : Navigator {
     fun navigateTo(factory: () -> NavDirections)
+    fun navigatePopBack()
 }
 
-class DefaultNavigateHelper : NavigateHelper {
+class DefaultNavigateHelper @Inject constructor() : NavigateHelper {
     private val _navDirections = MutableLiveData<Event<NavDirections>>()
     override val navDirections: LiveData<Event<NavDirections>>
-        get() = _navDirections
+        get() = _navDirections.distinctUntilChanged()
+
+    private val _navPopBack = MutableLiveData<Event<Unit>>()
+    override val navPopBack: LiveData<Event<Unit>>
+        get() = _navPopBack.distinctUntilChanged()
 
     override fun navigateTo(factory: () -> NavDirections) {
         _navDirections.fireEvent(factory)
+    }
+
+    override fun navigatePopBack() {
+        _navPopBack.fireEvent()
     }
 }

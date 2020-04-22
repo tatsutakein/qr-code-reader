@@ -38,6 +38,8 @@ class DetailFragment : MainNavigationFragment(R.layout.fragment_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupNavigation(viewModel)
+
         val binding = FragmentDetailBinding.bind(view).also {
             it.viewModel = viewModel
             it.lifecycleOwner = viewLifecycleOwner
@@ -75,6 +77,14 @@ class DetailFragment : MainNavigationFragment(R.layout.fragment_detail) {
                 list += DetailViewFavorite(uiModel.content.isFavorite, viewModel)
             }
             groupAdapter.update(list)
+        }
+
+        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menu_item_delete -> viewModel.onDeleteClick()
+                else -> false
+            }
+            true
         }
     }
 }
