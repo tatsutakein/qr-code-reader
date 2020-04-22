@@ -31,6 +31,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.feature.onboading.OnboadingActivity" />
+        
         <activity android:name=".ui.MainActivity" />
 
         <activity android:name=".ui.feature.capture.DirectCaptureActivity" />

@@ -9,6 +9,7 @@
     <string name="version_name">App Version %1$s (%2$s)</string>
     <string name="build_type">-- %1$s VERSION --</string>
 
+    <string name="start_use">使ってみる</string>
     <string name="home">ホーム</string>
     <string name="recent_content">最近のコンテンツ</string>
     <string name="add_shortcut">ショートカットを追加する</string>

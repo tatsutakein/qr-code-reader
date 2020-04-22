@@ -1,4 +1,4 @@
-package com.takechee.qrcodereader.ui.launcher
+package com.takechee.qrcodereader.ui.feature.onboading
 
 import android.content.Context
 import android.content.Intent
@@ -21,7 +21,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class LaunchViewModel @Inject constructor(
+class OnboadingViewModel @Inject constructor(
     private val context: Context,
     private val prefs: PreferenceStorage
 ) : BaseViewModel() {
@@ -30,8 +30,8 @@ class LaunchViewModel @Inject constructor(
         private const val DELAY_MS: Long = 500
     }
 
-    private val _event = MutableLiveData<Event<LauncherEvent>>()
-    val event: LiveData<Event<LauncherEvent>>
+    private val _event = MutableLiveData<Event<OnboadingEvent>>()
+    val event: LiveData<Event<OnboadingEvent>>
         get() = _event.distinctUntilChanged()
 
 
@@ -41,8 +41,6 @@ class LaunchViewModel @Inject constructor(
     //
     // =============================================================================================
     init {
-        _event.fireEvent {
-            LauncherEvent.Destination.Main(context)
-        }
+
     }
 }
