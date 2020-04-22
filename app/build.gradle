@@ -127,7 +127,8 @@ dependencies {
     implementation Dependencies.Groupie.core
     implementation Dependencies.Groupie.dataBinding
 
-    implementation Dependencies.permissionsdispatcher
+    implementation Dependencies.Permission.dispatcher
+    kapt Dependencies.Permission.processor
     implementation Dependencies.threeten
 
     implementation Dependencies.insetterDbx

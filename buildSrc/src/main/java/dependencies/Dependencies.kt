@@ -75,8 +75,12 @@ object Dependencies {
         const val viewBinding = "com.xwray:groupie-viewbinding:$version"
     }
 
-    const val permissionsdispatcher =
-        "org.permissionsdispatcher:permissionsdispatcher-ktx:1.0.0-alpha2"
+    object Permission {
+        private const val version = "4.7.0"
+        const val dispatcher = "org.permissionsdispatcher:permissionsdispatcher:$version"
+        const val processor = "org.permissionsdispatcher:permissionsdispatcher-processor:$version"
+    }
+
     const val threeten = "com.jakewharton.threetenabp:threetenabp:1.2.3"
     const val insetterDbx = "dev.chrisbanes:insetter-dbx:0.2.1"
     const val insetterKtx = "dev.chrisbanes:insetter-ktx:0.2.1"
