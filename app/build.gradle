@@ -91,6 +91,7 @@ dependencies {
     implementation Dependencies.AndroidX.fragment
     implementation Dependencies.AndroidX.constraintLayout
     implementation Dependencies.AndroidX.recyclerview
+    implementation Dependencies.AndroidX.viewpager2
     implementation Dependencies.AndroidX.browser
     implementation Dependencies.AndroidX.preferenceKtx
     implementation Dependencies.AndroidX.material
@@ -134,6 +135,7 @@ dependencies {
 
     implementation Dependencies.jsourp
     implementation Dependencies.lottie
+    implementation Dependencies.indicator
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'

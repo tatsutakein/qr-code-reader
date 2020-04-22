@@ -14,6 +14,7 @@ object Dependencies {
         const val fragment = "androidx.fragment:fragment-ktx:1.2.4"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.0-beta4"
         const val recyclerview = "androidx.recyclerview:recyclerview:1.2.0-alpha02"
+        const val viewpager2 = "androidx.viewpager2:viewpager2:1.0.0"
         const val browser = "androidx.browser:browser:1.0.0"
         const val preferenceKtx = "androidx.preference:preference-ktx:1.1.0"
         const val material = "com.google.android.material:material:1.2.0-alpha05"
@@ -74,10 +75,12 @@ object Dependencies {
         const val viewBinding = "com.xwray:groupie-viewbinding:$version"
     }
 
-    const val permissionsdispatcher = "org.permissionsdispatcher:permissionsdispatcher-ktx:1.0.0-alpha2"
+    const val permissionsdispatcher =
+        "org.permissionsdispatcher:permissionsdispatcher-ktx:1.0.0-alpha2"
     const val threeten = "com.jakewharton.threetenabp:threetenabp:1.2.3"
     const val insetterDbx = "dev.chrisbanes:insetter-dbx:0.2.1"
     const val insetterKtx = "dev.chrisbanes:insetter-ktx:0.2.1"
     const val jsourp = "org.jsoup:jsoup:1.13.1"
     const val lottie = "com.airbnb.android:lottie:3.4.0"
+    const val indicator = "com.romandanylyk:pageindicatorview:1.0.3"
 }
