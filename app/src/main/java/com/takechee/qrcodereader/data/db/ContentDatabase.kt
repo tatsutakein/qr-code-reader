@@ -19,7 +19,7 @@ interface ContentDatabase {
 
     suspend fun updateContent(
         contentId: ContentId,
-        nickname: ContentNickname? = null,
+        nickname: String? = null,
         isFavorite: Boolean? = null
     )
 
@@ -64,13 +64,13 @@ class ContentRoomDatabase @Inject constructor(
 
     override suspend fun updateContent(
         contentId: ContentId,
-        nickname: ContentNickname?,
+        nickname: String?,
         isFavorite: Boolean?
     ) {
         if (nickname == null && isFavorite == null) return
         withContext(Dispatchers.IO) {
             database.runInTransaction {
-                nickname?.let { contentDao.updateNickname(contentId, it.value) }
+                nickname?.let { contentDao.updateNickname(contentId, it) }
                 isFavorite?.let { contentDao.updateIsFavorite(contentId, it) }
             }
         }
@@ -83,7 +83,7 @@ class ContentRoomDatabase @Inject constructor(
     }
 
     private fun toContent(entity: ContentEntity): Content {
-        return Content.create(
+        return Content.instantiate(
             id = entity.contentId,
             createTime = entity.createTime,
             updateTime = entity.updateTime,

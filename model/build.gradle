@@ -1,0 +1,15 @@
+import dependencies.Dependencies
+
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation Dependencies.Kotlin.stdlib
+
+    // ThreeTenBP for the shared module only. Date and time API for Java.
+    implementation Dependencies.Threeten.core
+}
+
+sourceCompatibility = "8"
+targetCompatibility = "8"

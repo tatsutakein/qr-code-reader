@@ -3,8 +3,6 @@ package com.takechee.qrcodereader.ui.feature.detail
 import android.graphics.Bitmap
 import android.util.Patterns
 import androidx.core.net.toUri
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.takechee.qrcodereader.model.Content
 
 data class DetailUiModel(

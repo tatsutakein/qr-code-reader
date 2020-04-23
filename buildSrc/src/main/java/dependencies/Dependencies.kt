@@ -89,7 +89,11 @@ object Dependencies {
         const val processor = "org.permissionsdispatcher:permissionsdispatcher-processor:$version"
     }
 
-    const val threeten = "com.jakewharton.threetenabp:threetenabp:1.2.3"
+    object Threeten {
+        const val core = "org.threeten:threetenbp:1.4.2:no-tzdb"
+        const val androidBackport = "com.jakewharton.threetenabp:threetenabp:1.2.3"
+    }
+
     const val insetterDbx = "dev.chrisbanes:insetter-dbx:0.2.1"
     const val insetterKtx = "dev.chrisbanes:insetter-ktx:0.2.1"
     const val jsourp = "org.jsoup:jsoup:1.13.1"

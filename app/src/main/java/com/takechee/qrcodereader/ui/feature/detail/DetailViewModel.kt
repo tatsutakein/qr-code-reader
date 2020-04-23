@@ -136,7 +136,7 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             repository.updateContent(
                 contentId = args.contentId,
-                nickname = nickname.let(::ContentNickname)
+                nickname = nickname
             )
         }
     }

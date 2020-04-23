@@ -15,7 +15,7 @@ interface ContentRepository {
 
     suspend fun updateContent(
         contentId: ContentId,
-        nickname: ContentNickname? = null,
+        nickname: String? = null,
         isFavorite: Boolean? = null
     )
 
@@ -50,7 +50,7 @@ class ContentDataRepository @Inject constructor(
 
     override suspend fun updateContent(
         contentId: ContentId,
-        nickname: ContentNickname?,
+        nickname: String?,
         isFavorite: Boolean?
     ) {
         db.updateContent(contentId, nickname, isFavorite)

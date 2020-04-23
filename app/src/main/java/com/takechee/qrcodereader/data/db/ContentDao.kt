@@ -1,6 +1,5 @@
 package com.takechee.qrcodereader.data.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.takechee.qrcodereader.model.ContentId
 import kotlinx.coroutines.flow.Flow

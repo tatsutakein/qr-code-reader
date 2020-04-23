@@ -84,6 +84,7 @@ android {
 }
 
 dependencies {
+    implementation project(':model')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Dependencies.Kotlin.stdlib
     implementation Dependencies.AndroidX.coreKtx
@@ -134,7 +135,7 @@ dependencies {
 
     implementation Dependencies.Permission.dispatcher
     kapt Dependencies.Permission.processor
-    implementation Dependencies.threeten
+    implementation Dependencies.Threeten.androidBackport
 
     implementation Dependencies.insetterDbx
     implementation Dependencies.insetterKtx
