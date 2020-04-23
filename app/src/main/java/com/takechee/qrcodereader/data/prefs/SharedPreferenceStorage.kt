@@ -2,9 +2,6 @@ package com.takechee.qrcodereader.data.prefs
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.distinctUntilChanged
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
@@ -50,9 +47,9 @@ class SharedPreferenceStorage @Inject constructor(context: Context) : Preference
         }
     }
 
-    override var openReaderWhenAppStarts by booleanPreference(
+    override var onboardingCompleted by booleanPreference(
         prefs,
-        Preference.OPEN_READER_WHEN_APP_STARTS,
+        Preference.ONBOADING_V1,
         false
     )
 
@@ -72,7 +69,7 @@ class SharedPreferenceStorage @Inject constructor(context: Context) : Preference
 }
 
 private enum class Preference {
-    OPEN_READER_WHEN_APP_STARTS,
+    ONBOADING_V1,
     SHORTCUT_GUIDE_VISIBLE;
 
     val prefName: String = "pref_${name.toLowerCase(Locale.JAPAN)}"

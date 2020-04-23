@@ -43,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
+            android:paddingVertical="@dimen/margin_small"
             android:scrollbarStyle="insideOverlay"
             android:scrollbars="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -53,11 +54,27 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/margin_normal"
+                    android:paddingVertical="@dimen/margin_small"
+                    android:text="@string/about_this_app" />
+
+                <TextView
+                    android:id="@+id/privacy_policy"
+                    style="@style/Widget.QRCodeReader.Misc.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewModel.onContentClick(MiscListContent.PRIVACY_POLICY)}"
+                    android:text="@string/privacy_policy"
+                    android:textColor="?colorPrimary" />
+
+                <TextView
                     android:id="@+id/open_source_license"
                     style="@style/Widget.QRCodeReader.Misc.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="@{() -> viewModel.onContentClick(MiscListContent.Licenses)}"
+                    android:onClick="@{() -> viewModel.onContentClick(MiscListContent.LICENSES)}"
                     android:text="@string/licenses_title"
                     android:textColor="?colorPrimary" />
 

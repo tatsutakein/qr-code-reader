@@ -8,6 +8,6 @@ import kotlinx.coroutines.flow.Flow
 interface PreferenceStorage {
     val shortcutGuideVisibleFlow: Flow<Boolean>
 
-    var openReaderWhenAppStarts: Boolean
+    var onboardingCompleted: Boolean
     var shortcutGuideVisible: Boolean
 }

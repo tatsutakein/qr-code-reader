@@ -26,10 +26,6 @@ class OnboadingViewModel @Inject constructor(
     private val prefs: PreferenceStorage
 ) : BaseViewModel(), OnboadingUserEvent {
 
-    companion object {
-        private const val DELAY_MS: Long = 500
-    }
-
     private val _event = MutableLiveData<Event<OnboadingEvent>>()
     val event: LiveData<Event<OnboadingEvent>>
         get() = _event.distinctUntilChanged()
@@ -37,21 +33,25 @@ class OnboadingViewModel @Inject constructor(
 
     // =============================================================================================
     //
-    // Initialize
-    //
-    // =============================================================================================
-    init {
-
-    }
-
-    // =============================================================================================
-    //
     // Event
     //
     // =============================================================================================
     override fun onStartUseClick() {
-        _event.fireEvent {
-            OnboadingEvent.Destination.DirectCapture(context)
-        }
+        complete(OnboadingEvent.Destination.DirectCapture(context))
+    }
+
+    override fun onDirectionHomeClick() {
+        complete(OnboadingEvent.Destination.Main(context))
+    }
+
+
+    // =============================================================================================
+    //
+    // Utility
+    //
+    // =============================================================================================
+    private fun complete(destination: OnboadingEvent.Destination) {
+        prefs.onboardingCompleted = true
+        _event.fireEvent { destination }
     }
 }

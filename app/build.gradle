@@ -109,6 +109,11 @@ dependencies {
     kapt Dependencies.AndroidX.Room.compiler
     testImplementation Dependencies.AndroidX.Room.testing
 
+    implementation Dependencies.AndroidX.Compose.framework
+    implementation Dependencies.AndroidX.Compose.tooling
+    implementation Dependencies.AndroidX.Compose.layout
+    implementation Dependencies.AndroidX.Compose.material
+
     implementation Dependencies.AndroidX.Licenses.core
 
     implementation Dependencies.Dagger.android

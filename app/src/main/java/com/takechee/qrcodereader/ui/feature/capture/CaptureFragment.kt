@@ -2,6 +2,7 @@ package com.takechee.qrcodereader.ui.feature.capture
 
 import android.Manifest
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.updateLayoutParams
@@ -29,6 +30,8 @@ class CaptureFragment : MainNavigationFragment(R.layout.fragment_capture) {
 
     private var barcodeView: DecoratedBarcodeView? = null
 
+    private var hasPermission = false
+
 
     // =============================================================================================
     //
@@ -47,6 +50,10 @@ class CaptureFragment : MainNavigationFragment(R.layout.fragment_capture) {
 
         barcodeView = binding.zxingBarcodeScanner
 
+        hasPermission = PermissionUtils.hasSelfPermissions(
+            requireActivity(),
+            "android.permission.CAMERA"
+        )
         showCameraWithPermissionCheck()
 
         binding.zxingBarcodeScanner.doOnApplyWindowInsets { scanner, insets, initialState ->
@@ -73,11 +80,11 @@ class CaptureFragment : MainNavigationFragment(R.layout.fragment_capture) {
 
     override fun onResume() {
         super.onResume()
-        barcodeView?.resume()
+        if (hasPermission) barcodeView?.resume()
     }
 
     override fun onPause() {
-        barcodeView?.pause()
+        if (hasPermission) barcodeView?.pause()
         super.onPause()
     }
 
@@ -89,23 +96,29 @@ class CaptureFragment : MainNavigationFragment(R.layout.fragment_capture) {
     // =============================================================================================
     @NeedsPermission(Manifest.permission.CAMERA)
     fun showCamera() {
+        hasPermission = true
         barcodeView?.decodeContinuous(viewModel)
     }
 
     @OnShowRationale(Manifest.permission.CAMERA)
     fun showRationaleForCamera(request: PermissionRequest) {
         request.proceed()
-//        showRationaleDialog(R.string.permission_camera_rationale, request)
     }
 
     @OnPermissionDenied(Manifest.permission.CAMERA)
     fun onCameraDenied() {
-//        Toast.makeText(this, R.string.permission_camera_denied, Toast.LENGTH_SHORT).show()
     }
 
     @OnNeverAskAgain(Manifest.permission.CAMERA)
     fun onCameraNeverAskAgain() {
-//        Toast.makeText(this, R.string.permission_camera_never_askagain, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        onRequestPermissionsResult(requestCode, grantResults)
     }
 }
 

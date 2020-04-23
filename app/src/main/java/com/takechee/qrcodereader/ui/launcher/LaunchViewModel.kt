@@ -44,11 +44,15 @@ class LaunchViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             val waitTime = async { delay(DELAY_MS) }
-
+            val onboadingCompleted = prefs.onboardingCompleted
             waitTime.await()
+
             _event.fireEvent {
-//                LauncherEvent.Destination.OnBoarding(context)
-            LauncherEvent.Destination.Main(context)
+                if (onboadingCompleted) {
+                    LauncherEvent.Destination.Main(context)
+                } else {
+                    LauncherEvent.Destination.OnBoarding(context)
+                }
             }
         }
     }

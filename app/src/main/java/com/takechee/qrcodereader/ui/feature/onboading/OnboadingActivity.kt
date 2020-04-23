@@ -14,6 +14,7 @@ import com.takechee.qrcodereader.databinding.ActivityOnboadingBinding
 import com.takechee.qrcodereader.di.ViewModelKey
 import com.takechee.qrcodereader.result.receiveEvent
 import com.takechee.qrcodereader.ui.common.base.BaseActivity
+import com.takechee.qrcodereader.util.extension.registerOnPageChangeCallback
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import dagger.Binds
@@ -43,12 +44,17 @@ class OnboadingActivity : BaseActivity() {
         )
         binding.viewModel = viewModel
 
-        binding.pager.adapter = GroupAdapter<GroupieViewHolder>().apply {
-            update(OnboadingPage.items())
+        val groupAdapter = GroupAdapter<GroupieViewHolder>().apply { update(OnboadingPage.items()) }
+        binding.pageIndicator.count = groupAdapter.itemCount
+        binding.viewPager.apply {
+            adapter = groupAdapter
+            registerOnPageChangeCallback(onPageSelected = { position ->
+                binding.pageIndicator.selection = position
+            })
         }
 
         binding.actionArea.doOnLayout {
-            binding.pager.setPageTransformer { page, _ ->
+            binding.viewPager.setPageTransformer { page, _ ->
                 page.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                     bottomMargin = it.height
                 }

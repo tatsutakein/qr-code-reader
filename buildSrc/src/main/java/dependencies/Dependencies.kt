@@ -43,6 +43,14 @@ object Dependencies {
             const val testing = "androidx.room:room-testing:${version}"
         }
 
+        object Compose {
+            private const val version = "0.1.0-dev09"
+            const val framework = "androidx.ui:ui-framework:$version"
+            const val tooling = "androidx.ui:ui-tooling:$version"
+            const val layout = "androidx.ui:ui-layout:$version"
+            const val material = "androidx.ui:ui-material:$version"
+        }
+
         object Licenses {
             const val gradlePlugin = "com.google.android.gms:oss-licenses-plugin:0.10.2"
             const val core = "com.google.android.gms:play-services-oss-licenses:17.0.0"

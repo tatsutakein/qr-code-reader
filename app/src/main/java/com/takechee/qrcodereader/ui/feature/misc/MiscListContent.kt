@@ -4,5 +4,6 @@ import androidx.annotation.StringRes
 import com.takechee.qrcodereader.R
 
 enum class MiscListContent(@StringRes val title: Int) {
-    Licenses(R.string.licenses_title)
+    PRIVACY_POLICY(R.string.privacy_policy),
+    LICENSES(R.string.licenses_title)
 }
