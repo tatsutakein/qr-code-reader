@@ -13,6 +13,9 @@ interface ContentDao {
     fun getContentsFlow(start: Int, limit: Int): Flow<List<ContentEntity>>
 
     @Query("SELECT * FROM content ORDER BY content_id DESC")
+    fun getContentsAll(): List<ContentEntity>
+
+    @Query("SELECT * FROM content ORDER BY content_id DESC")
     fun getContentsAllFlow(): Flow<List<ContentEntity>>
 
     @Query("SELECT * FROM content WHERE content_id = :contentId")

@@ -2,6 +2,10 @@ package com.takechee.qrcodereader.ui.feature.history
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.doOnLayout
+import androidx.core.view.marginBottom
+import androidx.core.view.marginTop
+import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -42,6 +46,13 @@ class HistoryFragment : MainNavigationFragment(R.layout.fragment_history) {
         }
 
         setupNavigation(viewModel)
+
+        binding.filterToggleFab.doOnLayout {
+            binding.historyListView.updatePadding(
+                bottom = binding.historyListView.paddingBottom
+                        + it.marginTop + it.height + it.marginBottom
+            )
+        }
 
         val section = HistorySection(viewModel)
         binding.historyListView.apply {

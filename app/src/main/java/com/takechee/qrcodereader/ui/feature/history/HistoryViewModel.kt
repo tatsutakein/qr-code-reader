@@ -9,11 +9,43 @@ import javax.inject.Inject
 
 class HistoryViewModel @Inject constructor(
     private val navigator: HistoryNavigator,
-    private val repository: ContentRepository
+    repository: ContentRepository
 ) : BaseViewModel(), HistoryEventListener, Navigator by navigator {
 
-    val contents: LiveData<List<Content>> = repository.getContentsAllFlow()
-        .asLiveData(viewModelScope.coroutineContext)
+    val contents: LiveData<List<Content>>
+    private val _favoriteFilterEnabled = MutableLiveData(false)
+    val favoriteFilterEnabled: LiveData<Boolean>
+        get() = _favoriteFilterEnabled.distinctUntilChanged()
+
+
+    // =============================================================================================
+    //
+    // Initialize
+    //
+    // =============================================================================================
+    init {
+        val contentsLiveData = repository.getContentsAllFlow()
+            .asLiveData(viewModelScope.coroutineContext)
+        val favoriteFilterEnabledLiveData = favoriteFilterEnabled
+
+        contents = MediatorLiveData<List<Content>>().apply {
+            fun update() {
+                val contents = contentsLiveData.value.orEmpty()
+                val favoriteFilterEnabled = favoriteFilterEnabledLiveData.value ?: false
+                value = if (favoriteFilterEnabled) {
+                    contents.filter { content -> content.isFavorite }
+                } else {
+                    contents
+                }
+            }
+            listOf(
+                contentsLiveData,
+                favoriteFilterEnabledLiveData
+            ).forEach { source ->
+                addSource(source) { update() }
+            }
+        }
+    }
 
 
     // =============================================================================================
@@ -23,5 +55,9 @@ class HistoryViewModel @Inject constructor(
     // =============================================================================================
     override fun onHistoryItemClick(content: Content) {
         navigator.navigateToDetail(content.id)
+    }
+
+    override fun onFilterEnableChangeClick() {
+        _favoriteFilterEnabled.value = _favoriteFilterEnabled.value?.not() ?: false
     }
 }

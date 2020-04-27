@@ -4,4 +4,5 @@ import com.takechee.qrcodereader.model.Content
 
 interface HistoryEventListener {
     fun onHistoryItemClick(content: Content)
+    fun onFilterEnableChangeClick()
 }

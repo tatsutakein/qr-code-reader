@@ -9,6 +9,7 @@ import javax.inject.Inject
 
 interface ContentRepository {
     fun getContentsAllFlow(): Flow<List<Content>>
+    suspend fun getContents(filterFavorite: Boolean): List<Content>
     fun getContentsFlow(start: Int, limit: Int): Flow<List<Content>>
     fun getContentFlow(contentId: ContentId): Flow<Content?>
     suspend fun upsertCaptureText(text: String, action: (contentId: ContentId) -> Unit)
@@ -34,6 +35,10 @@ class ContentDataRepository @Inject constructor(
 
     override fun getContentsAllFlow(): Flow<List<Content>> {
         return db.getContentsAllFlow()
+    }
+
+    override suspend fun getContents(filterFavorite: Boolean): List<Content> {
+        return db.getContents(filterFavorite)
     }
 
     override fun getContentsFlow(start: Int, limit: Int): Flow<List<Content>> {

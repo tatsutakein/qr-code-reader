@@ -4,7 +4,6 @@ import androidx.room.RoomDatabase
 import androidx.room.withTransaction
 import com.takechee.qrcodereader.model.Content
 import com.takechee.qrcodereader.model.ContentId
-import com.takechee.qrcodereader.model.ContentNickname
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -13,6 +12,7 @@ import javax.inject.Inject
 
 interface ContentDatabase {
     fun getContentsAllFlow(): Flow<List<Content>>
+    suspend fun getContents(filterFavorite: Boolean): List<Content>
     fun getContentsFlow(start: Int, limit: Int): Flow<List<Content>>
     fun getContentFlow(contentId: ContentId): Flow<Content?>
     suspend fun upsertCaptureText(text: String): ContentId
@@ -38,6 +38,15 @@ class ContentRoomDatabase @Inject constructor(
 ) : ContentDatabase {
     override fun getContentsAllFlow(): Flow<List<Content>> {
         return contentDao.getContentsAllFlow().map { it.map(::toContent) }
+    }
+
+    override suspend fun getContents(filterFavorite: Boolean): List<Content> {
+        var entities = withContext(Dispatchers.IO) { contentDao.getContentsAll() }
+        // Favorite filter
+        if (filterFavorite) {
+            entities = entities.filter { entity -> entity.isFavorite }
+        }
+        return entities.map(::toContent)
     }
 
     override fun getContentsFlow(start: Int, limit: Int): Flow<List<Content>> {

@@ -3,11 +3,13 @@ package com.takechee.qrcodereader.di
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.pm.ShortcutManager
-import android.net.ConnectivityManager
-import android.view.inputmethod.InputMethodManager
 import androidx.core.content.getSystemService
+import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.takechee.qrcodereader.MainApp
-import com.takechee.qrcodereader.data.db.*
+import com.takechee.qrcodereader.data.db.AppDatabase
+import com.takechee.qrcodereader.data.db.ContentDatabase
+import com.takechee.qrcodereader.data.db.ContentRoomDatabase
 import com.takechee.qrcodereader.data.prefs.PreferenceStorage
 import com.takechee.qrcodereader.data.prefs.SharedPreferenceStorage
 import com.takechee.qrcodereader.data.repository.ContentDataRepository
@@ -26,6 +28,11 @@ class AppModule {
     @Provides
     fun provideContext(application: MainApp): Context {
         return application.applicationContext
+    }
+
+    @Provides
+    fun providesInAppUpdateManager(context: Context): AppUpdateManager {
+        return AppUpdateManagerFactory.create(context)
     }
 
     @Provides
