@@ -12,7 +12,7 @@ object Versions {
 
 private object AppVersion {
     private const val major: Int = 1
-    private const val minor: Int = 0
+    private const val minor: Int = 1
     private const val patch: Int = 0
     private const val build: Int = 0
 
