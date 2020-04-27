@@ -111,6 +111,10 @@ dependencies {
     testImplementation Dependencies.AndroidX.Room.testing
 
     implementation Dependencies.AndroidX.Licenses.core
+    implementation Dependencies.Play.core
+
+    implementation Dependencies.Firebase.analytics
+    implementation Dependencies.Firebase.crashlytics
 
     implementation Dependencies.Dagger.android
     implementation Dependencies.Dagger.androidSupport
@@ -118,9 +122,6 @@ dependencies {
     kapt Dependencies.Dagger.processor
     compileOnly Dependencies.Dagger.assistedAnnotations
     kapt Dependencies.Dagger.assistedProcessor
-
-    implementation 'com.google.firebase:firebase-analytics:17.3.0'
-    implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta04'
 
     implementation Dependencies.ZXing.core
     implementation Dependencies.ZXing.embedded

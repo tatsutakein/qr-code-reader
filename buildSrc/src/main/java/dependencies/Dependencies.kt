@@ -2,9 +2,18 @@ package dependencies
 
 @Suppress("unused")
 object Dependencies {
+
+    object GradlePlugin {
+        const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.version}"
+        const val playServices = "com.google.gms:google-services:4.3.3"
+        const val crashlytics = "com.google.firebase:firebase-crashlytics-gradle:2.0.0"
+        const val safeArgs =
+            "androidx.navigation:navigation-safe-args-gradle-plugin:${AndroidX.Navigation.version}"
+        const val licenses = "com.google.android.gms:oss-licenses-plugin:0.10.2"
+    }
+
     object Kotlin {
-        private const val version = "1.3.72"
-        const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
+        internal const val version = "1.3.72"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
     }
 
@@ -28,9 +37,7 @@ object Dependencies {
         }
 
         object Navigation {
-            private const val version = "2.2.1"
-            const val safeArgsPlugin =
-                "androidx.navigation:navigation-safe-args-gradle-plugin:$version"
+            internal const val version = "2.2.1"
             const val fragmentKtx = "androidx.navigation:navigation-fragment-ktx:$version"
             const val uiKtx = "androidx.navigation:navigation-ui-ktx:$version"
         }
@@ -55,6 +62,15 @@ object Dependencies {
             const val gradlePlugin = "com.google.android.gms:oss-licenses-plugin:0.10.2"
             const val core = "com.google.android.gms:play-services-oss-licenses:17.0.0"
         }
+    }
+
+    object Play {
+        const val core = "com.google.android.play:core:1.7.2"
+    }
+
+    object Firebase {
+        const val analytics = "com.google.firebase:firebase-analytics:17.4.0"
+        const val crashlytics = "com.google.firebase:firebase-crashlytics:17.0.0"
     }
 
     object Dagger {
