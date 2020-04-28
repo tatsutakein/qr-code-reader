@@ -87,23 +87,26 @@ class DetailViewModel @Inject constructor(
     //
     // =============================================================================================
     override fun onShareActionClick() {
-        fireEvent {
-            val sendIntent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, args.contentId)
-                type = "text/plain"
+        withContent { content ->
+            fireEvent {
+                val sendIntent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, content.text)
+                    type = "text/plain"
+                }
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                DetailEvent.OpenIntent(shareIntent)
             }
-            val shareIntent = Intent.createChooser(sendIntent, null)
-            DetailEvent.OpenIntent(shareIntent)
         }
     }
 
     override fun onOpenIntentActionClick() {
-        val contentText = content.value?.text ?: return
-        fireEvent {
-            val viewIntent = Intent(Intent.ACTION_VIEW, contentText.toUri())
-            val chooserIntent = Intent.createChooser(viewIntent, null)
-            DetailEvent.OpenIntent(chooserIntent)
+        withContent { content ->
+            fireEvent {
+                val viewIntent = Intent(Intent.ACTION_VIEW, content.text.toUri())
+                val chooserIntent = Intent.createChooser(viewIntent, null)
+                DetailEvent.OpenIntent(chooserIntent)
+            }
         }
     }
 
@@ -113,23 +116,27 @@ class DetailViewModel @Inject constructor(
     }
 
     override fun onCopyToClipBoardActionClick() {
-        val contentText = content.value?.text ?: return
-        // クリップボードに格納するItemを作成
-        val item: ClipData.Item = ClipData.Item(contentText)
-        // MimeTypeの作成
-        val mimeType = arrayOfNulls<String>(1)
-        mimeType[0] = ClipDescription.MIMETYPE_TEXT_URILIST
-        //クリップボードに格納するClipDataオブジェクトの作成
-        val cd = ClipData(ClipDescription("text_data", mimeType), item)
-        clipboardManager.setPrimaryClip(cd)
+        withContent { content ->
+            // クリップボードに格納するItemを作成
+            val item: ClipData.Item = ClipData.Item(content.text)
+            // MimeTypeの作成
+            val mimeType = arrayOfNulls<String>(1)
+            mimeType[0] = ClipDescription.MIMETYPE_TEXT_URILIST
+            //クリップボードに格納するClipDataオブジェクトの作成
+            val cd = ClipData(ClipDescription("text_data", mimeType), item)
+            clipboardManager.setPrimaryClip(cd)
 
-        Toast.makeText(context, R.string.copied, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, R.string.copied, Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onEditNicknameClick() {
-        val content = content.value ?: return
-        val isWebUrl = Patterns.WEB_URL.matcher(content.text).matches()
-        fireEvent { DetailEvent.ShowEditNicknameDialog(content.nickname.value, isWebUrl) }
+        withContent { content ->
+            val isWebUrl = Patterns.WEB_URL.matcher(content.text).matches()
+            fireEvent {
+                DetailEvent.ShowEditNicknameDialog(content.nickname.value, isWebUrl)
+            }
+        }
     }
 
     override fun onEditNicknamePositiveClick(nickname: String) {
@@ -179,5 +186,10 @@ class DetailViewModel @Inject constructor(
     // =============================================================================================
     private fun fireEvent(provider: () -> DetailEvent) {
         _event.fireEvent(provider)
+    }
+
+    private fun withContent(action: (content: Content) -> Unit) {
+        val content = content.value ?: return
+        action.invoke(content)
     }
 }
