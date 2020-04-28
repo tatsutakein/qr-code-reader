@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.takechee.qrcodereader.ui.feature.history.HistoryViewModel" />
+            type="com.takechee.qrcodereader.ui.feature.search.SearchViewModel" />
 
     </data>
 
@@ -29,14 +29,26 @@
                 android:id="@+id/toolbar"
                 style="@style/Widget.QRCodeReader.Toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                app:menu="@menu/history_menu"
-                app:title="@string/history" />
+                android:layout_height="?actionBarSize">
+
+                <SearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:iconifiedByDefault="false"
+                    android:imeOptions="flagNoFullscreen"
+                    android:queryBackground="@color/transparent"
+                    android:queryHint="@string/search"
+                    android:searchHintIcon="@null"
+                    android:searchIcon="@null"
+                    tools:targetApi="lollipop_mr1" />
+
+            </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/history_list_view"
+            android:id="@+id/search_result_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
@@ -44,18 +56,8 @@
             android:paddingVertical="@dimen/margin_small"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:paddingBottomSystemWindowInsets="@{true}"
             tools:listitem="@layout/item_history" />
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/filter_toggle_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_margin="@dimen/margin_normal"
-            android:onClick="@{() -> viewModel.onFilterEnableChangeClick()}"
-            app:history_favoriteFilter="@{safeUnbox(viewModel.favoriteFilterEnabled)}"
-            tools:icon="@drawable/ic_baseline_star_border"
-            tools:text="@string/filter_favorite" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -1,4 +1,4 @@
-package com.takechee.qrcodereader.ui.feature.history
+package com.takechee.qrcodereader.ui.feature.search
 
 import com.takechee.qrcodereader.model.ContentId
 import com.takechee.qrcodereader.ui.NavigateHelper
@@ -10,9 +10,8 @@ import javax.inject.Inject
 // Navigator
 //
 // =============================================================================================
-interface HistoryNavigator : Navigator {
+interface SearchNavigator : Navigator {
     fun navigateToDetail(contentId: ContentId)
-    fun navigateToSearch()
 }
 
 
@@ -21,18 +20,12 @@ interface HistoryNavigator : Navigator {
 // NavigateHelper
 //
 // =============================================================================================
-class HistoryNavigateHelper @Inject constructor(
+class SearchNavigateHelper @Inject constructor(
     navigateHelper: NavigateHelper
-) : HistoryNavigator, NavigateHelper by navigateHelper {
+) : SearchNavigator, NavigateHelper by navigateHelper {
     override fun navigateToDetail(contentId: ContentId) {
         navigateTo {
-            HistoryFragmentDirections.toDetail(contentId)
-        }
-    }
-
-    override fun navigateToSearch() {
-        navigateTo {
-            HistoryFragmentDirections.toSearch()
+            SearchFragmentDirections.toDetail(contentId)
         }
     }
 }

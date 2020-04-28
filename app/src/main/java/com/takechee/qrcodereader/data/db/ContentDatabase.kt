@@ -12,6 +12,7 @@ import javax.inject.Inject
 
 interface ContentDatabase {
     fun getContentsAllFlow(): Flow<List<Content>>
+    suspend fun search(text: String): List<Content>
     suspend fun getContents(filterFavorite: Boolean): List<Content>
     fun getContentsFlow(start: Int, limit: Int): Flow<List<Content>>
     fun getContentFlow(contentId: ContentId): Flow<Content?>
@@ -38,6 +39,12 @@ class ContentRoomDatabase @Inject constructor(
 ) : ContentDatabase {
     override fun getContentsAllFlow(): Flow<List<Content>> {
         return contentDao.getContentsAllFlow().map { it.map(::toContent) }
+    }
+
+    override suspend fun search(text: String): List<Content> {
+        val likeText = "%$text%"
+        val entities = withContext(Dispatchers.IO) { contentDao.search(likeText) }
+        return entities.map(::toContent)
     }
 
     override suspend fun getContents(filterFavorite: Boolean): List<Content> {
