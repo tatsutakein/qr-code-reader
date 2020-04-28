@@ -60,4 +60,8 @@ class HistoryViewModel @Inject constructor(
     override fun onFilterEnableChangeClick() {
         _favoriteFilterEnabled.value = _favoriteFilterEnabled.value?.not() ?: false
     }
+
+    override fun onSearchClick() {
+        navigator.navigateToSearch()
+    }
 }

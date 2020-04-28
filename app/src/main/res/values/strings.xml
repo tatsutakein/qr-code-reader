@@ -26,6 +26,7 @@
     <string name="capture_open_gallery">ギャラリーを開く</string>
     <string name="detail">読み取り詳細</string>
     <string name="search">検索</string>
+    <string name="search_result_does_not_exist">一致する検索結果はありません</string>
     <string name="history">履歴</string>
     <string name="history_empty_message">コンテンツが作成されるとここに表示されます</string>
     <string name="misc">その他</string>

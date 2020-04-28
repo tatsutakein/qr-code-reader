@@ -12,6 +12,18 @@
         <action
             android:id="@+id/to_detail"
             app:destination="@id/navigation_detail" />
+        <action
+            android:id="@+id/to_search"
+            app:destination="@id/navigation_search" />
+    </fragment>
+
+    <fragment
+        android:id="@id/navigation_search"
+        android:name="com.takechee.qrcodereader.ui.feature.search.SearchFragment"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/to_detail"
+            app:destination="@id/navigation_detail" />
     </fragment>
 
     <fragment

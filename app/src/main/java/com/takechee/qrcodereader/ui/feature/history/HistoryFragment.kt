@@ -54,6 +54,14 @@ class HistoryFragment : MainNavigationFragment(R.layout.fragment_history) {
             )
         }
 
+        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menu_item_search -> viewModel.onSearchClick()
+                else -> return@setOnMenuItemClickListener false
+            }
+            true
+        }
+
         val section = HistorySection(viewModel)
         binding.historyListView.apply {
             adapter = GroupAdapter<GroupieViewHolder>().apply { add(section) }
