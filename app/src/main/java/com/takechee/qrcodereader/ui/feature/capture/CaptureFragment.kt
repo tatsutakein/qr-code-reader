@@ -2,7 +2,6 @@ package com.takechee.qrcodereader.ui.feature.capture
 
 import android.Manifest
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.updateLayoutParams
@@ -12,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.FragmentCaptureBinding
-import com.takechee.qrcodereader.result.receiveEvent
+import com.takechee.qrcodereader.corecomponent.result.receiveEvent
 import com.takechee.qrcodereader.ui.MainNavigationFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

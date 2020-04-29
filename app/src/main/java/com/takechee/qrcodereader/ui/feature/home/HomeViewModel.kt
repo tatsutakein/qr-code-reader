@@ -4,10 +4,10 @@ import androidx.lifecycle.*
 import com.takechee.qrcodereader.data.prefs.PreferenceStorage
 import com.takechee.qrcodereader.data.repository.ContentRepository
 import com.takechee.qrcodereader.model.Content
-import com.takechee.qrcodereader.result.Event
-import com.takechee.qrcodereader.result.fireEvent
+import com.takechee.qrcodereader.corecomponent.result.Event
+import com.takechee.qrcodereader.corecomponent.result.fireEvent
+import com.takechee.qrcodereader.corecomponent.ui.common.base.BaseViewModel
 import com.takechee.qrcodereader.ui.Navigator
-import com.takechee.qrcodereader.ui.common.base.BaseViewModel
 import com.takechee.qrcodereader.util.shortcut.ShortcutController
 import javax.inject.Inject
 

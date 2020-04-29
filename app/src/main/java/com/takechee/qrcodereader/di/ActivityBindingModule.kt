@@ -1,5 +1,6 @@
 package com.takechee.qrcodereader.di
 
+import com.takechee.qrcodereader.misc.ui.MiscModule
 import com.takechee.qrcodereader.ui.launcher.LauncherActivity
 import com.takechee.qrcodereader.ui.MainActivity
 import com.takechee.qrcodereader.ui.MainActivityModule
@@ -9,7 +10,6 @@ import com.takechee.qrcodereader.ui.feature.capture.DirectCaptureActivityModule
 import com.takechee.qrcodereader.ui.feature.detail.DetailModule
 import com.takechee.qrcodereader.ui.feature.history.HistoryModule
 import com.takechee.qrcodereader.ui.feature.home.HomeModule
-import com.takechee.qrcodereader.ui.feature.misc.MiscModule
 import com.takechee.qrcodereader.ui.feature.onboading.OnboadingActivity
 import com.takechee.qrcodereader.ui.feature.onboading.OnboadingActivityModule
 import com.takechee.qrcodereader.ui.feature.search.SearchModule

@@ -1,0 +1,11 @@
+<resources>
+
+    <style name="AppTheme" parent="Base.AppTheme">
+        <item name="android:navigationBarColor">@color/transparent</item>
+    </style>
+
+    <style name="AppTheme.OssLicenses" parent="Base.AppTheme.OssLicenses">
+        <item name="android:navigationBarColor">@color/transparent</item>
+    </style>
+
+</resources>

@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">QRコードリーダー</string>
+
+    <string name="about_this_app">このアプリについて</string>
+    <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="licenses_title">オープンソースライセンス</string>
+    <string name="info_title">情報</string>
+    <string name="settings_title">設定</string>
+    <string name="settings_open_camera_when_app_starts">アプリ起動時にカメラを開く</string>
+
+    <string name="version_name">App Version %1$s (%2$s)</string>
+    <string name="build_type">-- %1$s VERSION --</string>
+
+    <string name="start_use">使ってみる</string>
+    <string name="use_case_capture">QRコードの読み取りができます</string>
+    <string name="direction_home">ホームへ</string>
+    <string name="home">ホーム</string>
+    <string name="recent_content">最近のコンテンツ</string>
+    <string name="add_shortcut">ショートカットを追加する</string>
+    <string name="add_shortcut_message">ホーム画面にショートカットを追加すると素早くQRコードを読み取ることができます。</string>
+    <string name="add">追加する</string>
+    <string name="see_more">もっとみる</string>
+    <string name="empty_content">コンテンツはまだありません。</string>
+    <string name="empty_content_message">新しいコンテンツを作成すると、最近のコンテンツがここで確認できるようになります。</string>
+    <string name="capture">キャプチャー</string>
+    <string name="capture_open_gallery">ギャラリーを開く</string>
+    <string name="detail">読み取り詳細</string>
+    <string name="search">検索</string>
+    <string name="search_result_does_not_exist">一致する検索結果はありません</string>
+    <string name="history">履歴</string>
+    <string name="history_empty_message">コンテンツが作成されるとここに表示されます</string>
+    <string name="misc">その他</string>
+    <string name="copy_to_clipboard">クリップボードにコピー</string>
+    <string name="copied">クリップボードにコピーしました</string>
+    <string name="share">シェア</string>
+    <string name="save">保存</string>
+    <string name="delete">削除</string>
+    <string name="complete_delete">削除しました</string>
+    <string name="cancel">キャンセル</string>
+    <string name="get_title_by_url">URLからタイトルを取得</string>
+    <string name="open_intent">オープン</string>
+    <string name="open_camera">カメラを開く</string>
+    <string name="access_url">アクセスする</string>
+    <string name="nickname">ニックネーム</string>
+    <string name="filter_favorite">お気に入りでフィルター</string>
+    <string name="reset_filter">フィルターをリセット</string>
+    <string name="favorite">お気に入り</string>
+    <string name="add_to_favorite">お気に入りに追加</string>
+    <string name="remove_to_favorite">お気に入りを解除</string>
+    <string name="add_nickname">ニックネームを追加</string>
+    <string name="edit_nickname">ニックネームを編集</string>
+    <string name="recently_captured_content">最近読み取ったコンテンツ</string>
+</resources>

@@ -1,7 +1,7 @@
 package com.takechee.qrcodereader.ui.feature.detail
 
 import androidx.lifecycle.LiveData
-import com.takechee.qrcodereader.result.Event
+import com.takechee.qrcodereader.corecomponent.result.Event
 
 interface DetailUserEventListener : DetailViewContentEventListener {
     fun onEditNicknamePositiveClick(nickname: String)

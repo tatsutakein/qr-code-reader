@@ -12,11 +12,10 @@ import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.data.repository.ContentRepository
 import com.takechee.qrcodereader.model.Content
-import com.takechee.qrcodereader.model.ContentNickname
-import com.takechee.qrcodereader.result.Event
-import com.takechee.qrcodereader.result.fireEvent
+import com.takechee.qrcodereader.corecomponent.result.Event
+import com.takechee.qrcodereader.corecomponent.result.fireEvent
+import com.takechee.qrcodereader.corecomponent.ui.common.base.BaseViewModel
 import com.takechee.qrcodereader.ui.Navigator
-import com.takechee.qrcodereader.ui.common.base.BaseViewModel
 import com.takechee.qrcodereader.util.extension.px
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

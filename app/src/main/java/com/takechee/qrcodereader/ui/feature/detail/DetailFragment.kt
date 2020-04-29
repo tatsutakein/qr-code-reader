@@ -7,10 +7,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.SimpleItemAnimator
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.FragmentDetailBinding
-import com.takechee.qrcodereader.result.receiveEvent
+import com.takechee.qrcodereader.corecomponent.result.receiveEvent
 import com.takechee.qrcodereader.ui.MainNavigationFragment
 import com.takechee.qrcodereader.util.extension.simpleItemAnimatorEnabled
 import com.xwray.groupie.GroupAdapter

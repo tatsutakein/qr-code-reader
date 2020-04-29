@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="navigation_home" type="id" />
+    <item name="navigation_capture" type="id" />
+    <item name="navigation_detail" type="id" />
+    <item name="navigation_history" type="id" />
+    <item name="navigation_search" type="id" />
+    <item name="navigation_settings" type="id" />
+    <item name="navigation_misc" type="id" />
+    <item name="navigation_oss_licenses" type="id" />
+</resources>

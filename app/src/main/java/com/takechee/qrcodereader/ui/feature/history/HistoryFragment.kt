@@ -9,17 +9,12 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
-import androidx.navigation.fragment.findNavController
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.FragmentHistoryBinding
-import com.takechee.qrcodereader.result.receiveEvent
 import com.takechee.qrcodereader.ui.MainNavigationFragment
-import com.takechee.qrcodereader.ui.common.base.BaseFragment
 import com.takechee.qrcodereader.util.extension.simpleItemAnimatorEnabled
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import com.xwray.groupie.Item
-import com.xwray.groupie.Section
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import javax.inject.Inject

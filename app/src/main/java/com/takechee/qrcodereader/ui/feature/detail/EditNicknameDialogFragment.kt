@@ -1,13 +1,11 @@
 package com.takechee.qrcodereader.ui.feature.detail
 
 import android.app.Dialog
-import android.content.DialogInterface
 import android.content.DialogInterface.*
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -16,13 +14,11 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.takechee.qrcodereader.R
-import com.takechee.qrcodereader.result.receiveEvent
-import com.takechee.qrcodereader.ui.common.base.BaseDialogFragment
+import com.takechee.qrcodereader.corecomponent.result.receiveEvent
+import com.takechee.qrcodereader.corecomponent.ui.common.base.BaseDialogFragment
 import com.takechee.qrcodereader.util.extension.parentViewModels
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class EditNicknameDialogFragment : BaseDialogFragment() {

@@ -7,16 +7,7 @@
 
     <fragment
         android:id="@id/navigation_misc"
-        android:name="com.takechee.qrcodereader.ui.feature.misc.MiscListFragment"
-        tools:layout="@layout/fragment_misc_list" />
-
-    <activity
-        android:id="@id/navigation_oss_licenses"
-        android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity">
-        <argument
-            android:name="title"
-            android:defaultValue="@string/licenses_title"
-            app:argType="reference" />
-    </activity>
+        android:name="com.takechee.qrcodereader.misc.ui.MiscFragment"
+        tools:layout="@layout/fragment_misc" />
 
 </navigation>

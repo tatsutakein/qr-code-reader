@@ -3,7 +3,7 @@ package com.takechee.qrcodereader.ui.feature.capture
 import android.os.Bundle
 import android.view.View
 import com.takechee.qrcodereader.R
-import com.takechee.qrcodereader.ui.common.base.BaseActivity
+import com.takechee.qrcodereader.corecomponent.ui.common.base.BaseActivity
 import dagger.Module
 
 class DirectCaptureActivity : BaseActivity(R.layout.activity_direct_capture) {

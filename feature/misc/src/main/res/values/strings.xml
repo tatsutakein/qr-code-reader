@@ -1,0 +1,7 @@
+<resources>
+    <string name="about_this_app">このアプリについて</string>
+    <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="licenses_title">オープンソースライセンス</string>
+    <string name="version_name">App Version %1$s (%2$s)</string>
+    <string name="build_type">-- %1$s VERSION --</string>
+</resources>

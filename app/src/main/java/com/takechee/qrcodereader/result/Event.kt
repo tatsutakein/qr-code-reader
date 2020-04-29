@@ -5,6 +5,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import com.takechee.qrcodereader.corecomponent.result.Event
+import com.takechee.qrcodereader.corecomponent.result.EventObserver
 
 open class Event<out T>(private val content: T) {
 

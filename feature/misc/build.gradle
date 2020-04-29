@@ -1,0 +1,78 @@
+import versions.Versions
+import dependencies.Dependencies
+
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs'
+}
+
+android {
+    compileSdkVersion Versions.compileSdkVersion
+    defaultConfig {
+        minSdkVersion Versions.minSdkVersion
+        targetSdkVersion Versions.targetSdkVersion
+        versionCode Versions.versionCode
+        versionName Versions.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        buildConfigField("String", "GIT_COMMIT_HASH", "\"${commitHash}\"")
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation project(':corecomponent')
+
+    implementation Dependencies.Kotlin.stdlib
+    implementation Dependencies.AndroidX.coreKtx
+    implementation Dependencies.AndroidX.appcompat
+    implementation Dependencies.AndroidX.fragment
+    implementation Dependencies.AndroidX.browser
+    implementation Dependencies.AndroidX.material
+
+    kapt Dependencies.AndroidX.Lifecycle.compiler
+    implementation Dependencies.AndroidX.Lifecycle.liveDataKtx
+    implementation Dependencies.AndroidX.Lifecycle.viewModelKtx
+    implementation Dependencies.AndroidX.Lifecycle.savedState
+
+    implementation Dependencies.AndroidX.Licenses.core
+    implementation Dependencies.Play.core
+
+    implementation Dependencies.Dagger.android
+    implementation Dependencies.Dagger.androidSupport
+    kapt Dependencies.Dagger.compiler
+    kapt Dependencies.Dagger.processor
+    compileOnly Dependencies.Dagger.assistedAnnotations
+    kapt Dependencies.Dagger.assistedProcessor
+
+    testImplementation Dependencies.Test.junit4
+    androidTestImplementation Dependencies.AndroidTest.junit
+    androidTestImplementation Dependencies.AndroidTest.espresso
+}
+
+static def getCommitHash() {
+    'git rev-parse --short HEAD'.execute().text.trim()
+}

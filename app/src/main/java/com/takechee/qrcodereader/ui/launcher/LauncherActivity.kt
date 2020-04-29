@@ -5,8 +5,8 @@ import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.takechee.qrcodereader.di.ViewModelKey
-import com.takechee.qrcodereader.result.receiveEvent
-import com.takechee.qrcodereader.ui.common.base.BaseActivity
+import com.takechee.qrcodereader.corecomponent.result.receiveEvent
+import com.takechee.qrcodereader.corecomponent.ui.common.base.BaseActivity
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

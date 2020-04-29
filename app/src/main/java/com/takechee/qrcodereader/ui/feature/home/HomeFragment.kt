@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.FragmentHomeBinding
-import com.takechee.qrcodereader.result.receiveEvent
+import com.takechee.qrcodereader.corecomponent.result.receiveEvent
 import com.takechee.qrcodereader.ui.MainNavigationFragment
 import com.takechee.qrcodereader.util.extension.simpleItemAnimatorEnabled
 import com.takechee.qrcodereader.util.shortcut.ShortcutController

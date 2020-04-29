@@ -2,10 +2,10 @@ package com.takechee.qrcodereader.ui.feature.search
 
 import androidx.core.text.trimmedLength
 import androidx.lifecycle.*
+import com.takechee.qrcodereader.corecomponent.ui.common.base.BaseViewModel
 import com.takechee.qrcodereader.data.repository.ContentRepository
 import com.takechee.qrcodereader.model.Content
 import com.takechee.qrcodereader.ui.Navigator
-import com.takechee.qrcodereader.ui.common.base.BaseViewModel
 import com.takechee.qrcodereader.util.extension.addSources
 import kotlinx.coroutines.launch
 import javax.inject.Inject

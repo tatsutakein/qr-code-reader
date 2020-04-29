@@ -5,15 +5,14 @@ import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.core.view.doOnLayout
 import androidx.core.view.updateLayoutParams
-import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.ActivityOnboadingBinding
 import com.takechee.qrcodereader.di.ViewModelKey
-import com.takechee.qrcodereader.result.receiveEvent
-import com.takechee.qrcodereader.ui.common.base.BaseActivity
+import com.takechee.qrcodereader.corecomponent.result.receiveEvent
+import com.takechee.qrcodereader.corecomponent.ui.common.base.BaseActivity
 import com.takechee.qrcodereader.util.extension.registerOnPageChangeCallback
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder

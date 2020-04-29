@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.takechee.qrcodereader.misc.BuildConfig" />
+
+        <import type="com.takechee.qrcodereader.misc.ui.MiscContent" />
+
+        <variable
+            name="viewModel"
+            type="com.takechee.qrcodereader.misc.ui.MiscViewModel" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        app:paddingLeftSystemWindowInsets="@{true}"
+        app:paddingRightSystemWindowInsets="@{true}">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            style="@style/Widget.QRCodeReader.AppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/Widget.QRCodeReader.Toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:title="@string/misc" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/settings_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingVertical="@dimen/margin_small"
+            android:scrollbarStyle="insideOverlay"
+            android:scrollbars="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/margin_normal"
+                    android:paddingVertical="@dimen/margin_small"
+                    android:text="@string/about_this_app" />
+
+                <TextView
+                    android:id="@+id/privacy_policy"
+                    style="@style/Widget.QRCodeReader.Misc.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewModel.onContentClick(MiscContent.PRIVACY_POLICY)}"
+                    android:text="@string/privacy_policy"
+                    android:textColor="?colorPrimary" />
+
+                <TextView
+                    android:id="@+id/open_source_license"
+                    style="@style/Widget.QRCodeReader.Misc.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewModel.onContentClick(MiscContent.LICENSES)}"
+                    android:text="@string/licenses_title"
+                    android:textColor="?colorPrimary" />
+
+                <TextView
+                    android:id="@+id/version_build_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal|bottom"
+                    android:minHeight="48dp"
+                    app:misc_gitCommitHash="@{BuildConfig.GIT_COMMIT_HASH}"
+                    app:misc_versionName="@{BuildConfig.VERSION_NAME}"
+                    tools:text="App Version 1.0.0 (XXXXXXX)" />
+
+                <TextView
+                    android:id="@+id/build_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_small"
+                    android:visibility="@{BuildConfig.DEBUG}"
+                    app:misc_buildType="@{BuildConfig.BUILD_TYPE}"
+                    tools:text="-- DEBUG VERSION --" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

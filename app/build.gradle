@@ -84,6 +84,8 @@ android {
 }
 
 dependencies {
+    implementation project(':corecomponent')
+    implementation project(':feature:misc')
     implementation project(':model')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Dependencies.Kotlin.stdlib

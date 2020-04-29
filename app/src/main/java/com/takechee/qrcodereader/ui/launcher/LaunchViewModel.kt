@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.viewModelScope
 import com.takechee.qrcodereader.data.prefs.PreferenceStorage
-import com.takechee.qrcodereader.result.Event
-import com.takechee.qrcodereader.result.fireEvent
-import com.takechee.qrcodereader.ui.common.base.BaseViewModel
+import com.takechee.qrcodereader.corecomponent.result.Event
+import com.takechee.qrcodereader.corecomponent.result.fireEvent
+import com.takechee.qrcodereader.corecomponent.ui.common.base.BaseViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

@@ -13,10 +13,10 @@ import androidx.lifecycle.distinctUntilChanged
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.takechee.qrcodereader.R
-import com.takechee.qrcodereader.result.Event
-import com.takechee.qrcodereader.result.fireEvent
-import com.takechee.qrcodereader.result.receiveEvent
-import com.takechee.qrcodereader.ui.common.base.BaseFragment
+import com.takechee.qrcodereader.corecomponent.result.Event
+import com.takechee.qrcodereader.corecomponent.result.fireEvent
+import com.takechee.qrcodereader.corecomponent.result.receiveEvent
+import com.takechee.qrcodereader.corecomponent.ui.common.base.BaseFragment
 import javax.inject.Inject
 
 abstract class MainNavigationFragment : BaseFragment {

@@ -17,7 +17,7 @@ import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.takechee.qrcodereader.R
-import com.takechee.qrcodereader.ui.common.base.BaseActivity
+import com.takechee.qrcodereader.corecomponent.ui.common.base.BaseActivity
 import com.takechee.qrcodereader.util.HeightTopWindowInsetsListener
 import com.takechee.qrcodereader.util.NoopWindowInsetsListener
 import com.takechee.qrcodereader.util.extension.setupWithNavController

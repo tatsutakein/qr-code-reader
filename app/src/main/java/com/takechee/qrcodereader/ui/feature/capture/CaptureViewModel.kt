@@ -8,10 +8,9 @@ import com.google.zxing.ResultPoint
 import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.BarcodeResult
 import com.takechee.qrcodereader.data.repository.ContentRepository
-import com.takechee.qrcodereader.result.Event
-import com.takechee.qrcodereader.result.fireEvent
+import com.takechee.qrcodereader.corecomponent.result.Event
+import com.takechee.qrcodereader.corecomponent.ui.common.base.BaseViewModel
 import com.takechee.qrcodereader.ui.Navigator
-import com.takechee.qrcodereader.ui.common.base.BaseViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

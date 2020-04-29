@@ -7,5 +7,6 @@
     <item name="navigation_search" type="id" />
     <item name="navigation_settings" type="id" />
     <item name="navigation_misc" type="id" />
+    <item name="navigation_misc2" type="id" />
     <item name="navigation_oss_licenses" type="id" />
 </resources>
