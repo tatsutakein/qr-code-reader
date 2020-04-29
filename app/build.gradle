@@ -140,9 +140,9 @@ dependencies {
     implementation Dependencies.lottie
     implementation Dependencies.indicator
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    testImplementation Dependencies.Test.junit4
+    androidTestImplementation Dependencies.AndroidTest.junit
+    androidTestImplementation Dependencies.AndroidTest.espresso
 }
 
 static def getCommitHash() {

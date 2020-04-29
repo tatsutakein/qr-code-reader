@@ -110,6 +110,15 @@ object Dependencies {
         const val androidBackport = "com.jakewharton.threetenabp:threetenabp:1.2.3"
     }
 
+    object Test {
+        const val junit4 = "junit:junit:4.12"
+    }
+
+    object AndroidTest {
+        const val junit = "androidx.test.ext:junit:1.1.1"
+        const val espresso = "androidx.test.espresso:espresso-core:3.2.0"
+    }
+
     const val insetterDbx = "dev.chrisbanes:insetter-dbx:0.2.1"
     const val insetterKtx = "dev.chrisbanes:insetter-ktx:0.2.1"
     const val jsourp = "org.jsoup:jsoup:1.13.1"
