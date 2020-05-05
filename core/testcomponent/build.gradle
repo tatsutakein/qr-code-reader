@@ -1,0 +1,20 @@
+import dependencies.Dependencies
+
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+apply from: rootProject.file('gradle/android.gradle')
+
+dependencies {
+    implementation Dependencies.Kotlin.stdlib
+    implementation Dependencies.Dagger.androidSupport
+
+    api Dependencies.Test.coroutines
+    api Dependencies.Test.archCore
+    api Dependencies.Test.liveDataTestingKtx
+    api Dependencies.Test.junit4
+    api Dependencies.Test.mockk
+}

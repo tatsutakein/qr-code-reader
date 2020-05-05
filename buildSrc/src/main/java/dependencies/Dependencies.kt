@@ -106,12 +106,18 @@ object Dependencies {
     }
 
     object Threeten {
-        const val core = "org.threeten:threetenbp:1.4.2:no-tzdb"
+        const val core = "org.threeten:threetenbp:1.4.4"
+        const val notzdb = "org.threeten:threetenbp:1.4.4:no-tzdb"
         const val androidBackport = "com.jakewharton.threetenabp:threetenabp:1.2.3"
     }
 
     object Test {
         const val junit4 = "junit:junit:4.12"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.5"
+        const val mockk = "io.mockk:mockk:1.9.3"
+        const val kotlinTestAssertions = "io.kotlintest:kotlintest-assertions:3.4.2"
+        const val archCore = "androidx.arch.core:core-testing:2.1.0"
+        const val liveDataTestingKtx = "com.jraska.livedata:testing-ktx:1.1.2"
     }
 
     object AndroidTest {

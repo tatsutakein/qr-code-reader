@@ -10,7 +10,7 @@ dependencies {
     implementation Dependencies.Kotlin.stdlib
 
     // ThreeTenBP for the shared module only. Date and time API for Java.
-    implementation Dependencies.Threeten.core
+    implementation Dependencies.Threeten.notzdb
 }
 
 sourceCompatibility = "8"

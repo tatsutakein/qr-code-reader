@@ -142,7 +142,10 @@ dependencies {
     implementation Dependencies.lottie
     implementation Dependencies.indicator
 
-    testImplementation Dependencies.Test.junit4
+    testImplementation project(':core:testcomponent')
+    testImplementation Dependencies.Test.kotlinTestAssertions
+    testImplementation Dependencies.Threeten.core
+
     androidTestImplementation Dependencies.AndroidTest.junit
     androidTestImplementation Dependencies.AndroidTest.espresso
 }

@@ -26,6 +26,7 @@ class HistoryViewModel @Inject constructor(
     init {
         val contentsLiveData = repository.getContentsAllFlow()
             .asLiveData(viewModelScope.coroutineContext)
+            .distinctUntilChanged()
         val favoriteFilterEnabledLiveData = favoriteFilterEnabled
 
         contents = MediatorLiveData<List<Content>>().apply {
@@ -44,7 +45,7 @@ class HistoryViewModel @Inject constructor(
             ).forEach { source ->
                 addSource(source) { update() }
             }
-        }
+        }.distinctUntilChanged()
     }
 
 
