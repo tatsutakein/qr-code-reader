@@ -1,4 +1,4 @@
-package com.takechee.qrcodereader.data.prefs
+package com.takechee.qrcodereader.corecomponent.data.prefs
 
 import kotlinx.coroutines.flow.Flow
 
@@ -7,7 +7,9 @@ import kotlinx.coroutines.flow.Flow
  */
 interface PreferenceStorage {
     val shortcutGuideVisibleFlow: Flow<Boolean>
+    val useBrowserAppFlow: Flow<Boolean>
 
     var onboardingCompleted: Boolean
     var shortcutGuideVisible: Boolean
+    var useBrowserApp: Boolean
 }

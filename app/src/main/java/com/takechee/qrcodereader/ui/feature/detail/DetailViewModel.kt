@@ -10,6 +10,7 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.takechee.qrcodereader.R
+import com.takechee.qrcodereader.corecomponent.data.prefs.PreferenceStorage
 import com.takechee.qrcodereader.data.repository.ContentRepository
 import com.takechee.qrcodereader.model.Content
 import com.takechee.qrcodereader.corecomponent.result.Event
@@ -29,6 +30,7 @@ class DetailViewModel @Inject constructor(
     private val clipboardManager: ClipboardManager,
     @DetailFragmentScoped private val args: DetailArgs,
     @DetailFragmentScoped private val encoder: BarcodeEncoder,
+    private val prefs: PreferenceStorage,
     private val repository: ContentRepository,
     private val navigator: DetailNavigator
 ) : BaseViewModel(), DetailUserEventListener, Navigator by navigator {
@@ -110,8 +112,17 @@ class DetailViewModel @Inject constructor(
     }
 
     override fun onOpenUrlActionClick() {
-        val contentText = content.value?.text ?: return
-        fireEvent { DetailEvent.OpenUrl(contentText.toUri()) }
+        withContent { content ->
+            fireEvent {
+                if (prefs.useBrowserApp) {
+                    val viewIntent = Intent(Intent.ACTION_VIEW, content.text.toUri())
+                    val chooserIntent = Intent.createChooser(viewIntent, null)
+                    DetailEvent.OpenUrl.BrowserApp(chooserIntent)
+                } else {
+                    DetailEvent.OpenUrl.CustomTabs(content.text.toUri())
+                }
+            }
+        }
     }
 
     override fun onCopyToClipBoardActionClick() {

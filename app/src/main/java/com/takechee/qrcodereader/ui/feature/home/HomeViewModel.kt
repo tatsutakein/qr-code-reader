@@ -1,7 +1,7 @@
 package com.takechee.qrcodereader.ui.feature.home
 
 import androidx.lifecycle.*
-import com.takechee.qrcodereader.data.prefs.PreferenceStorage
+import com.takechee.qrcodereader.corecomponent.data.prefs.PreferenceStorage
 import com.takechee.qrcodereader.data.repository.ContentRepository
 import com.takechee.qrcodereader.model.Content
 import com.takechee.qrcodereader.corecomponent.result.Event

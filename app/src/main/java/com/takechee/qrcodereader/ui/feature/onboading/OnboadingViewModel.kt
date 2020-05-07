@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.distinctUntilChanged
-import com.takechee.qrcodereader.data.prefs.PreferenceStorage
+import com.takechee.qrcodereader.corecomponent.data.prefs.PreferenceStorage
 import com.takechee.qrcodereader.corecomponent.result.Event
 import com.takechee.qrcodereader.corecomponent.result.fireEvent
 import com.takechee.qrcodereader.corecomponent.ui.common.base.BaseViewModel

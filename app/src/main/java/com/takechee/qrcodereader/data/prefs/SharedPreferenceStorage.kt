@@ -2,6 +2,7 @@ package com.takechee.qrcodereader.data.prefs
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.takechee.qrcodereader.corecomponent.data.prefs.PreferenceStorage
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
@@ -34,14 +35,24 @@ class SharedPreferenceStorage @Inject constructor(context: Context) : Preference
         }
     }
 
+    private val useBrowserAppChannel: ConflatedBroadcastChannel<Boolean> by lazy {
+        ConflatedBroadcastChannel<Boolean>().also { channel ->
+            channel.offer(useBrowserApp)
+        }
+    }
+
     override val shortcutGuideVisibleFlow: Flow<Boolean>
         get() = shortcutGuideVisibleChannel.asFlow()
+
+    override val useBrowserAppFlow: Flow<Boolean>
+        get() = useBrowserAppChannel.asFlow()
 
     private val changeListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
         when (Preference.of(key)) {
             Preference.SHORTCUT_GUIDE_VISIBLE -> shortcutGuideVisibleChannel.offer(
                 shortcutGuideVisible
             )
+            Preference.USE_BROWSER_APP -> useBrowserAppChannel.offer(useBrowserApp)
             else -> {
             }
         }
@@ -59,6 +70,12 @@ class SharedPreferenceStorage @Inject constructor(context: Context) : Preference
         true
     )
 
+    override var useBrowserApp by booleanPreference(
+        prefs,
+        Preference.USE_BROWSER_APP,
+        false
+    )
+
     companion object {
         const val PREFS_NAME = "qrcodereader"
     }
@@ -70,7 +87,8 @@ class SharedPreferenceStorage @Inject constructor(context: Context) : Preference
 
 private enum class Preference {
     ONBOADING_V1,
-    SHORTCUT_GUIDE_VISIBLE;
+    SHORTCUT_GUIDE_VISIBLE,
+    USE_BROWSER_APP;
 
     val prefName: String = "pref_${name.toLowerCase(Locale.JAPAN)}"
 

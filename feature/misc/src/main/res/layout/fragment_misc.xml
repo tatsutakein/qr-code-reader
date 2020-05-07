@@ -58,6 +58,31 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/margin_normal"
                     android:paddingVertical="@dimen/margin_small"
+                    android:text="@string/settings" />
+
+                <Switch
+                    android:id="@+id/settings_enable_notifications"
+                    style="@style/Widget.QRCodeReader.Settings.Switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.uiModel.useBrowserApp}"
+                    android:onCheckedChanged="@{(v, checked) -> viewModel.toggleUseBrowserApp(checked)}"
+                    android:text="@string/use_browser_app"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settings_time_zone" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="@dimen/margin_normal"
+                    android:background="?dividerHorizontal" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/margin_normal"
+                    android:paddingVertical="@dimen/margin_small"
                     android:text="@string/about_this_app" />
 
                 <TextView
@@ -65,7 +90,7 @@
                     style="@style/Widget.QRCodeReader.Misc.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="@{() -> viewModel.onContentClick(MiscContent.PRIVACY_POLICY)}"
+                    android:onClick="@{() -> viewModel.onContentClicked(MiscContent.PRIVACY_POLICY)}"
                     android:text="@string/privacy_policy"
                     android:textColor="?colorPrimary" />
 
@@ -74,7 +99,7 @@
                     style="@style/Widget.QRCodeReader.Misc.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="@{() -> viewModel.onContentClick(MiscContent.LICENSES)}"
+                    android:onClick="@{() -> viewModel.onContentClicked(MiscContent.LICENSES)}"
                     android:text="@string/licenses_title"
                     android:textColor="?colorPrimary" />
 

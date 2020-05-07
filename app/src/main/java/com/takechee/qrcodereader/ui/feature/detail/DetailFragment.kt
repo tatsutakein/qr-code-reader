@@ -48,7 +48,11 @@ class DetailFragment : MainNavigationFragment(R.layout.fragment_detail) {
         viewModel.event.receiveEvent(viewLifecycleOwner) { event ->
             when (event) {
                 is DetailEvent.OpenIntent -> event.action(this)
-                is DetailEvent.OpenUrl -> event.action(requireContext(), customTabsIntent)
+                is DetailEvent.OpenUrl.CustomTabs -> event.action(
+                    requireContext(),
+                    customTabsIntent
+                )
+                is DetailEvent.OpenUrl.BrowserApp -> event.action(this)
                 is DetailEvent.ShowEditNicknameDialog -> event.action(this)
             }
         }
@@ -81,9 +85,9 @@ class DetailFragment : MainNavigationFragment(R.layout.fragment_detail) {
         binding.toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_item_delete -> viewModel.onDeleteClick()
-                else -> false
+                else -> return@setOnMenuItemClickListener false
             }
-            true
+            return@setOnMenuItemClickListener true
         }
     }
 }

@@ -10,7 +10,7 @@ import com.takechee.qrcodereader.MainApp
 import com.takechee.qrcodereader.data.db.AppDatabase
 import com.takechee.qrcodereader.data.db.ContentDatabase
 import com.takechee.qrcodereader.data.db.ContentRoomDatabase
-import com.takechee.qrcodereader.data.prefs.PreferenceStorage
+import com.takechee.qrcodereader.corecomponent.data.prefs.PreferenceStorage
 import com.takechee.qrcodereader.data.prefs.SharedPreferenceStorage
 import com.takechee.qrcodereader.data.repository.ContentDataRepository
 import com.takechee.qrcodereader.data.repository.ContentRepository
