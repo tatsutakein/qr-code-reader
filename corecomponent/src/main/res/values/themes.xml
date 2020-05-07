@@ -36,10 +36,6 @@
 
     <style name="AppTheme" parent="Base.AppTheme" />
 
-    <style name="AppTheme.Launcher">
-        <item name="android:windowBackground">@drawable/launcher_window</item>
-    </style>
-
     <style name="Base.AppTheme.OssLicenses" parent="Theme.MaterialComponents.DayNight">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/color_primary</item>
