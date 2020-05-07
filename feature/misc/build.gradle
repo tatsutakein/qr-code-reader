@@ -44,7 +44,7 @@ android {
 }
 
 dependencies {
-    implementation project(':corecomponent')
+    implementation project(':core:corecomponent')
 
     implementation Dependencies.Kotlin.stdlib
     implementation Dependencies.AndroidX.coreKtx
