@@ -95,7 +95,6 @@ object Dependencies {
     object Groupie {
         private const val version = "2.8.0"
         const val core = "com.xwray:groupie:$version"
-        const val dataBinding = "com.xwray:groupie-databinding:$version"
         const val viewBinding = "com.xwray:groupie-viewbinding:$version"
     }
 

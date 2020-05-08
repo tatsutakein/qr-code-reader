@@ -1,12 +1,13 @@
 package com.takechee.qrcodereader.ui.feature.search
 
+import android.view.View
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.ItemSearchBinding
 import com.takechee.qrcodereader.model.Content
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import com.xwray.groupie.Section
-import com.xwray.groupie.databinding.BindableItem
+import com.xwray.groupie.viewbinding.BindableItem
 
 class SearchSection(private val eventListener: SearchEventListener) : Section() {
     fun update(state: SearchState) {
@@ -56,9 +57,8 @@ data class SearchItem(
     val content: Content,
     private val eventListener: SearchEventListener
 ) : BindableItem<ItemSearchBinding>(content.id) {
-
     override fun getLayout(): Int = R.layout.item_search
-
+    override fun initializeViewBinding(view: View) = ItemSearchBinding.bind(view)
     override fun bind(viewBinding: ItemSearchBinding, position: Int) {
         viewBinding.content = content
         viewBinding.eventListener = eventListener

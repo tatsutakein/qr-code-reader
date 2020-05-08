@@ -1,12 +1,13 @@
 package com.takechee.qrcodereader.ui.feature.history
 
+import android.view.View
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.ItemHistoryBinding
 import com.takechee.qrcodereader.model.Content
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import com.xwray.groupie.Section
-import com.xwray.groupie.databinding.BindableItem
+import com.xwray.groupie.viewbinding.BindableItem
 
 class HistorySection(private val eventListener: HistoryEventListener) : Section() {
     fun update(contents: List<Content>) {
@@ -46,9 +47,8 @@ data class HistoryItem(
     val content: Content,
     private val eventListener: HistoryEventListener
 ) : BindableItem<ItemHistoryBinding>(content.id) {
-
     override fun getLayout(): Int = R.layout.item_history
-
+    override fun initializeViewBinding(view: View) = ItemHistoryBinding.bind(view)
     override fun bind(viewBinding: ItemHistoryBinding, position: Int) {
         viewBinding.content = content
         viewBinding.eventListener = eventListener

@@ -129,7 +129,7 @@ dependencies {
     implementation Dependencies.ZXing.embedded
 
     implementation Dependencies.Groupie.core
-    implementation Dependencies.Groupie.dataBinding
+    implementation Dependencies.Groupie.viewBinding
 
     implementation Dependencies.Permission.dispatcher
     kapt Dependencies.Permission.processor
