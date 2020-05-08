@@ -9,6 +9,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        staging {
+            initWith(debug)
+        }
         release {
             minifyEnabled false
             consumerProguardFiles 'proguard-rules.pro'
