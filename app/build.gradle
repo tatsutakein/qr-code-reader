@@ -143,7 +143,7 @@ dependencies {
     implementation Dependencies.indicator
 
     testImplementation project(':core:testcomponent')
-    testImplementation Dependencies.Test.kotlinTestAssertions
+    testImplementation Dependencies.Test.kotlinTestAssertionsJvm
     testImplementation Dependencies.Threeten.core
 
     androidTestImplementation Dependencies.AndroidTest.junit

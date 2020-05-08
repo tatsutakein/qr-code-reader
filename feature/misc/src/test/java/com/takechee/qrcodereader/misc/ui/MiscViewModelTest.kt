@@ -5,7 +5,7 @@ import com.jraska.livedata.test
 import com.takechee.qrcodereader.corecomponent.data.prefs.PreferenceStorage
 import com.takechee.qrcodereader.widget.component.MockkRule
 import com.takechee.qrcodereader.widget.component.ViewModelTestRule
-import io.kotlintest.shouldBe
+import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.flow.flowOf

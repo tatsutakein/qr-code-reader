@@ -41,7 +41,7 @@ dependencies {
     kapt Dependencies.Dagger.assistedProcessor
 
     testImplementation project(':core:testcomponent')
-    testImplementation Dependencies.Test.kotlinTestAssertions
+    testImplementation Dependencies.Test.kotlinTestAssertionsJvm
 
     androidTestImplementation Dependencies.AndroidTest.junit
     androidTestImplementation Dependencies.AndroidTest.espresso

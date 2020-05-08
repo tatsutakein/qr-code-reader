@@ -9,7 +9,7 @@ import com.takechee.qrcodereader.util.createDummyContent
 import com.takechee.qrcodereader.util.createDummyContents
 import com.takechee.qrcodereader.widget.component.MockkRule
 import com.takechee.qrcodereader.widget.component.ViewModelTestRule
-import io.kotlintest.shouldBe
+import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.flow.flowOf
