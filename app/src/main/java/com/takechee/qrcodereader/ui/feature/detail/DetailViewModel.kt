@@ -105,6 +105,7 @@ class DetailViewModel @Inject constructor(
         withContent { content ->
             fireEvent {
                 val viewIntent = Intent(Intent.ACTION_VIEW, content.text.toUri())
+                viewIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 val chooserIntent = Intent.createChooser(viewIntent, null)
                 DetailEvent.OpenIntent(chooserIntent)
             }
