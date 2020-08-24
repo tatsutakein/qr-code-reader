@@ -9,6 +9,8 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 apply plugin: 'com.google.firebase.crashlytics'
 
+apply from: rootProject.file('gradle/signing.gradle')
+
 android {
     compileSdkVersion Versions.compileSdkVersion
     defaultConfig {
@@ -27,9 +29,9 @@ android {
 
         buildConfigField("String", "GIT_COMMIT_HASH", "\"${commitHash}\"")
     }
-
     buildTypes {
         debug {
+            signingConfig = signingConfigs.getByName("debug")
             debuggable true
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
@@ -42,6 +44,9 @@ android {
             manifestPlaceholders = [crashlyticsEnabled: true]
         }
         release {
+            if (project.hasProperty('signingStoreFile')) {
+                signingConfig = signingConfigs.getByName("release")
+            }
             minifyEnabled false
             manifestPlaceholders = [crashlyticsEnabled: true]
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
