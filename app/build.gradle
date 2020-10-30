@@ -120,6 +120,7 @@ dependencies {
     implementation Dependencies.AndroidX.Licenses.core
     implementation Dependencies.Play.core
 
+    implementation platform(Dependencies.Firebase.bom)
     implementation Dependencies.Firebase.analytics
     implementation Dependencies.Firebase.crashlytics
 
