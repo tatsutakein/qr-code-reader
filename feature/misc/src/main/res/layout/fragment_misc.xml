@@ -5,9 +5,11 @@
 
     <data>
 
-        <import type="com.takechee.qrcodereader.misc.BuildConfig" />
-
         <import type="com.takechee.qrcodereader.misc.ui.MiscContent" />
+
+        <variable
+            name="envVar"
+            type="com.takechee.qrcodereader.corecomponent.EnvVar" />
 
         <variable
             name="viewModel"
@@ -106,8 +108,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal|bottom"
                     android:minHeight="48dp"
-                    app:misc_gitCommitHash="@{BuildConfig.GIT_COMMIT_HASH}"
-                    app:misc_versionName="@{BuildConfig.VERSION_NAME}"
+                    app:misc_gitCommitHash="@{envVar.GIT_COMMIT_HASH}"
+                    app:misc_versionName="@{envVar.VERSION_NAME}"
                     tools:text="App Version 1.0.0 (XXXXXXX)" />
 
                 <TextView
@@ -116,8 +118,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="@dimen/margin_small"
-                    android:visibility="@{BuildConfig.DEBUG}"
-                    app:misc_buildType="@{BuildConfig.BUILD_TYPE}"
+                    android:visibility="@{envVar.DEBUG}"
+                    app:misc_buildType="@{envVar.BUILD_TYPE}"
                     tools:text="-- DEBUG VERSION --" />
 
             </LinearLayout>

@@ -5,13 +5,12 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
-    id 'androidx.navigation.safeargs'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 apply from: rootProject.file('gradle/android.gradle')
 
 android {
-    defaultConfig.buildConfigField("String", "GIT_COMMIT_HASH", "\"${commitHash}\"")
     dataBinding.enabled = true
 }
 
@@ -45,8 +44,4 @@ dependencies {
 
     androidTestImplementation Dependencies.AndroidTest.junit
     androidTestImplementation Dependencies.AndroidTest.espresso
-}
-
-static def getCommitHash() {
-    'git rev-parse --short HEAD'.execute().text.trim()
 }

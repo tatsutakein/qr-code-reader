@@ -6,7 +6,9 @@ import android.content.pm.ShortcutManager
 import androidx.core.content.getSystemService
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.takechee.qrcodereader.BuildConfig
 import com.takechee.qrcodereader.MainApp
+import com.takechee.qrcodereader.corecomponent.EnvVar
 import com.takechee.qrcodereader.data.db.AppDatabase
 import com.takechee.qrcodereader.data.db.ContentDatabase
 import com.takechee.qrcodereader.data.db.ContentRoomDatabase
@@ -54,6 +56,17 @@ class AppModule {
     @Provides
     fun providePreferenceStorage(context: Context): PreferenceStorage {
         return SharedPreferenceStorage(context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideEnvVar(): EnvVar = object : EnvVar {
+        override val DEBUG: Boolean = BuildConfig.DEBUG
+        override val APPLICATION_ID: String = BuildConfig.APPLICATION_ID
+        override val BUILD_TYPE: String = BuildConfig.BUILD_TYPE
+        override val VERSION_CODE: Int = BuildConfig.VERSION_CODE
+        override val VERSION_NAME: String = BuildConfig.VERSION_NAME
+        override val GIT_COMMIT_HASH: String = BuildConfig.GIT_COMMIT_HASH
     }
 
     @Provides
