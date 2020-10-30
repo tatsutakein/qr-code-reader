@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel>
-      <module name="qr-code-reader.app" target="1.8" />
-      <module name="qr-code-reader.buildSrc" target="1.8" />
-      <module name="qr-code-reader.core.corecomponent" target="1.8" />
-      <module name="qr-code-reader.core.testcomponent" target="1.8" />
+    <bytecodeTargetLevel target="1.8">
       <module name="qr-code-reader.corecomponent" target="1.8" />
-      <module name="qr-code-reader.feature.misc" target="1.8" />
       <module name="qr-code-reader.misc" target="1.8" />
-      <module name="qr-code-reader.model" target="1.8" />
       <module name="qr-code-reader.testcomponent" target="1.8" />
     </bytecodeTargetLevel>
   </component>
