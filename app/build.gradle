@@ -96,6 +96,7 @@ dependencies {
 
     implementation Dependencies.Kotlin.stdlib
     implementation Dependencies.Kotlin.Coroutines.core
+    implementation Dependencies.Kotlin.Coroutines.android
 
     implementation Dependencies.AndroidX.coreKtx
     implementation Dependencies.AndroidX.appcompat
