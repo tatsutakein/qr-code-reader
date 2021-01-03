@@ -11,14 +11,17 @@ import com.google.zxing.WriterException
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.corecomponent.data.prefs.PreferenceStorage
-import com.takechee.qrcodereader.data.repository.ContentRepository
-import com.takechee.qrcodereader.model.Content
 import com.takechee.qrcodereader.corecomponent.result.Event
 import com.takechee.qrcodereader.corecomponent.result.fireEvent
 import com.takechee.qrcodereader.corecomponent.ui.common.base.BaseViewModel
+import com.takechee.qrcodereader.data.repository.ContentRepository
+import com.takechee.qrcodereader.model.Content
+import com.takechee.qrcodereader.model.ContentNickname
 import com.takechee.qrcodereader.ui.Navigator
 import com.takechee.qrcodereader.util.extension.px
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
@@ -28,8 +31,8 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     private val context: Context,
     private val clipboardManager: ClipboardManager,
-    @DetailFragmentScoped private val args: DetailArgs,
-    @DetailFragmentScoped private val encoder: BarcodeEncoder,
+    private val args: DetailArgs,
+    private val encoder: BarcodeEncoder,
     private val prefs: PreferenceStorage,
     private val repository: ContentRepository,
     private val navigator: DetailNavigator
@@ -39,8 +42,8 @@ class DetailViewModel @Inject constructor(
         private const val QR_IMAGE_SIZE = 200
     }
 
-    private val content: LiveData<Content?> =
-        repository.getContentFlow(args.contentId).asLiveData(viewModelScope.coroutineContext)
+    private val contentFlow = repository.getContentFlow(args.contentId)
+    private val content = contentFlow.asLiveData(viewModelScope.coroutineContext)
 
     val uiModel: LiveData<DetailUiModel>
 
@@ -64,19 +67,31 @@ class DetailViewModel @Inject constructor(
     //
     // =============================================================================================
     init {
+        if (prefs.autoLoadNickname) viewModelScope.launch {
+            contentFlow.collect { content ->
+                if (content == null) return@collect
+                if (content.nickname.isNotEmpty) return@collect
+                val docTitle = getDocTitle(content.text) ?: return@collect
+                repository.updateContent(
+                    contentId = args.contentId,
+                    nickname = docTitle
+                )
+            }
+        }
+
         uiModel = MediatorLiveData<DetailUiModel>().apply {
             value = DetailUiModel.EMPTY
-            fun updateValue() {
+            val valueUpdaterObserver = Observer<Any> {
                 value = DetailUiModel(
-                    qrImage.value,
-                    content.value ?: Content.EMPTY
+                    qrImage = qrImage.value,
+                    content = content.value ?: Content.EMPTY
                 )
             }
             listOf(
                 qrImage.distinctUntilChanged(),
                 content.distinctUntilChanged()
             ).forEach { source ->
-                addSource(source) { updateValue() }
+                addSource(source, valueUpdaterObserver)
             }
         }.distinctUntilChanged()
     }
@@ -162,15 +177,9 @@ class DetailViewModel @Inject constructor(
     override fun onGetTitleByUrlClick(): LiveData<Event<String>> {
         return liveData(viewModelScope.coroutineContext) {
             val contentText = content.value?.text ?: return@liveData
-            if (!Patterns.WEB_URL.matcher(contentText).matches()) return@liveData
-            val doc = withContext(Dispatchers.IO) {
-                try {
-                    Jsoup.connect(contentText).get()
-                } catch (e: IOException) {
-                    return@withContext null
-                }
-            } ?: return@liveData
-            emit(Event<String>(doc.title()))
+            getDocTitle(contentText = contentText)?.let { docTitle ->
+                emit(Event(docTitle))
+            }
         }
     }
 
@@ -195,6 +204,19 @@ class DetailViewModel @Inject constructor(
     // Utility
     //
     // =============================================================================================
+    private suspend fun getDocTitle(contentText: String): String? {
+        if (!Patterns.WEB_URL.matcher(contentText).matches()) return null
+
+        @Suppress("BlockingMethodInNonBlockingContext")
+        return withContext(Dispatchers.IO) {
+            try {
+                Jsoup.connect(contentText).get()?.title()
+            } catch (e: IOException) {
+                return@withContext null
+            }
+        }
+    }
+
     private fun fireEvent(provider: () -> DetailEvent) {
         _event.fireEvent(provider)
     }

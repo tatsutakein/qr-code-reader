@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.takechee.qrcodereader.ui.feature.detail
 
 import androidx.lifecycle.ViewModel
@@ -10,7 +12,6 @@ import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 
 @Module
-@Suppress("UNUSED")
 abstract class DetailFragmentModule {
 
     @ContributesAndroidInjector
@@ -24,17 +25,14 @@ abstract class DetailFragmentModule {
     @ViewModelKey(DetailViewModel::class)
     abstract fun bindDetailViewModel(viewModel: DetailViewModel): ViewModel
 
-    @Module
     companion object {
         @DetailFragmentScoped
-        @JvmStatic
         @Provides
         fun provideDetailFragmentArguments(fragment: DetailFragment): DetailArgs {
             return DetailArgs.of(fragment.args)
         }
 
         @DetailFragmentScoped
-        @JvmStatic
         @Provides
         fun provideBarcodeEncoder(): BarcodeEncoder = BarcodeEncoder()
     }

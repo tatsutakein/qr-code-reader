@@ -41,11 +41,20 @@ class SharedPreferenceStorage @Inject constructor(context: Context) : Preference
         }
     }
 
+    private val autoLoadNicknameChannel: ConflatedBroadcastChannel<Boolean> by lazy {
+        ConflatedBroadcastChannel<Boolean>().also { channel ->
+            channel.offer(useBrowserApp)
+        }
+    }
+
     override val shortcutGuideVisibleFlow: Flow<Boolean>
         get() = shortcutGuideVisibleChannel.asFlow()
 
     override val useBrowserAppFlow: Flow<Boolean>
         get() = useBrowserAppChannel.asFlow()
+
+    override val autoLoadNicknameFlow: Flow<Boolean>
+        get() = autoLoadNicknameChannel.asFlow()
 
     private val changeListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
         when (Preference.of(key)) {
@@ -53,6 +62,7 @@ class SharedPreferenceStorage @Inject constructor(context: Context) : Preference
                 shortcutGuideVisible
             )
             Preference.USE_BROWSER_APP -> useBrowserAppChannel.offer(useBrowserApp)
+            Preference.AUTO_LOAD_NICKNAME -> autoLoadNicknameChannel.offer(autoLoadNickname)
             else -> {
             }
         }
@@ -76,6 +86,12 @@ class SharedPreferenceStorage @Inject constructor(context: Context) : Preference
         false
     )
 
+    override var autoLoadNickname by booleanPreference(
+        prefs,
+        Preference.AUTO_LOAD_NICKNAME,
+        false
+    )
+
     companion object {
         const val PREFS_NAME = "qrcodereader"
     }
@@ -88,7 +104,8 @@ class SharedPreferenceStorage @Inject constructor(context: Context) : Preference
 private enum class Preference {
     ONBOADING_V1,
     SHORTCUT_GUIDE_VISIBLE,
-    USE_BROWSER_APP;
+    USE_BROWSER_APP,
+    AUTO_LOAD_NICKNAME;
 
     val prefName: String = "pref_${name.toLowerCase(Locale.JAPAN)}"
 

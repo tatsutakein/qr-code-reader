@@ -51,7 +51,7 @@ class CaptureFragment : MainNavigationFragment(R.layout.fragment_capture) {
 
         hasPermission = PermissionUtils.hasSelfPermissions(
             requireActivity(),
-            "android.permission.CAMERA"
+            Manifest.permission.CAMERA
         )
         showCameraWithPermissionCheck()
 
@@ -96,7 +96,7 @@ class CaptureFragment : MainNavigationFragment(R.layout.fragment_capture) {
     @NeedsPermission(Manifest.permission.CAMERA)
     fun showCamera() {
         hasPermission = true
-        barcodeView?.decodeContinuous(viewModel)
+        barcodeView?.decodeSingle(viewModel)
     }
 
     @OnShowRationale(Manifest.permission.CAMERA)

@@ -31,17 +31,23 @@ class MiscViewModel @Inject constructor(
     // =============================================================================================
     init {
         val useBrowserApp = prefs.useBrowserAppFlow.asLiveData(viewModelScope.coroutineContext)
+        val autoLoadNickname = prefs.autoLoadNicknameFlow.asLiveData(viewModelScope.coroutineContext)
 
         uiModel = MediatorLiveData<MiscUiModel>().apply {
             value = MiscUiModel.EMPTY
-            fun update() {
+            val valueUpdaterObserver = Observer<Any> {
                 val useBrowserAppValue = useBrowserApp.value ?: false
+                val autoLoadNicknameValue = autoLoadNickname.value ?: false
                 value = MiscUiModel(
-                    useBrowserApp = useBrowserAppValue
+                    useBrowserApp = useBrowserAppValue,
+                    autoLoadNickname = autoLoadNicknameValue,
                 )
             }
-            listOf(useBrowserApp).forEach { source ->
-                addSource(source) { update() }
+            listOf(
+                useBrowserApp,
+                autoLoadNickname,
+            ).forEach { source ->
+                addSource(source, valueUpdaterObserver)
             }
         }.distinctUntilChanged()
     }
@@ -55,6 +61,12 @@ class MiscViewModel @Inject constructor(
     override fun toggleUseBrowserApp(checked: Boolean) {
         viewModelScope.launch {
             prefs.useBrowserApp = checked
+        }
+    }
+
+    override fun toggleAutoLoadNickname(checked: Boolean) {
+        viewModelScope.launch {
+            prefs.autoLoadNickname = checked
         }
     }
 

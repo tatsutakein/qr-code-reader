@@ -21,10 +21,6 @@ class CaptureViewModel @Inject constructor(
     private val repository: ContentRepository
 ) : BaseViewModel(), BarcodeCallback, Navigator by navigator {
 
-    companion object {
-        private const val DELAY_MS: Long = 500
-    }
-
     private val _event = MutableLiveData<Event<CaptureEvent>>()
     val event: LiveData<Event<CaptureEvent>>
         get() = _event.distinctUntilChanged()
@@ -45,7 +41,6 @@ class CaptureViewModel @Inject constructor(
             repository.upsertCaptureText(resultText) { contentId ->
                 navigator.navigateToDetail(contentId)
             }
-            delay(DELAY_MS)
         }
     }
 

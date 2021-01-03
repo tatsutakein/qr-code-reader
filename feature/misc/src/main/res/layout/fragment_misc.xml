@@ -62,7 +62,7 @@
                     android:paddingVertical="@dimen/margin_small"
                     android:text="@string/settings" />
 
-                <Switch
+                <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/settings_enable_notifications"
                     style="@style/Widget.QRCodeReader.Settings.Switch"
                     android:layout_width="match_parent"
@@ -70,6 +70,16 @@
                     android:checked="@{viewModel.uiModel.useBrowserApp}"
                     android:onCheckedChanged="@{(v, checked) -> viewModel.toggleUseBrowserApp(checked)}"
                     android:text="@string/use_browser_app" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/settingsEnableAutoLoadNickname"
+                    style="@style/Widget.QRCodeReader.Settings.Switch"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.uiModel.autoLoadNickname}"
+                    android:onCheckedChanged="@{(v, checked) -> viewModel.toggleAutoLoadNickname(checked)}"
+                    android:text="@string/auto_load_nickname" />
 
                 <View
                     android:layout_width="match_parent"

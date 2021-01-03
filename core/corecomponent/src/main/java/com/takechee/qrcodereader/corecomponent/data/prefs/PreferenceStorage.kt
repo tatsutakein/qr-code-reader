@@ -8,8 +8,10 @@ import kotlinx.coroutines.flow.Flow
 interface PreferenceStorage {
     val shortcutGuideVisibleFlow: Flow<Boolean>
     val useBrowserAppFlow: Flow<Boolean>
+    val autoLoadNicknameFlow: Flow<Boolean>
 
     var onboardingCompleted: Boolean
     var shortcutGuideVisible: Boolean
     var useBrowserApp: Boolean
+    var autoLoadNickname: Boolean
 }
