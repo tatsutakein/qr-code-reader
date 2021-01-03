@@ -75,7 +75,6 @@
                     android:id="@+id/settingsEnableAutoLoadNickname"
                     style="@style/Widget.QRCodeReader.Settings.Switch"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/margin_normal"
                     android:layout_height="wrap_content"
                     android:checked="@{viewModel.uiModel.autoLoadNickname}"
                     android:onCheckedChanged="@{(v, checked) -> viewModel.toggleAutoLoadNickname(checked)}"
