@@ -5,5 +5,6 @@ import com.takechee.qrcodereader.misc.R
 
 enum class MiscContent(@StringRes val title: Int) {
     PRIVACY_POLICY(R.string.privacy_policy),
-    LICENSES(R.string.licenses_title)
+    OPEN_STORE(R.string.open_store),
+    LICENSES(R.string.licenses_title),
 }

@@ -41,6 +41,11 @@ class MiscFragment : BaseFragment(R.layout.fragment_misc) {
         viewModel.event.receiveEvent(viewLifecycleOwner) { event ->
             when (event) {
                 is MiscEvent.OpenUrl -> event.action(requireContext(), customTabsIntent)
+                is MiscEvent.OpenStore -> {
+                    if (event.intent.resolveActivity(requireContext().packageManager) != null) {
+                        startActivity(event.intent)
+                    }
+                }
                 is MiscEvent.OpenLicenses -> event.action(fragment = this)
             }
         }

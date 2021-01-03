@@ -16,6 +16,8 @@ sealed class MiscEvent {
         }
     }
 
+    data class OpenStore(val intent: Intent): MiscEvent()
+
     class OpenLicenses(private val context: Context) : MiscEvent() {
         fun action(fragment: Fragment) {
             // setting title

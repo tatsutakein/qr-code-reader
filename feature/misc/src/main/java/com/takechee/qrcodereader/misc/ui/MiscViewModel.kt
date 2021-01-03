@@ -1,8 +1,10 @@
 package com.takechee.qrcodereader.misc.ui
 
 import android.content.Context
+import android.content.Intent
 import androidx.core.net.toUri
 import androidx.lifecycle.*
+import com.takechee.qrcodereader.corecomponent.EnvVar
 import com.takechee.qrcodereader.corecomponent.data.prefs.PreferenceStorage
 import com.takechee.qrcodereader.corecomponent.ui.common.base.BaseViewModel
 import com.takechee.qrcodereader.corecomponent.result.Event
@@ -14,7 +16,8 @@ import javax.inject.Inject
 
 class MiscViewModel @Inject constructor(
     private val context: Context,
-    private val prefs: PreferenceStorage
+    private val envVar: EnvVar,
+    private val prefs: PreferenceStorage,
 ) : BaseViewModel(), MiscUserActionEventListener {
 
     val uiModel: LiveData<MiscUiModel>
@@ -31,7 +34,8 @@ class MiscViewModel @Inject constructor(
     // =============================================================================================
     init {
         val useBrowserApp = prefs.useBrowserAppFlow.asLiveData(viewModelScope.coroutineContext)
-        val autoLoadNickname = prefs.autoLoadNicknameFlow.asLiveData(viewModelScope.coroutineContext)
+        val autoLoadNickname =
+            prefs.autoLoadNicknameFlow.asLiveData(viewModelScope.coroutineContext)
 
         uiModel = MediatorLiveData<MiscUiModel>().apply {
             value = MiscUiModel.EMPTY
@@ -75,9 +79,25 @@ class MiscViewModel @Inject constructor(
             MiscContent.PRIVACY_POLICY -> _event.fireEvent {
                 MiscEvent.OpenUrl(WEB_PRIVACY_POLICY.toUri())
             }
+            MiscContent.OPEN_STORE -> fireOpenStoreEvent()
             MiscContent.LICENSES -> _event.fireEvent {
                 MiscEvent.OpenLicenses(context)
             }
         }
+    }
+
+
+    // =============================================================================================
+    //
+    // Utility
+    //
+    // =============================================================================================
+    private fun fireOpenStoreEvent() {
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = "https://play.google.com/store/apps/details?id=${envVar.APPLICATION_ID}".toUri()
+            setPackage("com.android.vending")
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        _event.fireEvent { MiscEvent.OpenStore(intent = intent) }
     }
 }

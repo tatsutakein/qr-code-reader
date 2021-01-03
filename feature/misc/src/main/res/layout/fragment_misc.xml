@@ -104,6 +104,15 @@
                     android:textColor="?colorPrimary" />
 
                 <TextView
+                    android:id="@+id/openStore"
+                    style="@style/Widget.QRCodeReader.Misc.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewModel.onContentClicked(MiscContent.OPEN_STORE)}"
+                    android:text="@string/open_store"
+                    android:textColor="?colorPrimary" />
+
+                <TextView
                     android:id="@+id/open_source_license"
                     style="@style/Widget.QRCodeReader.Misc.Button"
                     android:layout_width="match_parent"
