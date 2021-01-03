@@ -18,6 +18,8 @@ dependencies {
     implementation project(':core:corecomponent')
 
     implementation Dependencies.Kotlin.stdlib
+    implementation Dependencies.Kotlin.Coroutines.core
+
     implementation Dependencies.AndroidX.coreKtx
     implementation Dependencies.AndroidX.appcompat
     implementation Dependencies.AndroidX.fragment

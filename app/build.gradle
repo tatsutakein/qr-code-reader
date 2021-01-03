@@ -93,7 +93,10 @@ dependencies {
     implementation project(':feature:misc')
     implementation project(':model')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation Dependencies.Kotlin.stdlib
+    implementation Dependencies.Kotlin.Coroutines.core
+
     implementation Dependencies.AndroidX.coreKtx
     implementation Dependencies.AndroidX.appcompat
     implementation Dependencies.AndroidX.fragment

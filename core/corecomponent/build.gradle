@@ -12,6 +12,8 @@ apply from: rootProject.file('gradle/android.gradle')
 
 dependencies {
     implementation Dependencies.Kotlin.stdlib
+    implementation Dependencies.Kotlin.Coroutines.core
+
     implementation Dependencies.AndroidX.coreKtx
     implementation Dependencies.AndroidX.material
 

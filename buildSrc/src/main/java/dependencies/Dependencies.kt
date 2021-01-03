@@ -13,8 +13,13 @@ object Dependencies {
     }
 
     object Kotlin {
-        internal const val version = "1.4.10"
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
+        internal const val version = "1.4.21"
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$version"
+
+        object Coroutines {
+            private const val version = "1.4.2"
+            const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
+        }
     }
 
     object AndroidX {
