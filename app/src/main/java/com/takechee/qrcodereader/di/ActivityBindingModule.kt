@@ -1,5 +1,6 @@
 package com.takechee.qrcodereader.di
 
+import com.takechee.qrcodereader.corecomponent.di.ActivityScoped
 import com.takechee.qrcodereader.misc.ui.MiscModule
 import com.takechee.qrcodereader.ui.launcher.LauncherActivity
 import com.takechee.qrcodereader.ui.MainActivity

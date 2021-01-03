@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.databinding.ActivityOnboadingBinding
-import com.takechee.qrcodereader.di.ViewModelKey
+import com.takechee.qrcodereader.corecomponent.di.ViewModelKey
 import com.takechee.qrcodereader.corecomponent.result.receiveEvent
 import com.takechee.qrcodereader.corecomponent.ui.common.base.BaseActivity
 import com.takechee.qrcodereader.util.extension.registerOnPageChangeCallback

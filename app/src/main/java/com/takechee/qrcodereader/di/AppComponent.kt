@@ -1,6 +1,7 @@
 package com.takechee.qrcodereader.di
 
 import com.takechee.qrcodereader.MainApp
+import com.takechee.qrcodereader.corecomponent.di.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector

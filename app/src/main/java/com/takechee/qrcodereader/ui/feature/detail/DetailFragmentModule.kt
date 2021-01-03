@@ -4,7 +4,7 @@ package com.takechee.qrcodereader.ui.feature.detail
 
 import androidx.lifecycle.ViewModel
 import com.journeyapps.barcodescanner.BarcodeEncoder
-import com.takechee.qrcodereader.di.ViewModelKey
+import com.takechee.qrcodereader.corecomponent.di.ViewModelKey
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
