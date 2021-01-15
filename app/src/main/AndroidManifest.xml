@@ -6,7 +6,6 @@
     <dist:module dist:instant="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".MainApp"
@@ -24,7 +23,7 @@
             android:value="${crashlyticsEnabled}" />
 
         <activity
-            android:name=".ui.launcher.LauncherActivity"
+            android:name="com.takechee.qrcodereader.legacy.ui.launcher.LauncherActivity"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,11 +31,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.feature.onboading.OnboadingActivity" />
+        <activity android:name="com.takechee.qrcodereader.legacy.ui.feature.onboading.OnboadingActivity" />
 
-        <activity android:name=".ui.MainActivity" />
+        <activity android:name="com.takechee.qrcodereader.ui.MainActivity" />
 
-        <activity android:name=".ui.feature.capture.DirectCaptureActivity" />
+        <activity android:name="com.takechee.qrcodereader.legacy.ui.feature.capture.DirectCaptureActivity" />
 
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"

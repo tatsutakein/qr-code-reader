@@ -53,9 +53,7 @@ android {
         }
     }
 
-    buildFeatures {
-        dataBinding = true
-    }
+    buildFeatures.dataBinding = true
 
     testBuildType "staging"
 
@@ -92,6 +90,7 @@ dependencies {
     implementation project(':core:corecomponent')
     implementation project(':feature:misc')
     implementation project(':model')
+    implementation project(':legacy')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation Dependencies.Kotlin.stdlib
@@ -138,19 +137,9 @@ dependencies {
     implementation Dependencies.ZXing.core
     implementation Dependencies.ZXing.embedded
 
-    implementation Dependencies.Groupie.core
-    implementation Dependencies.Groupie.viewBinding
-
     implementation Dependencies.Permission.dispatcher
     kapt Dependencies.Permission.processor
     implementation Dependencies.Threeten.androidBackport
-
-    implementation Dependencies.insetterDbx
-    implementation Dependencies.insetterKtx
-
-    implementation Dependencies.jsourp
-    implementation Dependencies.lottie
-    implementation Dependencies.indicator
 
     testImplementation project(':core:testcomponent')
     testImplementation Dependencies.Test.kotlinTestAssertionsJvm

@@ -2,7 +2,7 @@ package com.takechee.qrcodereader
 
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.takechee.qrcodereader.di.DaggerAppComponent
-import com.takechee.qrcodereader.util.shortcut.ShortcutController
+import com.takechee.qrcodereader.legacy.util.shortcut.ShortcutController
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import javax.inject.Inject

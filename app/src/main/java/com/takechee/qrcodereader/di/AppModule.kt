@@ -9,17 +9,19 @@ import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.takechee.qrcodereader.BuildConfig
 import com.takechee.qrcodereader.MainApp
 import com.takechee.qrcodereader.corecomponent.EnvVar
-import com.takechee.qrcodereader.data.db.AppDatabase
-import com.takechee.qrcodereader.data.db.ContentDatabase
-import com.takechee.qrcodereader.data.db.ContentRoomDatabase
+import com.takechee.qrcodereader.legacy.data.db.AppDatabase
+import com.takechee.qrcodereader.legacy.data.db.ContentDatabase
+import com.takechee.qrcodereader.legacy.data.db.ContentRoomDatabase
 import com.takechee.qrcodereader.corecomponent.data.prefs.PreferenceStorage
-import com.takechee.qrcodereader.data.prefs.SharedPreferenceStorage
-import com.takechee.qrcodereader.data.repository.ContentDataRepository
-import com.takechee.qrcodereader.data.repository.ContentRepository
-import com.takechee.qrcodereader.ui.DefaultNavigateHelper
-import com.takechee.qrcodereader.ui.NavigateHelper
-import com.takechee.qrcodereader.util.shortcut.DefaultShortcutController
-import com.takechee.qrcodereader.util.shortcut.ShortcutController
+import com.takechee.qrcodereader.corecomponent.di.MainActivityIntentFactory
+import com.takechee.qrcodereader.legacy.data.prefs.SharedPreferenceStorage
+import com.takechee.qrcodereader.legacy.data.repository.ContentDataRepository
+import com.takechee.qrcodereader.legacy.data.repository.ContentRepository
+import com.takechee.qrcodereader.legacy.ui.DefaultNavigateHelper
+import com.takechee.qrcodereader.legacy.ui.NavigateHelper
+import com.takechee.qrcodereader.legacy.util.shortcut.DefaultShortcutController
+import com.takechee.qrcodereader.legacy.util.shortcut.ShortcutController
+import com.takechee.qrcodereader.ui.MainActivityIntentFactoryInternal
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -86,4 +88,9 @@ class AppModule {
     @Provides
     fun provideContentRepository(dataSource: ContentDataRepository): ContentRepository = dataSource
 
+    @Singleton
+    @Provides
+    fun provideMainActivityIntentFactory(context: Context): MainActivityIntentFactory {
+        return MainActivityIntentFactoryInternal(context = context)
+    }
 }

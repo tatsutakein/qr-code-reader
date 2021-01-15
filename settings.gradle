@@ -1,5 +1,6 @@
-include ':app',
-        ':core:corecomponent',
-        ':core:testcomponent',
-        ':feature:misc',
-        ':model'
+include ':app'
+include ':core:corecomponent'
+include ':core:testcomponent'
+include ':feature:misc'
+include ':legacy'
+include ':model'

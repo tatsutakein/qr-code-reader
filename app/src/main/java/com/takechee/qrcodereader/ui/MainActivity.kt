@@ -18,9 +18,10 @@ import androidx.transition.TransitionManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.takechee.qrcodereader.R
 import com.takechee.qrcodereader.corecomponent.ui.common.base.BaseActivity
-import com.takechee.qrcodereader.util.HeightTopWindowInsetsListener
-import com.takechee.qrcodereader.util.NoopWindowInsetsListener
-import com.takechee.qrcodereader.util.extension.setupWithNavController
+import com.takechee.qrcodereader.legacy.ui.NavigationHost
+import com.takechee.qrcodereader.legacy.util.HeightTopWindowInsetsListener
+import com.takechee.qrcodereader.legacy.util.NoopWindowInsetsListener
+import com.takechee.qrcodereader.legacy.util.extension.setupWithNavController
 import dagger.Module
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
 
@@ -152,10 +153,4 @@ class MainActivity : BaseActivity(R.layout.activity_main), NavigationHost {
             interpolator = AccelerateDecelerateInterpolator()
         }
     }
-}
-
-@Module
-@Suppress("UNUSED")
-abstract class MainActivityModule {
-
 }

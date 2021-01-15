@@ -1,0 +1,83 @@
+import dependencies.Dependencies
+
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+apply from: rootProject.file('gradle/android.gradle')
+android.buildFeatures.dataBinding = true
+
+dependencies {
+    implementation project(':core:corecomponent')
+    implementation project(':feature:misc')
+    implementation project(':model')
+
+    implementation Dependencies.Kotlin.stdlib
+    implementation Dependencies.Kotlin.Coroutines.core
+    implementation Dependencies.Kotlin.Coroutines.android
+
+    implementation Dependencies.AndroidX.coreKtx
+    implementation Dependencies.AndroidX.appcompat
+    implementation Dependencies.AndroidX.fragment
+    implementation Dependencies.AndroidX.constraintLayout
+    implementation Dependencies.AndroidX.recyclerview
+    implementation Dependencies.AndroidX.viewpager2
+    implementation Dependencies.AndroidX.browser
+    implementation Dependencies.AndroidX.preferenceKtx
+    implementation Dependencies.AndroidX.material
+
+    kapt Dependencies.AndroidX.Lifecycle.compiler
+    implementation Dependencies.AndroidX.Lifecycle.liveDataKtx
+    implementation Dependencies.AndroidX.Lifecycle.viewModelKtx
+    implementation Dependencies.AndroidX.Lifecycle.savedState
+
+    implementation Dependencies.AndroidX.Navigation.fragmentKtx
+    implementation Dependencies.AndroidX.Navigation.uiKtx
+
+    implementation Dependencies.AndroidX.Room.ktx
+    implementation Dependencies.AndroidX.Room.runtime
+    kapt Dependencies.AndroidX.Room.compiler
+    testImplementation Dependencies.AndroidX.Room.testing
+
+    implementation Dependencies.AndroidX.Licenses.core
+    implementation Dependencies.Play.core
+
+    implementation platform(Dependencies.Firebase.bom)
+    implementation Dependencies.Firebase.analytics
+    implementation Dependencies.Firebase.crashlytics
+
+    implementation Dependencies.Dagger.android
+    implementation Dependencies.Dagger.androidSupport
+    kapt Dependencies.Dagger.compiler
+    kapt Dependencies.Dagger.processor
+    compileOnly Dependencies.Dagger.assistedAnnotations
+    kapt Dependencies.Dagger.assistedProcessor
+
+    implementation Dependencies.ZXing.core
+    implementation Dependencies.ZXing.embedded
+
+    implementation Dependencies.Groupie.core
+    implementation Dependencies.Groupie.viewBinding
+
+    implementation Dependencies.Permission.dispatcher
+    kapt Dependencies.Permission.processor
+    implementation Dependencies.Threeten.androidBackport
+
+    implementation Dependencies.insetterDbx
+    implementation Dependencies.insetterKtx
+
+    implementation Dependencies.jsourp
+    implementation Dependencies.lottie
+    implementation Dependencies.indicator
+
+    testImplementation project(':core:testcomponent')
+    testImplementation Dependencies.Test.kotlinTestAssertionsJvm
+    testImplementation Dependencies.Threeten.core
+
+    androidTestImplementation Dependencies.AndroidTest.junit
+    androidTestImplementation Dependencies.AndroidTest.espresso
+}
