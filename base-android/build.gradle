@@ -87,7 +87,7 @@ android {
 }
 
 dependencies {
-    implementation project(':core:corecomponent')
+    implementation project(':core:core-component')
     implementation project(':feature:misc')
     implementation project(':model')
     implementation project(':legacy')
@@ -141,7 +141,7 @@ dependencies {
     kapt Dependencies.Permission.processor
     implementation Dependencies.Threeten.androidBackport
 
-    testImplementation project(':core:testcomponent')
+    testImplementation project(':core:test-component')
     testImplementation Dependencies.Test.kotlinTestAssertionsJvm
     testImplementation Dependencies.Threeten.core
 

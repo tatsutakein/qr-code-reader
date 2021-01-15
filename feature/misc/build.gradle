@@ -15,7 +15,7 @@ android {
 }
 
 dependencies {
-    implementation project(':core:corecomponent')
+    implementation project(':core:core-component')
 
     implementation Dependencies.Kotlin.stdlib
     implementation Dependencies.Kotlin.Coroutines.core
@@ -42,7 +42,7 @@ dependencies {
     compileOnly Dependencies.Dagger.assistedAnnotations
     kapt Dependencies.Dagger.assistedProcessor
 
-    testImplementation project(':core:testcomponent')
+    testImplementation project(':core:test-component')
     testImplementation Dependencies.Test.kotlinTestAssertionsJvm
 
     androidTestImplementation Dependencies.AndroidTest.junit

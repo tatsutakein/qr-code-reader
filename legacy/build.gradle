@@ -12,7 +12,7 @@ apply from: rootProject.file('gradle/android.gradle')
 android.buildFeatures.dataBinding = true
 
 dependencies {
-    implementation project(':core:corecomponent')
+    implementation project(':core:core-component')
     implementation project(':feature:misc')
     implementation project(':model')
 
@@ -74,7 +74,7 @@ dependencies {
     implementation Dependencies.lottie
     implementation Dependencies.indicator
 
-    testImplementation project(':core:testcomponent')
+    testImplementation project(':core:test-component')
     testImplementation Dependencies.Test.kotlinTestAssertionsJvm
     testImplementation Dependencies.Threeten.core
 
