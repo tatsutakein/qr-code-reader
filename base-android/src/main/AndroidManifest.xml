@@ -24,6 +24,7 @@
 
         <activity
             android:name="com.takechee.qrcodereader.legacy.ui.launcher.LauncherActivity"
+            android:exported="true"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,18 +32,26 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.takechee.qrcodereader.legacy.ui.feature.onboading.OnboadingActivity" />
+        <activity
+            android:name="com.takechee.qrcodereader.legacy.ui.feature.onboading.OnboadingActivity"
+            android:exported="false" />
 
-        <activity android:name="com.takechee.qrcodereader.ui.MainActivity" />
+        <activity
+            android:name="com.takechee.qrcodereader.ui.MainActivity"
+            android:exported="false" />
 
-        <activity android:name="com.takechee.qrcodereader.legacy.ui.feature.capture.DirectCaptureActivity" />
+        <activity
+            android:name="com.takechee.qrcodereader.legacy.ui.feature.capture.DirectCaptureActivity"
+            android:exported="true" />
 
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
+            android:exported="false"
             android:theme="@style/AppTheme.OssLicenses" />
 
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
+            android:exported="false"
             android:theme="@style/AppTheme.OssLicenses" />
 
     </application>
