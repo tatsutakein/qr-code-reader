@@ -27,11 +27,9 @@ dependencies {
     implementation Dependencies.Dagger.androidSupport
     kapt Dependencies.Dagger.compiler
     kapt Dependencies.Dagger.processor
-    compileOnly Dependencies.Dagger.assistedAnnotations
-    kapt Dependencies.Dagger.assistedProcessor
 
-    api Dependencies.insetterDbx
-    api Dependencies.insetterKtx
+    api Dependencies.Insetter.core
+    api Dependencies.Insetter.dbx
 
     testImplementation Dependencies.Test.junit4
     androidTestImplementation Dependencies.AndroidTest.junit

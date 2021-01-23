@@ -39,8 +39,6 @@ dependencies {
     implementation Dependencies.Dagger.androidSupport
     kapt Dependencies.Dagger.compiler
     kapt Dependencies.Dagger.processor
-    compileOnly Dependencies.Dagger.assistedAnnotations
-    kapt Dependencies.Dagger.assistedProcessor
 
     testImplementation project(':core:test-component')
     testImplementation Dependencies.Test.kotlinTestAssertionsJvm

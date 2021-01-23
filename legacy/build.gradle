@@ -48,14 +48,12 @@ dependencies {
 
     implementation platform(Dependencies.Firebase.bom)
     implementation Dependencies.Firebase.analytics
-    implementation Dependencies.Firebase.crashlytics
+    implementation Dependencies.Firebase.Crashlytics.core
 
     implementation Dependencies.Dagger.android
     implementation Dependencies.Dagger.androidSupport
     kapt Dependencies.Dagger.compiler
     kapt Dependencies.Dagger.processor
-    compileOnly Dependencies.Dagger.assistedAnnotations
-    kapt Dependencies.Dagger.assistedProcessor
 
     implementation Dependencies.ZXing.core
     implementation Dependencies.ZXing.embedded
@@ -67,8 +65,8 @@ dependencies {
     kapt Dependencies.Permission.processor
     implementation Dependencies.Threeten.androidBackport
 
-    implementation Dependencies.insetterDbx
-    implementation Dependencies.insetterKtx
+    implementation Dependencies.Insetter.core
+    implementation Dependencies.Insetter.dbx
 
     implementation Dependencies.jsourp
     implementation Dependencies.lottie
