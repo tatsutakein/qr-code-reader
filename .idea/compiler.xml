@@ -2,7 +2,13 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.8">
+      <module name="qr-code-reader.base-android" target="11" />
+      <module name="qr-code-reader.buildSrc" target="11" />
+      <module name="qr-code-reader.core.core-component" target="11" />
+      <module name="qr-code-reader.core.test-component" target="11" />
       <module name="qr-code-reader.corecomponent" target="1.8" />
+      <module name="qr-code-reader.feature.misc" target="11" />
+      <module name="qr-code-reader.legacy" target="11" />
       <module name="qr-code-reader.misc" target="1.8" />
       <module name="qr-code-reader.testcomponent" target="1.8" />
     </bytecodeTargetLevel>

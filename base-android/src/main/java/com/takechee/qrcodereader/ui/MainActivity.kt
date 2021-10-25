@@ -22,8 +22,6 @@ import com.takechee.qrcodereader.legacy.ui.NavigationHost
 import com.takechee.qrcodereader.legacy.util.HeightTopWindowInsetsListener
 import com.takechee.qrcodereader.legacy.util.NoopWindowInsetsListener
 import com.takechee.qrcodereader.legacy.util.extension.setupWithNavController
-import dagger.Module
-import dev.chrisbanes.insetter.doOnApplyWindowInsets
 
 class MainActivity : BaseActivity(R.layout.activity_main), NavigationHost {
 
@@ -59,12 +57,13 @@ class MainActivity : BaseActivity(R.layout.activity_main), NavigationHost {
             container.setOnApplyWindowInsetsListener(NoopWindowInsetsListener)
         }
         bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation).also {
-            it.doOnApplyWindowInsets { view, insets, initialState ->
+            it.setOnApplyWindowInsetsListener { view, insets ->
                 view.updatePadding(
-                    left = initialState.paddings.left + insets.systemWindowInsetLeft,
-                    right = initialState.paddings.right + insets.systemWindowInsetRight,
-                    bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                    left = insets.systemWindowInsetLeft,
+                    right = insets.systemWindowInsetRight,
+                    bottom = insets.systemWindowInsetBottom
                 )
+                return@setOnApplyWindowInsetsListener insets
             }
         }
 

@@ -2,9 +2,9 @@ package versions
 
 @Suppress("unused")
 object Versions {
-    const val compileSdkVersion = 30
+    const val compileSdkVersion = 31
     const val minSdkVersion = 24
-    const val targetSdkVersion = 30
+    const val targetSdkVersion = 31
 
     const val versionCode: Int = AppVersion.code
     const val versionName: String = AppVersion.name

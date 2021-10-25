@@ -4,6 +4,7 @@ import android.Manifest
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsets
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
@@ -15,7 +16,6 @@ import com.takechee.qrcodereader.corecomponent.result.receiveEvent
 import com.takechee.qrcodereader.legacy.ui.MainNavigationFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import permissions.dispatcher.*
 import javax.inject.Inject
 
@@ -55,19 +55,20 @@ class CaptureFragment : MainNavigationFragment(R.layout.fragment_capture) {
         )
         showCameraWithPermissionCheck()
 
-        binding.zxingBarcodeScanner.doOnApplyWindowInsets { scanner, insets, initialState ->
+        binding.zxingBarcodeScanner.setOnApplyWindowInsetsListener { scanner, insets ->
             scanner.updatePadding(
-                left = initialState.paddings.left + insets.systemWindowInsetLeft,
-//                top = initialState.paddings.top + insets.systemWindowInsetTop,
-                right = initialState.paddings.right + insets.systemWindowInsetRight,
-                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                left = insets.systemWindowInsetLeft,
+                right = insets.systemWindowInsetRight,
+                bottom = insets.systemWindowInsetBottom,
             )
+            return@setOnApplyWindowInsetsListener insets
         }
 
-        binding.toolbar.doOnApplyWindowInsets { toolbar, insets, initialState ->
+        binding.toolbar.setOnApplyWindowInsetsListener { toolbar, insets ->
             toolbar.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                topMargin = initialState.margins.top + insets.systemWindowInsetTop
+                topMargin = insets.systemWindowInsetTop
             }
+            return@setOnApplyWindowInsetsListener insets
         }
 
         viewModel.event.receiveEvent(viewLifecycleOwner) { event ->
