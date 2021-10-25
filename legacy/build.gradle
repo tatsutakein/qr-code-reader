@@ -3,7 +3,7 @@ import dependencies.Dependencies
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
+    id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
 }
@@ -16,34 +16,33 @@ dependencies {
     implementation project(':feature:misc')
     implementation project(':model')
 
-    implementation Dependencies.Kotlin.stdlib
     implementation Dependencies.Kotlin.Coroutines.core
     implementation Dependencies.Kotlin.Coroutines.android
 
-    implementation Dependencies.AndroidX.coreKtx
-    implementation Dependencies.AndroidX.appcompat
-    implementation Dependencies.AndroidX.fragment
-    implementation Dependencies.AndroidX.constraintLayout
-    implementation Dependencies.AndroidX.recyclerview
-    implementation Dependencies.AndroidX.viewpager2
-    implementation Dependencies.AndroidX.browser
-    implementation Dependencies.AndroidX.preferenceKtx
-    implementation Dependencies.AndroidX.material
+    implementation Dependencies.Jetpack.coreKtx
+    implementation Dependencies.Jetpack.appcompat
+    implementation Dependencies.Jetpack.fragment
+    implementation Dependencies.Jetpack.constraintLayout
+    implementation Dependencies.Jetpack.recyclerview
+    implementation Dependencies.Jetpack.viewpager2
+    implementation Dependencies.Jetpack.browser
+    implementation Dependencies.Jetpack.preferenceKtx
+    implementation Dependencies.Jetpack.material
 
-    kapt Dependencies.AndroidX.Lifecycle.compiler
-    implementation Dependencies.AndroidX.Lifecycle.liveDataKtx
-    implementation Dependencies.AndroidX.Lifecycle.viewModelKtx
-    implementation Dependencies.AndroidX.Lifecycle.savedState
+    kapt Dependencies.Jetpack.Lifecycle.compiler
+    implementation Dependencies.Jetpack.Lifecycle.liveDataKtx
+    implementation Dependencies.Jetpack.Lifecycle.viewModelKtx
+    implementation Dependencies.Jetpack.Lifecycle.savedState
 
-    implementation Dependencies.AndroidX.Navigation.fragmentKtx
-    implementation Dependencies.AndroidX.Navigation.uiKtx
+    implementation Dependencies.Jetpack.Navigation.fragmentKtx
+    implementation Dependencies.Jetpack.Navigation.uiKtx
 
-    implementation Dependencies.AndroidX.Room.ktx
-    implementation Dependencies.AndroidX.Room.runtime
-    kapt Dependencies.AndroidX.Room.compiler
-    testImplementation Dependencies.AndroidX.Room.testing
+    implementation Dependencies.Jetpack.Room.ktx
+    implementation Dependencies.Jetpack.Room.runtime
+    kapt Dependencies.Jetpack.Room.compiler
+    testImplementation Dependencies.Jetpack.Room.testing
 
-    implementation Dependencies.AndroidX.Licenses.core
+    implementation Dependencies.Jetpack.Licenses.core
     implementation Dependencies.Play.core
 
     implementation platform(Dependencies.Firebase.bom)

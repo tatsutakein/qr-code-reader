@@ -6,9 +6,6 @@ plugins {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Dependencies.Kotlin.stdlib
-
     // ThreeTenBP for the shared module only. Date and time API for Java.
     implementation Dependencies.Threeten.notzdb
 }

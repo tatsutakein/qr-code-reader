@@ -3,7 +3,7 @@ import dependencies.Dependencies
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
+    id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
 }
@@ -17,22 +17,21 @@ android {
 dependencies {
     implementation project(':core:core-component')
 
-    implementation Dependencies.Kotlin.stdlib
     implementation Dependencies.Kotlin.Coroutines.core
     implementation Dependencies.Kotlin.Coroutines.android
 
-    implementation Dependencies.AndroidX.coreKtx
-    implementation Dependencies.AndroidX.appcompat
-    implementation Dependencies.AndroidX.fragment
-    implementation Dependencies.AndroidX.browser
-    implementation Dependencies.AndroidX.material
+    implementation Dependencies.Jetpack.coreKtx
+    implementation Dependencies.Jetpack.appcompat
+    implementation Dependencies.Jetpack.fragment
+    implementation Dependencies.Jetpack.browser
+    implementation Dependencies.Jetpack.material
 
-    kapt Dependencies.AndroidX.Lifecycle.compiler
-    implementation Dependencies.AndroidX.Lifecycle.liveDataKtx
-    implementation Dependencies.AndroidX.Lifecycle.viewModelKtx
-    implementation Dependencies.AndroidX.Lifecycle.savedState
+    kapt Dependencies.Jetpack.Lifecycle.compiler
+    implementation Dependencies.Jetpack.Lifecycle.liveDataKtx
+    implementation Dependencies.Jetpack.Lifecycle.viewModelKtx
+    implementation Dependencies.Jetpack.Lifecycle.savedState
 
-    implementation Dependencies.AndroidX.Licenses.core
+    implementation Dependencies.Jetpack.Licenses.core
     implementation Dependencies.Play.core
 
     implementation Dependencies.Dagger.android
