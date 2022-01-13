@@ -2,8 +2,9 @@ package com.takechee.qrcodereader.legacy.ui.feature.home
 
 import com.takechee.qrcodereader.model.Content
 
-data class HomeUiModel(
+internal data class HomeUiModel(
     val contents: List<Content>,
+    val favoriteContents: List<Content>,
     val shortcutGuideVisible: Boolean
 ) {
     val isEmpty: Boolean
@@ -15,7 +16,8 @@ data class HomeUiModel(
     companion object {
         val EMPTY = HomeUiModel(
             contents = emptyList(),
-            shortcutGuideVisible = false
+            favoriteContents = emptyList(),
+            shortcutGuideVisible = false,
         )
     }
 }

@@ -27,7 +27,7 @@ class HomeViewModel @Inject constructor(
     val event: LiveData<Event<HomeEvent>>
         get() = _event.distinctUntilChanged()
 
-    val uiModel: LiveData<HomeUiModel>
+    internal val uiModel: LiveData<HomeUiModel>
 
 
     // =============================================================================================
@@ -38,20 +38,26 @@ class HomeViewModel @Inject constructor(
     init {
         val contentsLiveData = repository.getContentsFlow(HISTORY_START, HISTORY_LIMIT)
             .asLiveData(viewModelScope.coroutineContext)
-
+        val favoriteContentsLiveData =
+            repository.getFavoriteContentsFlow(HISTORY_START, HISTORY_LIMIT)
+                .asLiveData(viewModelScope.coroutineContext)
         val shortcutGuideVisibleLiveData: LiveData<Boolean> =
             prefs.shortcutGuideVisibleFlow.asLiveData(viewModelScope.coroutineContext)
 
         uiModel = MediatorLiveData<HomeUiModel>().apply {
             value = HomeUiModel.EMPTY
             fun update() {
-                val contents = contentsLiveData.value ?: return
-                val shortcutGuideVisible = shortcutGuideVisibleLiveData.value ?: return
-                value = HomeUiModel(contents, shortcutGuideVisible)
+                value = HomeUiModel(
+                    contents = contentsLiveData.value ?: emptyList(),
+                    favoriteContents = favoriteContentsLiveData.value ?: emptyList(),
+                    shortcutGuideVisible = shortcutGuideVisibleLiveData.value ?: false,
+                )
             }
-            listOf(contentsLiveData, shortcutGuideVisibleLiveData).forEach { source ->
-                addSource(source) { update() }
-            }
+            listOf(
+                contentsLiveData,
+                favoriteContentsLiveData,
+                shortcutGuideVisibleLiveData,
+            ).forEach { source -> addSource(source) { update() } }
         }.distinctUntilChanged()
     }
 

@@ -8,7 +8,6 @@ import androidx.core.view.marginTop
 import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import com.takechee.qrcodereader.legacy.R
 import com.takechee.qrcodereader.legacy.databinding.FragmentHomeBinding
 import com.takechee.qrcodereader.corecomponent.result.receiveEvent
@@ -22,7 +21,9 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import javax.inject.Inject
 
-class HomeFragment : MainNavigationFragment(R.layout.fragment_home) {
+class HomeFragment : MainNavigationFragment(
+    contentLayoutId = R.layout.fragment_home,
+) {
 
     @Inject
     lateinit var shortcutController: ShortcutController
@@ -54,22 +55,27 @@ class HomeFragment : MainNavigationFragment(R.layout.fragment_home) {
 
         setupNavigation(viewModel)
 
-        val historyContainer = HomeHistoryContainerItem(viewModel)
+        val historyContainer = HomeHistoryContainerItem(eventListener = viewModel)
+        val favoriteContainer = HomeFavoriteContainerItem(eventListener = viewModel)
 
         binding.contentsView.simpleItemAnimatorEnabled(false)
+        binding.contentsView.addItemDecoration(HomeContentSpaceDecoration.create(requireContext()))
         val adapter = GroupAdapter<GroupieViewHolder>()
         binding.contentsView.adapter = adapter
         val initList = mutableListOf<Item<*>>()
         initList += historyContainer
+        initList += favoriteContainer
         initList += HomeShortcutItem(viewModel)
         adapter.update(initList)
 
         viewModel.uiModel.observe(viewLifecycleOwner) { uiModel ->
             val list = mutableListOf<Item<*>>()
             list += historyContainer
+            list += favoriteContainer
             if (uiModel.shortcutGuideVisible) list += HomeShortcutItem(viewModel)
             adapter.update(list)
             historyContainer.update(uiModel.contents)
+            favoriteContainer.update(uiModel.favoriteContents)
         }
 
         viewModel.event.receiveEvent(viewLifecycleOwner) { event ->

@@ -11,6 +11,7 @@ interface ContentRepository {
     suspend fun searchFromText(query: String): List<Content>
     suspend fun getContents(filterFavorite: Boolean): List<Content>
     fun getContentsFlow(start: Int, limit: Int): Flow<List<Content>>
+    fun getFavoriteContentsFlow(start: Int, limit: Int): Flow<List<Content>>
     fun getContentFlow(contentId: ContentId): Flow<Content?>
     suspend fun upsertCaptureText(text: String, action: (contentId: ContentId) -> Unit)
 
@@ -47,6 +48,10 @@ class ContentDataRepository @Inject constructor(
 
     override fun getContentsFlow(start: Int, limit: Int): Flow<List<Content>> {
         return db.getContentsFlow(start, limit)
+    }
+
+    override fun getFavoriteContentsFlow(start: Int, limit: Int): Flow<List<Content>> {
+        return db.getFavoriteContentsFlow(start, limit)
     }
 
     override fun getContentFlow(contentId: ContentId): Flow<Content?> {

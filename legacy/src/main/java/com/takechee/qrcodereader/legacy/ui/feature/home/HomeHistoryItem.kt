@@ -2,6 +2,7 @@ package com.takechee.qrcodereader.legacy.ui.feature.home
 
 import android.view.View
 import com.takechee.qrcodereader.legacy.R
+import com.takechee.qrcodereader.legacy.databinding.ItemHomeFavoriteContainerBinding
 import com.takechee.qrcodereader.legacy.databinding.ItemHomeHistoryBinding
 import com.takechee.qrcodereader.legacy.databinding.ItemHomeHistoryContainerBinding
 import com.takechee.qrcodereader.legacy.databinding.ItemHomeShortcutBinding
@@ -14,6 +15,7 @@ import com.xwray.groupie.viewbinding.BindableItem
 
 private enum class HomeContent {
     HISTORY,
+    FAVORITE,
     SHORTCUT;
 
     val id: Long = (ordinal + 1).toLong()
@@ -69,6 +71,47 @@ data class HomeHistoryItem(
     override fun bind(viewBinding: ItemHomeHistoryBinding, position: Int) {
         viewBinding.content = content
         viewBinding.eventListener = eventListener
+    }
+}
+
+
+// =============================================================================================
+//
+// Favorite
+//
+// =============================================================================================
+data class HomeFavoriteContainerItem(
+    private val eventListener: HomeEventListener
+) : BindableItem<ItemHomeFavoriteContainerBinding>(HomeContent.FAVORITE.id) {
+
+    private val groupAdapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
+
+    private val hasContent: Boolean
+        get() = groupAdapter.itemCount > 0
+
+    override fun getLayout(): Int = R.layout.item_home_favorite_container
+
+    override fun initializeViewBinding(view: View) = ItemHomeFavoriteContainerBinding.bind(view)
+
+    override fun createViewHolder(
+        itemView: View
+    ): GroupieViewHolder<ItemHomeFavoriteContainerBinding> {
+        return super.createViewHolder(itemView).apply {
+            binding.historyListView.simpleItemAnimatorEnabled(false)
+            binding.historyListView.adapter = groupAdapter
+        }
+    }
+
+    override fun bind(viewBinding: ItemHomeFavoriteContainerBinding, position: Int) {
+        viewBinding.hasHistoryContent = hasContent
+        viewBinding.eventListener = eventListener
+    }
+
+    fun update(contents: List<Content>) {
+        val list = mutableListOf<Item<*>>()
+        contents.mapTo(list) { content -> HomeHistoryItem(content, eventListener) }
+        groupAdapter.update(list)
+        notifyChanged()
     }
 }
 

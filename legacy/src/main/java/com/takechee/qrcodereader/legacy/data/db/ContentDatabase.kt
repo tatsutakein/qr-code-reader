@@ -15,6 +15,7 @@ interface ContentDatabase {
     suspend fun search(text: String): List<Content>
     suspend fun getContents(filterFavorite: Boolean): List<Content>
     fun getContentsFlow(start: Int, limit: Int): Flow<List<Content>>
+    fun getFavoriteContentsFlow(start: Int, limit: Int): Flow<List<Content>>
     fun getContentFlow(contentId: ContentId): Flow<Content?>
     suspend fun upsertCaptureText(text: String): ContentId
 
@@ -58,6 +59,10 @@ class ContentRoomDatabase @Inject constructor(
 
     override fun getContentsFlow(start: Int, limit: Int): Flow<List<Content>> {
         return contentDao.getContentsFlow(start, limit).map { it.map(::toContent) }
+    }
+
+    override fun getFavoriteContentsFlow(start: Int, limit: Int): Flow<List<Content>> {
+        return contentDao.getFavoriteContentsFlow(start, limit).map { it.map(::toContent) }
     }
 
     override fun getContentFlow(contentId: ContentId): Flow<Content?> {
