@@ -12,6 +12,9 @@ interface ContentDao {
     @Query("SELECT * FROM content ORDER BY content_id DESC LIMIT :start, :limit")
     fun getContentsFlow(start: Int, limit: Int): Flow<List<ContentEntity>>
 
+    @Query("SELECT * FROM content WHERE is_favorite = 1 ORDER BY content_id DESC LIMIT :start, :limit")
+    fun getFavoriteContentsFlow(start: Int, limit: Int): Flow<List<ContentEntity>>
+
     @Query("SELECT * FROM content WHERE text LIKE :text OR nickname LIKE :text ORDER BY content_id DESC")
     fun search(text: String): List<ContentEntity>
 

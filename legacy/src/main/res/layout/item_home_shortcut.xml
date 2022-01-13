@@ -12,8 +12,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normal">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -52,9 +51,9 @@
                 android:onClick="@{() -> eventListener.onRemoveShortcutGuideClick()}"
                 android:padding="@dimen/margin_normal"
                 android:src="@drawable/ic_close"
-                android:tint="?colorOnSurface"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="?colorOnSurface" />
 
             <Button
                 android:id="@+id/add_shortcut_button"

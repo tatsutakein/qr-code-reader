@@ -16,6 +16,7 @@
     <string name="direction_home">ホームへ</string>
     <string name="home">ホーム</string>
     <string name="recent_content">最近のコンテンツ</string>
+    <string name="home_favorite_content">お気に入りのコンテンツ</string>
     <string name="add_shortcut">ショートカットを追加する</string>
     <string name="add_shortcut_message">ホーム画面にショートカットを追加すると素早くQRコードを読み取ることができます。</string>
     <string name="add">追加する</string>
